@@ -282,10 +282,14 @@
 		D0EF0B8916C5373D00921E3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peter Huang (Q66V2GU4AU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peter Huang (Q66V2GU4AU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "weorder/weorder-Prefix.pch";
 				INFOPLIST_FILE = "weorder/weorder-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "67ADCAD9-A78D-4F86-902E-E060ED99A4B5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "67ADCAD9-A78D-4F86-902E-E060ED99A4B5";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -293,10 +297,14 @@
 		D0EF0B8A16C5373D00921E3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Huang Peter";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Huang Peter";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "weorder/weorder-Prefix.pch";
 				INFOPLIST_FILE = "weorder/weorder-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6C4C4922-F322-43E1-BA82-B42AE5F95DDB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6C4C4922-F322-43E1-BA82-B42AE5F95DDB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -320,6 +328,7 @@
 				D0EF0B8A16C5373D00921E3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
