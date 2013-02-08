@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
-
+//modefied in iMac
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
