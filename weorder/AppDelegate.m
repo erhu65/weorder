@@ -10,6 +10,7 @@
 
 @implementation AppDelegate
 //modefied in iMac
+//modified in Mac mini
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
