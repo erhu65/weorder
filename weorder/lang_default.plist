@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>infoLeaveYourMsgOrQuestionHere</key>
+	<string>Leave your Question or Message . We would response ASAP.</string>
+	<key>warnLoginFBFirst</key>
+	<string>Please login Facebook first</string>
+	<key>titleMsgBoard</key>
+	<string>Msg Board</string>
+	<key>actionAddFavoriteSuccessfully</key>
+	<string>Add favorite successfully</string>
+	<key>actionZoomOut</key>
+	<string>Zoom Out</string>
+	<key>titleWhosFavoriteVideos</key>
+	<string>Favorite Videos</string>
+	<key>titleChatRoom</key>
+	<string>Chat Room</string>
+	<key>error_network_connection</key>
+	<string>Netowrk Connection Fail</string>
+	<key>actionJoin</key>
+	<string>Join</string>
+	<key>actionInviteFriend</key>
+	<string>Invite your friend</string>
+	<key>warnAreYouSoreRemoveFavoriteMainCategory</key>
+	<string>Are you sure to remove the favorite main category?</string>
+	<key>warnEmptyText</key>
+	<string>Please fill the field</string>
+	<key>actionCheckOutWeWorkApp</key>
+	<string>Hi let&apos;s check out WeWork App</string>
+	<key>titleVideo</key>
+	<string>Video</string>
+	<key>actionSplit</key>
+	<string>Split</string>
+	<key>onLine</key>
+	<string>On Line</string>
+	<key>warn</key>
+	<string>Warn</string>
+	<key>titleFavoriteCategory</key>
+	<string>Favorite Categories</string>
+	<key>say</key>
+	<string>say:</string>
+	<key>byDate</key>
+	<string>By Date</string>
+	<key>warnNoFBAccountFound</key>
+	<string>No Facebook Account Found</string>
+	<key>titleSubCategories</key>
+	<string>Sub Categories</string>
+	<key>warnConnectFBFirst</key>
+	<string>Please connect Facebook fisrt</string>
+	<key>actionFbAuthOkYouCanDoItAgain</key>
+	<string>Facebook Login OK You can do it again</string>
+	<key>actionMsg</key>
+	<string>Msg</string>
+	<key>infoNoData</key>
+	<string>No Data</string>
+	<key>actionBack</key>
+	<string>Back</string>
+	<key>actionRemoveFavorite</key>
+	<string>Remove Favorite</string>
+	<key>sort</key>
+	<string>Sort:</string>
+	<key>warnAreYouSoreRemoveFavoriteVideo</key>
+	<string>Are you sure to remove the favorite video?</string>
+	<key>actionDimiss</key>
+	<string>Dimiss</string>
+	<key>actionSearch</key>
+	<string>Search</string>
+	<key>infoRestorePurchasedProductsComplete</key>
+	<string>purchased products have been restored complete.</string>
+	<key>noSort</key>
+	<string>NO Sort</string>
+	<key>actionLeave</key>
+	<string>Leave</string>
+	<key>infoConnectFBFirst</key>
+	<string>Plearse Connect Facebook First</string>
+	<key>infoJoinRoomFirst</key>
+	<string>Please Join chat room first</string>
+	<key>info</key>
+	<string>Info</string>
+	<key>error</key>
+	<string>Error</string>
+	<key>sum</key>
+	<string>Sum</string>
+	<key>byName</key>
+	<string>By Name</string>
+	<key>actionTalk</key>
+	<string>Talk</string>
+	<key>titleFriendsFavoriteVideos</key>
+	<string>Friends&apos; Favorite videos</string>
+	<key>intoBuyUnlockKeyFirst</key>
+	<string>You can buy or restore the unlock key to add tags to your subject</string>
+	<key>warnAreYouSore</key>
+	<string>Are you sure?</string>
+	<key>actionFull</key>
+	<string>Full</string>
+	<key>actionAddFavorite</key>
+	<string>Add Favorite</string>
+	<key>error_parse_fail</key>
+	<string>Parse Error</string>
+	<key>actionOK</key>
+	<string>OK</string>
+	<key>actionRemoveFavoriteSuccessfully</key>
+	<string>Remove favorite successfully</string>
+	<key>actionZoomIn</key>
+	<string>Zoom In</string>
+	<key>titleFavoriteVideos</key>
+	<string>Favorite videos</string>
+	<key>titleMainCategories</key>
+	<string>Main Categories</string>
+	<key>actionCancel</key>
+	<string>Cancel</string>
+	<key>titleVideos</key>
+	<string>Videos</string>
+	<key>actionChange</key>
+	<string>Change</string>
+	<key>actionAdd</key>
+	<string>Add</string>
+	<key>actionEdit</key>
+	<string>Edit</string>
+	<key>actionDone</key>
+	<string>Done</string>
+	<key>titleInvite</key>
+	<string>Invite friend</string>
+	<key>warnPleaseAddMsgOrGratiffi</key>
+	<string>Please add message or gratiffi</string>
+	<key>warnPleaseJoinSubjectFirst</key>
+	<string>Please select a subject first.</string>
+	<key>titleMySubject</key>
+	<string>My</string>
+	<key>titleFriendInvite</key>
+	<string>Friend&apos;s</string>
+	<key>units</key>
+	<string>Units</string>
+	<key>titleTags</key>
+	<string>Tags</string>
+	<key>titleChangeSubjectName</key>
+	<string>Change Subject Name</string>
+	<key>titleWhatIsYourSubjectName</key>
+	<string>What is your subject name?</string>
+	<key>titleWhatIsYourTagName</key>
+	<string>What is your tag name?</string>
+	<key>titleChatAndGraffiti</key>
+	<string>Chat &amp; Graffiti</string>
+	<key>titleCategory</key>
+	<string>Category</string>
+	<key>titleFriends</key>
+	<string>Friends</string>
+	<key>titleService</key>
+	<string>Service</string>
+	<key>titleEditTag</key>
+	<string>Edit your tag</string>
+	<key>titleAddTag</key>
+	<string>Add your tag</string>
+	<key>intoBuyPoints</key>
+	<string>You can buy units to continue play and share animation with your friends.</string>
+</dict>
+</plist>

@@ -1,0 +1,4 @@
+
+@interface MyNavigationController : UINavigationController
+
+@end

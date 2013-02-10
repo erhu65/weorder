@@ -1,0 +1,4 @@
+
+@interface MyCustomSegue : UIStoryboardSegue
+
+@end

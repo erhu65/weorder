@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Icon</key>
+	<string>Icon.png</string>
+	<key>Icon-72</key>
+	<string>Icon-72.png</string>
+	<key>eyeball</key>
+	<string>eyeball.png</string>
+	<key>favoriteAdd</key>
+	<string>favoriteAdd.png</string>
+	<key>favoriteRemove</key>
+	<string>favoriteRemove.png</string>
+	<key>bg_sand</key>
+	<string>bg_sand.png</string>
+	<key>bt_pradot</key>
+	<string>app-background.png</string>
+	<key>users</key>
+	<string>users.png</string>
+	<key>greenlight</key>
+	<string>greenlight.png</string>
+	<key>redlight</key>
+	<string>redlight.png</string>
+	<key>tag</key>
+	<string>tag.png</string>
+	<key>tagSelected</key>
+	<string>tagSelected.png</string>
+	<key>animation1</key>
+	<string>smoke_1_40_128.png</string>
+	<key>animation2</key>
+	<string>explosion_1_38_128.png</string>
+	<key>animation3</key>
+	<string>explosion_1_38_128_corrected.png</string>
+	<key>animation4</key>
+	<string>explosion_2_38_128.png</string>
+	<key>animation5</key>
+	<string>explosion_2_38_128_corrected.png</string>
+	<key>animation6</key>
+	<string>explosion_3_40_128.png</string>
+	<key>animation7</key>
+	<string>explosion_4_39_128.png</string>
+	<key>animation8</key>
+	<string>explosion_4_39_128_corrected.png</string>
+	<key>animation9</key>
+	<string>explosion_5_38_128.png</string>
+	<key>animation10</key>
+	<string>explosion_5_38_128_corrected.png</string>
+</dict>
+</plist>

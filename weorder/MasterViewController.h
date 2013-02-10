@@ -1,0 +1,4 @@
+
+@interface MasterViewController : UIViewController
+
+@end

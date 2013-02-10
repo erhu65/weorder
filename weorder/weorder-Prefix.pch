@@ -11,4 +11,11 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import "PRPDebug.h"
+    #import "ErrorHandler.h"
+    #import "constants.h"
+    #import "BRStyleSheet.h"
+    #import "BRDModel.h"
+
 #endif

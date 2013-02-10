@@ -1,0 +1,4 @@
+
+@interface CombinedViewController : UIViewController
+
+@end
