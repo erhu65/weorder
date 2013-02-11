@@ -149,39 +149,47 @@ UIAlertViewDelegate>
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //prevent toggle the select record, we don't need it here
-    BOOL isSelected = [self isSelectedAtIndexPath:indexPath];
+    //BOOL isSelected = [self isSelectedAtIndexPath:indexPath];
     
     __weak __block BRRecordFriend *record = self.docs[indexPath.row];
+
+    PRPLog(@"record.fbId: %@ \
+           record.fbName: %@ \
+           - [%@ , %@]",
+           record.fbId,
+           record.fbName,
+           NSStringFromClass([self class]),
+           NSStringFromSelector(_cmd));
+
+//    [self showHud:YES];
+//    __weak __block BRFBFriendListViewController* weakSelf = self;
+//    
+//    [kSharedModel toggleInvitedFriend:record.fbId 
+//                               fbName:record.fbName
+//                           joinRoomId:self.myRoomId 
+//                            isInvited:!isSelected
+//                            withBlock:^(NSDictionary* res){
+//                       
+//                       [weakSelf hideHud:YES];
+//                       
+//                       if(nil != res 
+//                          && nil != res[@"error"]){
+//                           [self showMsg:res[@"error"] type:msgLevelError];
+//                           
+//                           return;
+//                       }
+//        record.isJoint = !record.isJoint; 
+//        if (isSelected) {//already selected, so deselect
+//            [weakSelf.selectedIndexPathToBirthday removeObjectForKey:indexPath];
+//        }
+//        else {//not currently selected, so select
+//            [weakSelf.selectedIndexPathToBirthday setObject:record forKey:indexPath];
+//        }
+//        //update the accessory view image
+//        [weakSelf updateAccessoryForTableCell:[weakSelf.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+//            
+//    }];
     
-    [self showHud:YES];
-    __weak __block BRFBFriendListViewController* weakSelf = self;
-    
-    [kSharedModel toggleInvitedFriend:record.fbId 
-                               fbName:record.fbName
-                           joinRoomId:self.myRoomId 
-                            isInvited:!isSelected
-                            withBlock:^(NSDictionary* res){
-                       
-                       [weakSelf hideHud:YES];
-                       
-                       if(nil != res 
-                          && nil != res[@"error"]){
-                           [self showMsg:res[@"error"] type:msgLevelError];
-                           
-                           return;
-                       }
-        record.isJoint = !record.isJoint; 
-        if (isSelected) {//already selected, so deselect
-            [weakSelf.selectedIndexPathToBirthday removeObjectForKey:indexPath];
-        }
-        else {//not currently selected, so select
-            [weakSelf.selectedIndexPathToBirthday setObject:record forKey:indexPath];
-        }
-        //update the accessory view image
-        [weakSelf updateAccessoryForTableCell:[weakSelf.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            
-    }];
-        
     //enable/disable the import button
     //[self updateImportButton];
 }
@@ -201,16 +209,16 @@ UIAlertViewDelegate>
         [self hideHud:YES];
         return;
     }
+    
     __weak __block BRFBFriendListViewController *weakSelf = self;
     [kSharedModel fetchFbFriendsInvited:kSharedModel.access_token 
                                    fbId:kSharedModel.fbId 
-                                   myRoomId: self.myRoomId
                               withBlock:^(NSDictionary* res){
         NSString* errMsg = res[@"error"];
         if(nil != errMsg){
             [self handleErrMsg:errMsg];
         } else  {
-            NSMutableArray* mArrTemp =(NSMutableArray*)res[@"mArrTemp"];
+            NSMutableArray* mArrTemp = (NSMutableArray*)res[@"mArrTemp"];
             NSRange range = NSMakeRange(0, mArrTemp.count); 
             NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:range];
             [weakSelf.docs removeAllObjects];

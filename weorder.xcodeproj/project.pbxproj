@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0113E5E16C7C93300854C51 /* WOStroesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0113E5D16C7C93300854C51 /* WOStroesViewController.m */; };
 		D0A6934A16C777F200DAC57D /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A6934916C777F200DAC57D /* libz.1.2.5.dylib */; };
 		D0A6934C16C777FE00DAC57D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A6934B16C777FE00DAC57D /* AddressBook.framework */; };
 		D0A6934E16C7780900DAC57D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A6934D16C7780900DAC57D /* MediaPlayer.framework */; };
@@ -268,6 +269,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D0113E5C16C7C93300854C51 /* WOStroesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStroesViewController.h; sourceTree = "<group>"; };
+		D0113E5D16C7C93300854C51 /* WOStroesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOStroesViewController.m; sourceTree = "<group>"; };
 		D0A6934916C777F200DAC57D /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D0A6934B16C777FE00DAC57D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		D0A6934D16C7780900DAC57D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -652,6 +655,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0113E5F16C7C93900854C51 /* WOStores */ = {
+			isa = PBXGroup;
+			children = (
+				D0113E5C16C7C93300854C51 /* WOStroesViewController.h */,
+				D0113E5D16C7C93300854C51 /* WOStroesViewController.m */,
+			);
+			name = WOStores;
+			sourceTree = "<group>";
+		};
 		D0A6936316C7795000DAC57D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,6 +1005,8 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				D0113E5F16C7C93900854C51 /* WOStores */,
+				D0A695B916C7861C00DAC57D /* MainCategory */,
 				D0A695AF16C785A100DAC57D /* myRoom */,
 				D0A695A516C7858B00DAC57D /* Tag */,
 				D0A695A216C784E900DAC57D /* BRPostToFacebookWallViewController.h */,
@@ -1006,7 +1020,6 @@
 				D0A6946016C77F6900DAC57D /* BRCoreViewController.m */,
 				D0A6946116C77F6900DAC57D /* Tab1NavigationController.h */,
 				D0A6946216C77F6900DAC57D /* Tab1NavigationController.m */,
-				D0A695B916C7861C00DAC57D /* MainCategory */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -1304,15 +1317,6 @@
 				D0A6937A16C77A7300DAC57D /* constants.h */,
 				D0EF0B6C16C5373B00921E3A /* AppDelegate.h */,
 				D0EF0B6D16C5373B00921E3A /* AppDelegate.m */,
-				D0A6945C16C77F2D00DAC57D /* VC */,
-				D0A6945B16C77ED500DAC57D /* model */,
-				D0A6944116C77E5700DAC57D /* theme */,
-				D0A6943416C77E1E00DAC57D /* lang */,
-				D0A6936316C7795000DAC57D /* Shared */,
-				D0A6945A16C77E9E00DAC57D /* In-App Purchase */,
-				D0A6937B16C77A8E00DAC57D /* lib */,
-				D0A6940616C77DB600DAC57D /* Utilities */,
-				D0A6941316C77DD500DAC57D /* categories */,
 				D0EF0B7516C5373B00921E3A /* MainStoryboard.storyboard */,
 				D0EF0B7816C5373C00921E3A /* FirstViewController.h */,
 				D0EF0B7916C5373C00921E3A /* FirstViewController.m */,
@@ -1322,6 +1326,15 @@
 				D0EF0B8016C5373D00921E3A /* SecondViewController.m */,
 				D0EF0B8216C5373D00921E3A /* second.png */,
 				D0EF0B8416C5373D00921E3A /* second@2x.png */,
+				D0A6945C16C77F2D00DAC57D /* VC */,
+				D0A6945B16C77ED500DAC57D /* model */,
+				D0A6944116C77E5700DAC57D /* theme */,
+				D0A6943416C77E1E00DAC57D /* lang */,
+				D0A6936316C7795000DAC57D /* Shared */,
+				D0A6945A16C77E9E00DAC57D /* In-App Purchase */,
+				D0A6937B16C77A8E00DAC57D /* lib */,
+				D0A6940616C77DB600DAC57D /* Utilities */,
+				D0A6941316C77DD500DAC57D /* categories */,
 				D0EF0B6416C5373B00921E3A /* Supporting Files */,
 			);
 			path = weorder;
@@ -1644,6 +1657,7 @@
 				D0A695C016C7862700DAC57D /* BRMainCategoryViewController.m in Sources */,
 				D0A695C116C7862700DAC57D /* BRRecordMainCategory.m in Sources */,
 				D0A695C216C7862700DAC57D /* BRCellMainCategory.m in Sources */,
+				D0113E5E16C7C93300854C51 /* WOStroesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1738,9 +1752,10 @@
 				GCC_PREFIX_HEADER = "weorder/weorder-Prefix.pch";
 				INFOPLIST_FILE = "weorder/weorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				"OTHER_CFLAGS[arch=*]" = "-DPRPDEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CEB97E4D-FAC4-47CA-AC7D-BEAA6FEFBB88";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEB97E4D-FAC4-47CA-AC7D-BEAA6FEFBB88";
+				PROVISIONING_PROFILE = "0FD8B668-C3A2-4782-94CD-1D304CA1C557";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0FD8B668-C3A2-4782-94CD-1D304CA1C557";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1759,8 +1774,8 @@
 				INFOPLIST_FILE = "weorder/weorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E179B81E-FD3D-4CB8-BFCC-F43EA0566F01";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E179B81E-FD3D-4CB8-BFCC-F43EA0566F01";
+				PROVISIONING_PROFILE = "824B2734-0A4F-4E36-8CC9-7A24E8B4A267";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "824B2734-0A4F-4E36-8CC9-7A24E8B4A267";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

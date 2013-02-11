@@ -7,23 +7,20 @@
 //
 
 #import "BRDModel.h"
-//#import "DetailViewController_iPad.h"
 #import "BRDBirthday.h"
 #import "BRDBirthdayImport.h"
 #import "BRRecordMainCategory.h"
 #import "WWRecordMyRoom.h"
 #import "BRRecordFbChat.h"
 #import "WWRecordTag.h"
-//#import "BRRecordSubCategory.h"
-//#import "BRRecordVideo.h"
 #import "BRRecordMsgBoard.h"
 #import "BRRecordFriend.h"
 #import "BRDSettings.h"
-//#import <AddressBook/AddressBook.h>
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 #import "LangManager.h"
 #import "ThemeManager.h"
+#import "AppDelegate.h"
 
 typedef enum : int
 {
@@ -66,18 +63,22 @@ static BRDModel *_sharedInstance = nil;
             _sharedInstance.fbId = fbId;
             _sharedInstance.fbName = fbName;
             //restore points left previous    
-            [_sharedInstance postPointsConsumtion:@"com.erhu65.wework.amount.animation" points:@"0" fbId:fbId withBlock:^(NSDictionary* res) {
-                NSString* error = res[@"error"];
-                if(nil !=  error){
-                    return;
-                }
-                NSDictionary* docPoints = res[@"doc"];
-                PRPLog(@"docPoints: %@-[%@ , %@]",
-                       docPoints,
-                       NSStringFromClass([self class]),
-                       NSStringFromSelector(_cmd));
-                _sharedInstance.points = (NSNumber*)docPoints[@"points"];
-            }];
+//            [_sharedInstance postPointsConsumtion:@"com.erhu65.wework.amount.animation" points:@"0" fbId:fbId withBlock:^(NSDictionary* res) {
+//                NSString* error = res[@"error"];
+//                if(nil !=  error){
+//                    return;
+//                }
+//                NSDictionary* docPoints = res[@"doc"];
+//                PRPLog(@"docPoints: %@-[%@ , %@]",
+//                       docPoints,
+//                       NSStringFromClass([self class]),
+//                       NSStringFromSelector(_cmd));
+//                _sharedInstance.points = (NSNumber*)docPoints[@"points"];
+//            }];
+            
+            
+            [_sharedInstance _doRegisterApns];
+            
         } else {
             _sharedInstance.points = @0;
         }
@@ -94,6 +95,49 @@ static BRDModel *_sharedInstance = nil;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+
+-(void)_doRegisterApns{
+    
+    NSString* baseUrl  = @"http://localhost:3000";
+        
+    if([baseUrl isEqualToString:BASE_URL]){
+        
+        kAppDelegate.token = @"41376fdd05dba81610db779fd97bf47c017980a52e1e3cb7e7318b30edd0eadc";
+    } else {
+        
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        NSString* token = [defaults objectForKey:KUserDefaultToken];
+        if(nil != token){
+            kAppDelegate.token = token;
+        } else {
+            kAppDelegate.token = @"";
+        }
+    }
+    
+    [_sharedInstance registerUdid:kAppDelegate.token withBlock:^(NSDictionary* res) {
+        
+        NSString* error = res[@"error"];
+        if(nil != error){
+            PRPLog(@"register apns error : %@ \
+                   -[%@ , %@]",
+                   error,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            return;
+        }
+        
+        NSDictionary* doc = res[@"doc"];
+        
+        PRPLog(@"apns register saved : %@ \
+               -[%@ , %@]",
+               doc,
+               NSStringFromClass([self class]),
+               NSStringFromSelector(_cmd));
+        
+    }];
+
+}
 
 -(ACAccount*)facebookAccount{
     if(nil == _facebookAccount){
@@ -404,7 +448,6 @@ static BRDModel *_sharedInstance = nil;
 
 - (void)fetchFbFriendsInvited:(NSString*)access_token 
                                  fbId:(NSString*)fbId
-                             myRoomId:(NSString*)myRoomId
                             withBlock:(void (^)(NSDictionary* userInfo))block{
     
     if (nil == self.fbId) {
@@ -420,7 +463,7 @@ static BRDModel *_sharedInstance = nil;
      random numbers to the disk before, generate these numbers now
      and then save them to the disk in an array */
     dispatch_async(concurrentQueue, ^{
-        NSString* urlMainCategores = [NSString stringWithFormat:@"%@/coffeecup/FriendList?access_token=%@&fbId=%@&myRoomId=%@", BASE_URL, access_token, fbId, myRoomId];
+        NSString* urlMainCategores = [NSString stringWithFormat:@"%@/coffeecup/FriendList?access_token=%@&fbId=%@", BASE_URL, access_token, fbId];
         NSURL *url = [NSURL URLWithString:urlMainCategores];
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
         [urlRequest setTimeoutInterval:30.0f];
@@ -448,10 +491,6 @@ static BRDModel *_sharedInstance = nil;
                    resStr,
                    NSStringFromClass([self class]),
                    NSStringFromSelector(_cmd));
-            //            PRPLog(@"response %@ -[%@ , %@]",
-            //                   [response description],
-            //                   NSStringFromClass([self class]),
-            //                   NSStringFromSelector(_cmd));
             
             /* Now try to deserialize the JSON object into a dictionary */
             error = nil;
@@ -713,6 +752,7 @@ static BRDModel *_sharedInstance = nil;
                 [defaults setObject:weakSelf.fbId forKey:KUserDefaultFbId];
                 [defaults setObject:weakSelf.fbName forKey:KUserDefaultFbName];
                 [defaults synchronize];
+                [self _doRegisterApns];
                 
                 PRPLog(@"Facebook returned friends: %@ -[%@ , %@]",
                        resultD,
@@ -2650,18 +2690,7 @@ static BRDModel *_sharedInstance = nil;
      and then save them to the disk in an array */
     dispatch_async(concurrentQueue, ^{
         
-        //        dispatch_sync(concurrentQueue, ^{
-        //            
-        //            
-        //        });
-        //        __block NSMutableArray *randomNumbers = nil;
-        //        /* Read the numbers from disk and sort them in an
-        //         ascending fashion */
-        //        dispatch_sync(concurrentQueue, ^{
-        //            
-        // 
-        //        });
-        NSString* urlGetSocketUrl = [NSString stringWithFormat:@"%@/coffeescript/welearn_socket_url", BASE_URL];
+        NSString* urlGetSocketUrl = [NSString stringWithFormat:@"%@/coffeecup/socket_url", BASE_URL];
         PRPLog(@"http request url: %@\n  -[%@ , %@]",
                urlGetSocketUrl,
                NSStringFromClass([self class]),
@@ -3637,28 +3666,16 @@ static BRDModel *_sharedInstance = nil;
     
 }
 
-- (void)registerUdid:(NSString*)udid
+- (void)registerUdid:(NSString*)token
+           withBlock:(void (^)(NSDictionary* res))block
 {
+    if(nil == token) token = @"";
     
-    //[self.mainCategories removeAllObjects];
-    dispatch_queue_t concurrentQueue = 
+    dispatch_queue_t concurrentQueue =
     dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    /* If we have not already saved an array of 10,000
-     random numbers to the disk before, generate these numbers now
-     and then save them to the disk in an array */
+    
     dispatch_async(concurrentQueue, ^{
         
-        //        dispatch_sync(concurrentQueue, ^{
-        //            
-        //            
-        //        });
-        //        __block NSMutableArray *randomNumbers = nil;
-        //        /* Read the numbers from disk and sort them in an
-        //         ascending fashion */
-        //        dispatch_sync(concurrentQueue, ^{
-        //            
-        // 
-        //        });
         NSString* regUdidUrl = [NSString stringWithFormat:@"%@/coffeecup/Apns/create", BASE_URL];
         PRPLog(@"http regUdidUrl url: %@\n  -[%@ , %@]",
                regUdidUrl,
@@ -3671,12 +3688,13 @@ static BRDModel *_sharedInstance = nil;
         [urlRequest setTimeoutInterval:30.0f];
         [urlRequest setHTTPMethod:@"POST"];
         
-        NSString *body = [NSString stringWithFormat:@"udid=%@", udid];
+        NSString *body = [NSString stringWithFormat:@"token=%@&fbId=%@", token, self.fbId];
         [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
         
         NSURLResponse *response;
         NSError *error;
-        NSString* errMsg = @"";
+        NSString* errMsg;
+        NSDictionary* doc;
         
         NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest
                                              returningResponse:&response
@@ -3720,6 +3738,7 @@ static BRDModel *_sharedInstance = nil;
                                deserializedDictionary,
                                NSStringFromClass([self class]),
                                NSStringFromSelector(_cmd));
+                        doc =  [deserializedDictionary objectForKey:@"doc"];
                         
                     }
                     
@@ -3770,11 +3789,17 @@ static BRDModel *_sharedInstance = nil;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            NSDictionary *userInfo = @{@"errMsg":errMsg};
-            [[NSNotificationCenter defaultCenter] postNotificationName:BRNotificationRegisterUdidDidUpdate object:self userInfo:userInfo];
+            NSDictionary *res;
             
+            if(nil != errMsg){
+                
+                res = @{@"error":errMsg};
+            } else {
+                res = @{@"doc": [doc copy]};
+            }
+            
+            block(res);
         });
-        
     });
 }
 - (void)getProductsWithBlock:(void (^)(NSDictionary* userInfo))block
@@ -4064,8 +4089,6 @@ static BRDModel *_sharedInstance = nil;
     
     //save our new and updated changes to the Core Data store
     [self saveChanges];
-    
-    
 }
 
 - (void)saveChanges

@@ -103,7 +103,6 @@ typedef enum subCategoriesSortType {
 
 - (void)fetchFbFriendsInvited:(NSString*)access_token 
                          fbId:(NSString*)fbId
-                     myRoomId:(NSString*)myRoomId
                     withBlock:(void (^)(NSDictionary* userInfo))block;
 
 - (void)toggleInvitedFriend:(NSString*)fbId
@@ -184,10 +183,16 @@ typedef enum subCategoriesSortType {
 
 
 - (void)getSocketUrl;
-- (void)registerUdid:(NSString*)udid;
+- (void)registerUdid:(NSString*)token
+           withBlock:(void (^)(NSDictionary* res))block;
+
 - (void)getProductsWithBlock:(void (^)(NSDictionary* userInfo))block;
 
--(void) importBirthdays:(NSArray *)birthdaysToImport;
 - (void)postToFacebookWall:(NSString *)message withFacebookID:(NSString *)facebookID;
+-(void) importBirthdays:(NSArray *)birthdaysToImport;
+
+
+
+
 
 @end

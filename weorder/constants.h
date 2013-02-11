@@ -19,6 +19,7 @@
 #define BASE_URL          @"http://protected-harbor-4547.herokuapp.com"
 
 #endif
+//#define BASE_URL          @"http://localhost:3000"
 //#define BASE_URL          @"http://radiant-hollows-7509.herokuapp.com"
 
 #define AWS_S3_ACCESS_KEY_ID          @"AKIAJC63EYWOJ72VK7PA"
@@ -30,11 +31,13 @@
 
 #define KUserDefaultFbId @"fbId"
 #define KUserDefaultFbName @"fbName"
+#define KUserDefaultToken @"token"
+
 #define KUserDefaultNotice @"KUserDefaultNotice"
 #define KUserDefaultLang @"KUserDefaultLang"
 
 
-#define KFacebookKey @"495492583830112"//
+#define KFacebookKey @"161217940695125"//
 
 #define KSyncImagesDone @"syncImagesDone"
 #define KUploadDone @"uploadDone"

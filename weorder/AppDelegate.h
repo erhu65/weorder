@@ -6,11 +6,18 @@
 //  Copyright (c) 2013 peter. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SurfsUpAppDelegate.h"
+#import "WebViewJavascriptBridge.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : SurfsUpAppDelegate <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property(strong, nonatomic)NSString* token;
+
+@property (strong, nonatomic) UIWebView *webview;
+@property (strong, nonatomic) WebViewJavascriptBridge *javascriptBridge;
+
 
 
 - (BOOL) isRetina;
