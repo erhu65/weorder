@@ -122,22 +122,44 @@ typedef enum videosFilterMode {
 
 -(void)_handelBRNotificationInAppDidUpdate:(NSNotification*)notification
 {   
-    NSDictionary *userInfo = [notification userInfo];
-    //NSString* type = userInfo[@"type"];
-    NSDate* now = [NSDate date];
-    NSDateFormatter *f2 = [[NSDateFormatter alloc] init];
-    [f2 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *strNow = [f2 stringFromDate:now];
+    NSDictionary *data = [notification userInfo];
+    NSString* type = data[@"type"];
     
-    NSString* notice = [NSString stringWithFormat:@"%@ \n %@", userInfo[@"notice"], strNow];
+    if([type isEqualToString:@"server"]){
     
-    [self.noticeChildViewController 
-     toggleSlide:nil msg:notice
-     stayTime:5.0f];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:notice forKey:KUserDefaultNotice];
-    [defaults synchronize];
+        NSDate* now = [NSDate date];
+        NSDateFormatter *f2 = [[NSDateFormatter alloc] init];
+        [f2 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *strNow = [f2 stringFromDate:now];
+        
+        NSString* notice = [NSString stringWithFormat:@"%@ \n %@", data[@"notice"], strNow];
+        
+        [self.noticeChildViewController
+         toggleSlide:nil msg:notice
+         stayTime:5.0f];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:notice forKey:KUserDefaultNotice];
+        [defaults synchronize];
+
+    } else if ([type isEqualToString:@"toFbId"]) {
     
+        NSString* receiverFbId = data[@"receiverFbId"];
+        NSString* senderFbName = data[@"senderFbName"];
+        NSString* msg = data[@"msg"];
+        NSString* notice = [NSString stringWithFormat:@"%@: %@", senderFbName, msg];
+        if([receiverFbId isEqualToString:kSharedModel.fbId]){
+            
+            PRPLog(@"data: %@ - [%@ , %@]",
+                   data,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            
+            [self.noticeChildViewController
+             toggleSlide:nil msg:notice
+             stayTime:5.0f];
+            
+        }
+    }
 }
 
 -(BOOL) _findAndResignFirstResponder:(UIView *)theView{

@@ -94,6 +94,9 @@ void exceptionHandler(NSException *exception)
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSURL* url = [[NSURL alloc] initWithString:BASE_URL];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    [self.webview loadRequest:request];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -178,8 +181,10 @@ void exceptionHandler(NSException *exception)
     [settings synchronize];
 }
 
+
 -(void)_handleSocketURLDidUpdate:(NSNotification *)notification
 {
+    if(nil == kSharedModel.fbId) return;
     NSDictionary *userInfo = [notification userInfo];
     NSString* error = userInfo[@"error"];
     
@@ -191,7 +196,9 @@ void exceptionHandler(NSException *exception)
                                                        delegate:self
                                               cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
         [alert show];
+        
     } else {
+        
         if(nil == [BRDModel sharedInstance].socketUrl) return;
         PRPLog(@"[BRDModel sharedInstance].socketUrl: %@-[%@ , %@]",
                [BRDModel sharedInstance].socketUrl,
@@ -205,8 +212,9 @@ void exceptionHandler(NSException *exception)
             NSLog(@"ObjC received message from JS: %@", data);
             responseCallback(@"Response for message from ObjC");
         }];
-        NSString* uniqueName = [Utils createUUID:@"_notice_user"];
-        NSDictionary* data = @{@"uniqueName": uniqueName};
+        //NSString* uniqueName = [Utils createUUID:@"_notice_user"];
+        
+        NSDictionary* data = @{@"fbId": kSharedModel.fbId};
         [_bridge callHandler:@"JsJoinNoticeHandler"
                         data:data
             responseCallback:^(id response) {
@@ -215,7 +223,8 @@ void exceptionHandler(NSException *exception)
                        response,
                        NSStringFromClass([self class]),
                        NSStringFromSelector(_cmd));
-            }];
+        }];
+        
         [_bridge registerHandler:@"iosGetNoticeCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
             NSDictionary* resDic = (NSDictionary*)data;
             //            NSString* type = resDic[@"type"];
@@ -296,5 +305,22 @@ void exceptionHandler(NSException *exception)
         return [[UIScreen mainScreen] scale] == 2.0 ? YES : NO;
     
     return NO;
+}
+
+-(void)connectNoticeSocket{
+    [self _handleSocketURLDidUpdate:nil];
+}
+
+-(void)sendNoticeToFbId:(NSDictionary*)data;
+{
+    [_bridge callHandler:@"JsSendNoticeToFbId"
+                    data:data
+        responseCallback:^(id response) {
+            
+            PRPLog(@"call JsSendNoticeToFbId responded: %@-[%@ , %@] \n ",
+                   response,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+        }];
 }
 @end

@@ -18,8 +18,8 @@
     self = [super init];
     if (self) {
         
-        NSNumber* isJoint = (NSNumber*) [dic objectForKey:@"isJoin"];
-        self.isJoint = [isJoint boolValue];
+        NSNumber* isUse = (NSNumber*) [dic objectForKey:@"isUse"];
+        self.isUse = [isUse boolValue];
         self.fbId = [dic objectForKey:@"id"];
         self.fbName = [dic objectForKey:@"name"];
         //self.count = (NSNumber*)[dic objectForKey:@"count"];

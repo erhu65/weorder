@@ -18,7 +18,9 @@
 @property (strong, nonatomic) UIWebView *webview;
 @property (strong, nonatomic) WebViewJavascriptBridge *javascriptBridge;
 
-
+-(void)connectNoticeSocket;
 
 - (BOOL) isRetina;
+
+-(void)sendNoticeToFbId:(NSDictionary*)data;
 @end

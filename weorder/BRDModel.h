@@ -167,7 +167,8 @@ typedef enum subCategoriesSortType {
             fbName:(NSString*)fbNmae
             roomId:(NSString*)roomId
          withBlock:(void (^)(NSDictionary* userInfo))block;
-- (void)fetchChatByRoom:(NSString*)roomId 
+
+- (void)fetchChatByRoom:(NSString*)roomId
                   withPage:(NSNumber*)page
                  withBlock:(void (^)(NSDictionary* userInfo))block;
 - (void)updMyChat:(NSString*)msg
@@ -191,7 +192,14 @@ typedef enum subCategoriesSortType {
 - (void)postToFacebookWall:(NSString *)message withFacebookID:(NSString *)facebookID;
 -(void) importBirthdays:(NSArray *)birthdaysToImport;
 
-
+- (void)postNotice:(NSString*)msg
+              type:(NSString*)type
+            senderFbId:(NSString*)senderFbId
+          senderFbName:(NSString*)senderFbName
+          receiverFbId:(NSString*)receiverFbId
+             sound:(NSString*)sound
+             badge:(NSString*)badge
+       withBlock:(void (^)(NSDictionary* userInfo))block;
 
 
 

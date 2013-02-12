@@ -19,6 +19,7 @@
 //#import "BRVideoViewController.h"
 #import "BRRecordFriend.h"
 #import "BRCellFriend.h"
+#import "AppDelegate.h"
 //#import "BRDBirthdayImport.h"
 
 @interface BRFBFriendListViewController ()
@@ -133,7 +134,7 @@ UIAlertViewDelegate>
     brTableCell.record = record;
         
     UIImageView *imageView;
-    if (record.isJoint) {
+    if (record.isUse) {
         
         imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon-import-selected.png"]];
         [self.selectedIndexPathToBirthday setObject:record forKey:indexPath];
@@ -160,7 +161,33 @@ UIAlertViewDelegate>
            record.fbName,
            NSStringFromClass([self class]),
            NSStringFromSelector(_cmd));
-
+    
+    NSDate* now = [NSDate date];
+    NSDateFormatter *dateFormater = [[NSDateFormatter alloc] init];
+    
+    [dateFormater setDateFormat:@"yyyy-dd-MM HH:mm:ss"];
+    NSString* strDate = [dateFormater stringFromDate:now];
+    
+    NSDictionary* data = @{
+                           @"type": @"toFbId",
+                           @"receiverFbId": record.fbId,
+                           @"senderFbId":kSharedModel.fbId,
+                           @"senderFbName":kSharedModel.fbName,
+                           @"msg": @"msg...",
+                           @"badge": @"badge...",
+                           @"sound": @"sound...",
+                           @"alert": @"alert...",
+                           @"dateTime": strDate
+                           };
+    
+    [kAppDelegate sendNoticeToFbId:data];
+    
+    [kSharedModel postNotice:@"msg..." type:@"toFbId" senderFbId:kSharedModel.fbId senderFbName:kSharedModel.fbName receiverFbId:record.fbId sound:@"sound..." badge:@"badge..." withBlock:^(NSDictionary* res) {
+        
+       
+        
+    }];
+    
 //    [self showHud:YES];
 //    __weak __block BRFBFriendListViewController* weakSelf = self;
 //    
