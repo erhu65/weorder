@@ -43,6 +43,7 @@
                     <connections>
                         <segue destination="2" kind="relationship" relationship="viewControllers" id="26"/>
                         <segue destination="zmr-ep-8D9" kind="relationship" relationship="viewControllers" id="xfP-RS-Rvh"/>
+                        <segue destination="cwE-R7-zCA" kind="relationship" relationship="viewControllers" id="TME-n0-hfH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
@@ -135,6 +136,157 @@
             </objects>
             <point key="canvasLocation" x="653" y="544"/>
         </scene>
+        <!--Notice View Controller - Notice-->
+        <scene sceneID="ZV1-G9-Btb">
+            <objects>
+                <viewController id="cwE-R7-zCA" customClass="WONoticeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IQA-0C-SqE">
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="gZc-GG-Nc9">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" type="user" id="ljy-EP-lfO"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wZi-Oz-nEz"/>
+                                    <barButtonItem title="Edit" id="m5H-ak-zut">
+                                        <connections>
+                                            <action selector="_toggleEditOrDone:" destination="cwE-R7-zCA" id="jRq-BX-EH5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FWk-ON-aEK" userLabel="tb">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WOCellNotice" rowHeight="80" id="nV1-cE-dc2" customClass="WOCellNotice">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPC-fq-nNm">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="46" id="0nv-MS-PFm"/>
+                                                        <constraint firstAttribute="width" constant="47" id="OrN-rc-7de"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lbName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPZ-Pt-dkN">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="71" id="7dk-Uv-9xD"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lbMsg" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="167" translatesAutoresizingMaskIntoConstraints="NO" id="zph-Ti-CEY">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="51" id="Fta-Jp-AgJ"/>
+                                                        <constraint firstAttribute="width" constant="167" id="qoM-79-I4h"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lbDatetime" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSp-r7-lUD">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="135" id="774-l2-OMb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iE-lT-2cJ">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="AdR-Wg-nrg"/>
+                                                        <constraint firstAttribute="height" constant="28" id="DPk-15-R3F"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="btnRead">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="readNotice:" destination="nV1-cE-dc2" eventType="touchUpInside" id="Lbe-2k-9Vl"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="zph-Ti-CEY" firstAttribute="bottom" secondItem="gPC-fq-nNm" secondAttribute="bottom" type="default" id="1s2-X9-XKJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="BSp-r7-lUD" secondAttribute="bottom" constant="1" id="V3a-Y5-iFD"/>
+                                            <constraint firstItem="zph-Ti-CEY" firstAttribute="top" secondItem="nV1-cE-dc2" secondAttribute="top" constant="8" id="WxO-Hb-fwd"/>
+                                            <constraint firstItem="zph-Ti-CEY" firstAttribute="leading" secondItem="LPZ-Pt-dkN" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ZwA-Ka-0s9"/>
+                                            <constraint firstItem="gPC-fq-nNm" firstAttribute="leading" secondItem="nV1-cE-dc2" secondAttribute="leading" constant="14" id="dOk-F8-d7M"/>
+                                            <constraint firstItem="LPZ-Pt-dkN" firstAttribute="leading" secondItem="nV1-cE-dc2" secondAttribute="leading" constant="6" id="ebH-HV-Bje"/>
+                                            <constraint firstAttribute="trailing" secondItem="1iE-lT-2cJ" secondAttribute="trailing" constant="12" id="etU-Q7-kcd"/>
+                                            <constraint firstAttribute="bottom" secondItem="LPZ-Pt-dkN" secondAttribute="bottom" constant="7" id="f7X-wt-hMD"/>
+                                            <constraint firstAttribute="trailing" secondItem="BSp-r7-lUD" secondAttribute="trailing" constant="7" id="iGU-o9-UDM"/>
+                                            <constraint firstItem="1iE-lT-2cJ" firstAttribute="top" secondItem="nV1-cE-dc2" secondAttribute="top" constant="27" id="zuq-RS-kEY"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="btnRead" destination="1iE-lT-2cJ" id="dmf-x2-uE8"/>
+                                            <outlet property="imvFb" destination="gPC-fq-nNm" id="6o7-DP-Gqi"/>
+                                            <outlet property="lbDatetime" destination="BSp-r7-lUD" id="WXv-5B-h4t"/>
+                                            <outlet property="lbFbName" destination="LPZ-Pt-dkN" id="3Mz-Fc-BUA"/>
+                                            <outlet property="lbMsg" destination="zph-Ti-CEY" id="pOy-Yn-iEq"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="cwE-R7-zCA" id="x4j-bE-yIU"/>
+                                    <outlet property="delegate" destination="cwE-R7-zCA" id="Dc9-M2-v6e"/>
+                                </connections>
+                            </tableView>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DZU-as-Nsu">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" type="user" id="fNI-8J-sXx"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="_toggleUnRead:" destination="cwE-R7-zCA" eventType="valueChanged" id="YFA-7M-c2a"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lbUnRead" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irO-w4-ETW">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gZc-GG-Nc9" firstAttribute="top" secondItem="IQA-0C-SqE" secondAttribute="top" type="default" id="2L3-Df-HO9"/>
+                            <constraint firstItem="gZc-GG-Nc9" firstAttribute="leading" secondItem="IQA-0C-SqE" secondAttribute="leading" type="default" id="5RF-ve-5ja"/>
+                            <constraint firstItem="gZc-GG-Nc9" firstAttribute="trailing" secondItem="IQA-0C-SqE" secondAttribute="trailing" type="default" id="8rp-7Y-841"/>
+                            <constraint firstItem="irO-w4-ETW" firstAttribute="top" secondItem="FWk-ON-aEK" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CPK-X8-reR"/>
+                            <constraint firstItem="DZU-as-Nsu" firstAttribute="leading" secondItem="irO-w4-ETW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="CeU-aw-sdn"/>
+                            <constraint firstItem="FWk-ON-aEK" firstAttribute="trailing" secondItem="IQA-0C-SqE" secondAttribute="trailing" type="user" id="NMb-cd-18c"/>
+                            <constraint firstAttribute="bottom" secondItem="DZU-as-Nsu" secondAttribute="bottom" type="user" id="OL3-3y-MV7"/>
+                            <constraint firstItem="FWk-ON-aEK" firstAttribute="leading" secondItem="IQA-0C-SqE" secondAttribute="leading" type="user" id="Pdh-WR-bdC"/>
+                            <constraint firstItem="irO-w4-ETW" firstAttribute="centerY" secondItem="DZU-as-Nsu" secondAttribute="centerY" type="default" id="QvQ-ZE-loB"/>
+                            <constraint firstItem="irO-w4-ETW" firstAttribute="leading" secondItem="IQA-0C-SqE" secondAttribute="leading" constant="154" id="USI-B1-JtM"/>
+                            <constraint firstItem="FWk-ON-aEK" firstAttribute="top" secondItem="gZc-GG-Nc9" secondAttribute="bottom" type="default" id="a0u-jO-sob"/>
+                            <constraint firstItem="FWk-ON-aEK" firstAttribute="leading" secondItem="IQA-0C-SqE" secondAttribute="leading" type="user" id="lIK-ZO-6We"/>
+                            <constraint firstItem="FWk-ON-aEK" firstAttribute="trailing" secondItem="IQA-0C-SqE" secondAttribute="trailing" type="user" id="qbd-lb-I4h"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="8001" title="Notice" id="ezZ-DM-UlX"/>
+                    <connections>
+                        <outlet property="barBtnEdit" destination="m5H-ak-zut" id="0YW-pQ-8tn"/>
+                        <outlet property="lbUnRead" destination="irO-w4-ETW" id="hEL-Tx-93p"/>
+                        <outlet property="swUnread" destination="DZU-as-Nsu" id="eJE-Dz-MT0"/>
+                        <outlet property="tb" destination="FWk-ON-aEK" id="ITR-lZ-M3N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jna-IA-5VY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="653" y="1199"/>
+        </scene>
     </scenes>
     <resources>
         <image name="first" width="16" height="16"/>
@@ -165,6 +317,27 @@
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="WOCellNotice" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOCellNotice.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnRead" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imvFb" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lbDatetime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbFbName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lbMsg" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="WONoticeViewController" superclassName="BRCoreViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WONoticeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="_toggleEditOrDone:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="_toggleUnRead:"/>
+                <relationship kind="outlet" name="barBtnEdit" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="lbUnRead" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="swUnread" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="tb" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="WOStroesViewController" superclassName="BRCoreViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WOStroesViewController.h"/>

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "WONoticeViewController.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "HMIAPHelper.h"
@@ -79,8 +79,11 @@ void exceptionHandler(NSException *exception)
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handleRegisterUdidDidUpdate:) name:BRNotificationRegisterUdidDidUpdate object:[BRDModel sharedInstance]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handelBRNotificationInAppDidUpdate:) name:BRNotificationInAppDidUpdate object:nil];
+    
     [kSharedModel getSocketUrl];
     //[HMIAPHelper sharedInstance];//restore the pervious purchased products first
+        
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 							
@@ -110,6 +113,7 @@ void exceptionHandler(NSException *exception)
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    [self reloadNoticeAndbadate];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -323,4 +327,43 @@ void exceptionHandler(NSException *exception)
                    NSStringFromSelector(_cmd));
         }];
 }
+
+-(void)reloadNoticeAndbadate{
+    
+    
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    for (UIViewController *viewController in tabController.viewControllers) {
+        if (viewController.tabBarItem.tag == kTabNoticeUnRead) {
+            WONoticeViewController* VC = (WONoticeViewController*)viewController;
+            [VC fetchNotice];
+            //                VC.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", noticeUnReadCount];
+            
+            
+        }
+    }
+}
+
+-(void)_handelBRNotificationInAppDidUpdate:(NSNotification*)notification
+{
+    NSDictionary *data = [notification userInfo];
+    NSString* type = data[@"type"];
+    
+    if([type isEqualToString:@"server"]){
+        
+        
+    } else if ([type isEqualToString:@"toFbId"]) {
+        
+        NSString* receiverFbId = data[@"receiverFbId"];
+        if([receiverFbId isEqualToString:kSharedModel.fbId]){
+            
+            PRPLog(@"data: %@ - [%@ , %@]",
+                   data,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            [self reloadNoticeAndbadate];
+            
+        }
+    }
+}
+
 @end

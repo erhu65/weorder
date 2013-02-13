@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D0113E5E16C7C93300854C51 /* WOStroesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0113E5D16C7C93300854C51 /* WOStroesViewController.m */; };
+		D052E22516CB678100E917C5 /* WONoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D052E22416CB678100E917C5 /* WONoticeViewController.m */; };
+		D052E22816CB67B100E917C5 /* WORecordNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = D052E22716CB67B100E917C5 /* WORecordNotice.m */; };
+		D052E22B16CB67D900E917C5 /* WOCellNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = D052E22A16CB67D900E917C5 /* WOCellNotice.m */; };
 		D0A6934A16C777F200DAC57D /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A6934916C777F200DAC57D /* libz.1.2.5.dylib */; };
 		D0A6934C16C777FE00DAC57D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A6934B16C777FE00DAC57D /* AddressBook.framework */; };
 		D0A6934E16C7780900DAC57D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0A6934D16C7780900DAC57D /* MediaPlayer.framework */; };
@@ -271,6 +274,12 @@
 /* Begin PBXFileReference section */
 		D0113E5C16C7C93300854C51 /* WOStroesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStroesViewController.h; sourceTree = "<group>"; };
 		D0113E5D16C7C93300854C51 /* WOStroesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOStroesViewController.m; sourceTree = "<group>"; };
+		D052E22316CB678100E917C5 /* WONoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WONoticeViewController.h; sourceTree = "<group>"; };
+		D052E22416CB678100E917C5 /* WONoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WONoticeViewController.m; sourceTree = "<group>"; };
+		D052E22616CB67B100E917C5 /* WORecordNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordNotice.h; sourceTree = "<group>"; };
+		D052E22716CB67B100E917C5 /* WORecordNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordNotice.m; sourceTree = "<group>"; };
+		D052E22916CB67D900E917C5 /* WOCellNotice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOCellNotice.h; sourceTree = "<group>"; };
+		D052E22A16CB67D900E917C5 /* WOCellNotice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOCellNotice.m; sourceTree = "<group>"; };
 		D0A6934916C777F200DAC57D /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		D0A6934B16C777FE00DAC57D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		D0A6934D16C7780900DAC57D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -664,6 +673,19 @@
 			name = WOStores;
 			sourceTree = "<group>";
 		};
+		D052E22216CB668A00E917C5 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				D052E22316CB678100E917C5 /* WONoticeViewController.h */,
+				D052E22416CB678100E917C5 /* WONoticeViewController.m */,
+				D052E22616CB67B100E917C5 /* WORecordNotice.h */,
+				D052E22716CB67B100E917C5 /* WORecordNotice.m */,
+				D052E22916CB67D900E917C5 /* WOCellNotice.h */,
+				D052E22A16CB67D900E917C5 /* WOCellNotice.m */,
+			);
+			name = Notice;
+			sourceTree = "<group>";
+		};
 		D0A6936316C7795000DAC57D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -1005,6 +1027,7 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				D052E22216CB668A00E917C5 /* Notice */,
 				D0113E5F16C7C93900854C51 /* WOStores */,
 				D0A695B916C7861C00DAC57D /* MainCategory */,
 				D0A695AF16C785A100DAC57D /* myRoom */,
@@ -1658,6 +1681,9 @@
 				D0A695C116C7862700DAC57D /* BRRecordMainCategory.m in Sources */,
 				D0A695C216C7862700DAC57D /* BRCellMainCategory.m in Sources */,
 				D0113E5E16C7C93300854C51 /* WOStroesViewController.m in Sources */,
+				D052E22516CB678100E917C5 /* WONoticeViewController.m in Sources */,
+				D052E22816CB67B100E917C5 /* WORecordNotice.m in Sources */,
+				D052E22B16CB67D900E917C5 /* WOCellNotice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

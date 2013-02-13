@@ -154,5 +154,11 @@
 	<string>Add your tag</string>
 	<key>intoBuyPoints</key>
 	<string>You can buy units to continue play and share animation with your friends.</string>
+	<key>read</key>
+	<string>Read</string>
+	<key>unread</key>
+	<string>Unread</string>
+	<key>titleNotice</key>
+	<string></string>
 </dict>
 </plist>

@@ -9,6 +9,8 @@
 #import "SurfsUpAppDelegate.h"
 #import "WebViewJavascriptBridge.h"
 
+#define kTabNoticeUnRead 8001
+
 @interface AppDelegate : SurfsUpAppDelegate <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -23,4 +25,5 @@
 - (BOOL) isRetina;
 
 -(void)sendNoticeToFbId:(NSDictionary*)data;
+-(void)reloadNoticeAndbadate;
 @end

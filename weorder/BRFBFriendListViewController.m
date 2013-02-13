@@ -173,7 +173,7 @@ UIAlertViewDelegate>
                            @"receiverFbId": record.fbId,
                            @"senderFbId":kSharedModel.fbId,
                            @"senderFbName":kSharedModel.fbName,
-                           @"msg": @"msg...",
+                           @"msg": @"msg...msg...msg...msg...msg...msg...msg...msg...",
                            @"badge": @"badge...",
                            @"sound": @"sound...",
                            @"alert": @"alert...",
@@ -182,9 +182,10 @@ UIAlertViewDelegate>
     
     [kAppDelegate sendNoticeToFbId:data];
     
-    [kSharedModel postNotice:@"msg..." type:@"toFbId" senderFbId:kSharedModel.fbId senderFbName:kSharedModel.fbName receiverFbId:record.fbId sound:@"sound..." badge:@"badge..." withBlock:^(NSDictionary* res) {
+    [kSharedModel postNotice:@"msg...msg...msg...msg...msg...msg...msg...msg..." type:@"toFbId" senderFbId:kSharedModel.fbId senderFbName:kSharedModel.fbName receiverFbId:record.fbId sound:@"sound..." badge:@"badge..." withBlock:^(NSDictionary* res) {
         
        
+
         
     }];
     

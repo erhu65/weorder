@@ -200,7 +200,15 @@ typedef enum subCategoriesSortType {
              sound:(NSString*)sound
              badge:(NSString*)badge
        withBlock:(void (^)(NSDictionary* userInfo))block;
+- (void)fetchNoticeByFbId:(NSString*)fbId
+                  withPage:(NSNumber*)page
+                 isUnRead:(BOOL)isUnRead
+                 withBlock:(void (^)(NSDictionary* userInfo))block;
 
+- (void)updNotice:(NSString*)_id
+        withBlock:(void (^)(NSDictionary* res))block;
 
+-(void)delNotice:(NSString*)_id
+     withBlock:(void (^)(NSDictionary* res))block;
 
 @end

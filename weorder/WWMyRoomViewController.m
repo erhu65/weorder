@@ -8,11 +8,9 @@
 
 #import "WWMyRoomViewController.h"
 #import "BRFBFriendListViewController.h"
-//#import "DetailViewController_iPad.h"
+
 #import "WWTagViewController.h"
-//#import "DetailViewController_iPad.h"
-#import "BRDModel.h"
-//#import "DetailViewController_iPad.h"
+
 #import "WWRecordMyRoom.h"
 #import "WWCellMyRoom.h"
 #import "AppDelegate.h"
@@ -67,7 +65,6 @@ WWCellMyRoomDelegate>
         self.page = @0;
         self.isLastPage = YES;
     }
-    
     return self;
 }
 
