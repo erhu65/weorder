@@ -115,7 +115,7 @@ typedef enum videosFilterMode {
    if(nil != HUD){
       [HUD hide:NO];
     }
-    [self _findAndResignFirstResponder:self.view];
+    [self findAndResignFirstResponder:self.view];
     //prevent crash when clicking tab veray quickly...
     
 }
@@ -162,13 +162,13 @@ typedef enum videosFilterMode {
     }
 }
 
--(BOOL) _findAndResignFirstResponder:(UIView *)theView{
+-(BOOL) findAndResignFirstResponder:(UIView *)theView{
     if([theView isFirstResponder]){
         [theView resignFirstResponder];
         return YES;
     }
     for(UIView *subView in theView.subviews){
-        if([self _findAndResignFirstResponder:subView]){
+        if([self findAndResignFirstResponder:subView]){
             return YES;
         }
     }

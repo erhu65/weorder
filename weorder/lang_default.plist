@@ -160,5 +160,13 @@
 	<string>Unread</string>
 	<key>titleNotice</key>
 	<string></string>
+	<key>titleMyStore</key>
+	<string>My Store</string>
+	<key>storeName</key>
+	<string>Store Name:</string>
+	<key>soreDescription</key>
+	<string>Store Description:</string>
+	<key>storePics</key>
+	<string>Store Pictures:</string>
 </dict>
 </plist>

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B788E57116CE058D0030DA71 /* WOStoreBackenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */; };
+		B7D8A4CB16CFE0480053ACFD /* WORecordStore.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D8A4CA16CFE0480053ACFD /* WORecordStore.m */; };
+		B7D8A4CE16CFE7140053ACFD /* WOCellStorePIc.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D8A4CD16CFE7140053ACFD /* WOCellStorePIc.m */; };
 		D0113E5E16C7C93300854C51 /* WOStroesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0113E5D16C7C93300854C51 /* WOStroesViewController.m */; };
 		D052E22516CB678100E917C5 /* WONoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D052E22416CB678100E917C5 /* WONoticeViewController.m */; };
 		D052E22816CB67B100E917C5 /* WORecordNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = D052E22716CB67B100E917C5 /* WORecordNotice.m */; };
@@ -272,6 +275,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B788E56F16CE058D0030DA71 /* WOStoreBackenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStoreBackenViewController.h; sourceTree = "<group>"; };
+		B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WOStoreBackenViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B7D8A4C916CFE0480053ACFD /* WORecordStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordStore.h; sourceTree = "<group>"; };
+		B7D8A4CA16CFE0480053ACFD /* WORecordStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordStore.m; sourceTree = "<group>"; };
+		B7D8A4CC16CFE7140053ACFD /* WOCellStorePic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOCellStorePic.h; sourceTree = "<group>"; };
+		B7D8A4CD16CFE7140053ACFD /* WOCellStorePIc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOCellStorePIc.m; sourceTree = "<group>"; };
 		D0113E5C16C7C93300854C51 /* WOStroesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStroesViewController.h; sourceTree = "<group>"; };
 		D0113E5D16C7C93300854C51 /* WOStroesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOStroesViewController.m; sourceTree = "<group>"; };
 		D052E22316CB678100E917C5 /* WONoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WONoticeViewController.h; sourceTree = "<group>"; };
@@ -333,7 +342,7 @@
 		D0A693B516C77C6500DAC57D /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
 		D0A693B616C77C6500DAC57D /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		D0A693BC16C77C8300DAC57D /* AutoLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutViewController.h; sourceTree = "<group>"; };
-		D0A693BD16C77C8300DAC57D /* AutoLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutViewController.m; sourceTree = "<group>"; };
+		D0A693BD16C77C8300DAC57D /* AutoLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AutoLayoutViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D0A693BE16C77C8300DAC57D /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		D0A693C216C77CC500DAC57D /* CombinedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombinedViewController.h; sourceTree = "<group>"; };
 		D0A693C316C77CC500DAC57D /* CombinedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombinedViewController.m; sourceTree = "<group>"; };
@@ -602,7 +611,7 @@
 		D0A695B416C785AB00DAC57D /* WWCellMyRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWCellMyRoom.h; sourceTree = "<group>"; };
 		D0A695B516C785AB00DAC57D /* WWCellMyRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWCellMyRoom.m; sourceTree = "<group>"; };
 		D0A695BA16C7862700DAC57D /* BRMainCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRMainCategoryViewController.h; sourceTree = "<group>"; };
-		D0A695BB16C7862700DAC57D /* BRMainCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRMainCategoryViewController.m; sourceTree = "<group>"; };
+		D0A695BB16C7862700DAC57D /* BRMainCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BRMainCategoryViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D0A695BC16C7862700DAC57D /* BRRecordMainCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRecordMainCategory.h; sourceTree = "<group>"; };
 		D0A695BD16C7862700DAC57D /* BRRecordMainCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRecordMainCategory.m; sourceTree = "<group>"; };
 		D0A695BE16C7862700DAC57D /* BRCellMainCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRCellMainCategory.h; sourceTree = "<group>"; };
@@ -664,6 +673,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B788E56E16CE045E0030DA71 /* WOStoreBacken */ = {
+			isa = PBXGroup;
+			children = (
+				B788E56F16CE058D0030DA71 /* WOStoreBackenViewController.h */,
+				B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */,
+				B7D8A4C916CFE0480053ACFD /* WORecordStore.h */,
+				B7D8A4CA16CFE0480053ACFD /* WORecordStore.m */,
+				B7D8A4CC16CFE7140053ACFD /* WOCellStorePic.h */,
+				B7D8A4CD16CFE7140053ACFD /* WOCellStorePIc.m */,
+			);
+			name = WOStoreBacken;
+			sourceTree = "<group>";
+		};
 		D0113E5F16C7C93900854C51 /* WOStores */ = {
 			isa = PBXGroup;
 			children = (
@@ -1027,6 +1049,7 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				B788E56E16CE045E0030DA71 /* WOStoreBacken */,
 				D052E22216CB668A00E917C5 /* Notice */,
 				D0113E5F16C7C93900854C51 /* WOStores */,
 				D0A695B916C7861C00DAC57D /* MainCategory */,
@@ -1338,6 +1361,8 @@
 			isa = PBXGroup;
 			children = (
 				D0A6937A16C77A7300DAC57D /* constants.h */,
+				D0A6944116C77E5700DAC57D /* theme */,
+				D0A6943416C77E1E00DAC57D /* lang */,
 				D0EF0B6C16C5373B00921E3A /* AppDelegate.h */,
 				D0EF0B6D16C5373B00921E3A /* AppDelegate.m */,
 				D0EF0B7516C5373B00921E3A /* MainStoryboard.storyboard */,
@@ -1351,8 +1376,6 @@
 				D0EF0B8416C5373D00921E3A /* second@2x.png */,
 				D0A6945C16C77F2D00DAC57D /* VC */,
 				D0A6945B16C77ED500DAC57D /* model */,
-				D0A6944116C77E5700DAC57D /* theme */,
-				D0A6943416C77E1E00DAC57D /* lang */,
 				D0A6936316C7795000DAC57D /* Shared */,
 				D0A6945A16C77E9E00DAC57D /* In-App Purchase */,
 				D0A6937B16C77A8E00DAC57D /* lib */,
@@ -1684,6 +1707,9 @@
 				D052E22516CB678100E917C5 /* WONoticeViewController.m in Sources */,
 				D052E22816CB67B100E917C5 /* WORecordNotice.m in Sources */,
 				D052E22B16CB67D900E917C5 /* WOCellNotice.m in Sources */,
+				B788E57116CE058D0030DA71 /* WOStoreBackenViewController.m in Sources */,
+				B7D8A4CB16CFE0480053ACFD /* WORecordStore.m in Sources */,
+				B7D8A4CE16CFE7140053ACFD /* WOCellStorePIc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1800,8 +1826,8 @@
 				INFOPLIST_FILE = "weorder/weorder-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "824B2734-0A4F-4E36-8CC9-7A24E8B4A267";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "824B2734-0A4F-4E36-8CC9-7A24E8B4A267";
+				PROVISIONING_PROFILE = "880374F5-D5E3-45BB-95B4-D41DFBA01F54";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "880374F5-D5E3-45BB-95B4-D41DFBA01F54";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -20,11 +20,16 @@ typedef enum mainCategoryFilterMode {
 } mainCategoryFilterMode;
 
 
-
+#ifdef PRPDEBUG
 @interface UIWindow (AutoLayoutDebug) 
 + (UIWindow *)keyWindow;
 - (NSString *)_autolayoutTrace;
 @end
+
+#else
+
+#endif
+
 
 
 
@@ -246,10 +251,18 @@ UIAlertViewDelegate>
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+#ifdef PRPDEBUG
     PRPLog(@"%@-[%@ , %@]",
            [[UIWindow keyWindow] _autolayoutTrace],
            NSStringFromClass([self class]),
            NSStringFromSelector(_cmd));
+    
+#else
+    
+#endif
+    
+    
     if(self.mode == mainCategoryFilterModeFavorite 
        && kSharedModel.isUserMainCategoryFavoriteNeedUpdate){
         [self _handleRefreshFromFirstPage:nil];
@@ -283,10 +296,16 @@ UIAlertViewDelegate>
 {
     [super didRotateFromInterfaceOrientation:
      fromInterfaceOrientation];
+#ifdef PRPDEBUG
     PRPLog(@"%@-[%@ , %@]",
-          [[UIWindow keyWindow] _autolayoutTrace],
+           [[UIWindow keyWindow] _autolayoutTrace],
            NSStringFromClass([self class]),
            NSStringFromSelector(_cmd));
+    
+#else
+    
+#endif
+
 }
 
 - (IBAction)toggleSlide:(id)sender{

@@ -1,10 +1,16 @@
 
 #import "AutoLayoutViewController.h"
 
+#ifdef PRPDEBUG
 @interface UIWindow (AutoLayoutDebug) 
 + (UIWindow *)keyWindow;
 - (NSString *)_autolayoutTrace;
 @end
+
+#else
+
+#endif
+
 
 
 @interface AutoLayoutViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -181,11 +187,25 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"%@", [[UIWindow keyWindow] _autolayoutTrace]); }
+    
+#ifdef PRPDEBUG
+   NSLog(@"%@", [[UIWindow keyWindow] _autolayoutTrace]); 
+    
+#else
+    
+#endif
+
+}
 - (void)didRotateFromInterfaceOrientation: (UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:
      fromInterfaceOrientation];
+#ifdef PRPDEBUG
     NSLog(@"%@", [[UIWindow keyWindow] _autolayoutTrace]); 
+    
+#else
+    
+#endif
+    
 }
 @end

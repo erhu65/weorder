@@ -45,5 +45,6 @@ typedef enum msgLevel {
 @property (nonatomic) BOOL isEnableSound;
 -(void)playSoundEffect:(NSString*)soundName 
                soundId:(SystemSoundID)soundId;
+-(BOOL) findAndResignFirstResponder:(UIView *)theView;
 
 @end
