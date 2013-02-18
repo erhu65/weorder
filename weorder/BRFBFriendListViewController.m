@@ -57,14 +57,6 @@ UIAlertViewDelegate>
 }
 
 
-
--(void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

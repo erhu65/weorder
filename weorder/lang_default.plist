@@ -162,11 +162,35 @@
 	<string></string>
 	<key>titleMyStore</key>
 	<string>My Store</string>
+	<key>titleEditStorePic</key>
+	<string>Edit My Store Pic</string>
+	<key>titleAddStorePic</key>
+	<string>Add My Store Pic</string>
 	<key>storeName</key>
 	<string>Store Name:</string>
 	<key>soreDescription</key>
 	<string>Store Description:</string>
 	<key>storePics</key>
 	<string>Store Pictures:</string>
+	<key>pleaseFillName</key>
+	<string>Please fill name</string>
+	<key>pleaseFillDescription</key>
+	<string>Please fill description</string>
+	<key>pleaseChoosePIc</key>
+	<string>Please choose a picture</string>
+	<key>notYetAddStoreInfo</key>
+	<string>No yet Add Store Infomation</string>
+	<key>choosePIc</key>
+	<string>Choose PIcture</string>
+	<key>takeFromLibrary</key>
+	<string>Take from library</string>
+	<key>takeFromCamera</key>
+	<string>Take from camera</string>
+	<key>picDescription</key>
+	<string>PIc desc:</string>
+	<key>delete</key>
+	<string>Delete</string>
+	<key>areYouSureToDelete</key>
+	<string>Are you sure to delete?</string>
 </dict>
 </plist>

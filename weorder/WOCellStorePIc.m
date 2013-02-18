@@ -7,6 +7,9 @@
 //
 
 #import "WOCellStorePic.h"
+#import "WORecordStorePic.h"
+#import "BRStyleSheet.h"
+#import "UIImageView+RemoteFile.h"
 
 @implementation WOCellStorePic
 
@@ -38,8 +41,24 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
+}
+
+-(void) setRecord:(WORecordStorePic *)record
+{
+    _record = record;
+    self.lbPicDesc.text = _record.description;
+    if (nil != record.awsS3ImgUrl) {
+        [self.imvPic setImageWithS3URL:record.awsS3ImgUrl placeHolderImage:[UIImage imageNamed:kSharedModel.theme[@"Icon"]] withUniqueKey:record.uniqueKey];
+    }
+    else self.imvPic.image = [UIImage imageNamed:kSharedModel.theme[@"Icon"]];
+}
+-(void) setLbPicDesc:(UILabel *)lbPicDesc
+{
+    _lbPicDesc = lbPicDesc;
+    if (_lbPicDesc) {
+        [BRStyleSheet styleLabel:_lbPicDesc withType:BRLabelTypeName];
+    }
 }
 
 @end

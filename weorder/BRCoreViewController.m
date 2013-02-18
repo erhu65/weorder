@@ -101,7 +101,14 @@ typedef enum videosFilterMode {
 -(void)viewWillAppear:(BOOL)animated{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handleFacebookMeDidUpdate:) name:BRNotificationFacebookMeDidUpdate object:[BRDModel sharedInstance]];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handelBRNotificationInAppDidUpdate:) name:BRNotificationInAppDidUpdate object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handelBRNotificationInAppDidUpdate:) name:BRNotificationInAppDidUpdate object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handelNotificationFromModel:) name:NotificationFromModel object:nil];
+
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -111,7 +118,8 @@ typedef enum videosFilterMode {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BRNotificationInAppDidUpdate object:nil];
     
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationFromModel object:nil];
+
    if(nil != HUD){
       [HUD hide:NO];
     }
@@ -148,7 +156,7 @@ typedef enum videosFilterMode {
         NSString* msg = data[@"msg"];
         NSString* notice = [NSString stringWithFormat:@"%@: %@", senderFbName, msg];
         if([receiverFbId isEqualToString:kSharedModel.fbId]){
-            
+     
             PRPLog(@"data: %@ - [%@ , %@]",
                    data,
                    NSStringFromClass([self class]),
@@ -161,6 +169,27 @@ typedef enum videosFilterMode {
         }
     }
 }
+-(void)_handelNotificationFromModel:(NSNotification*)notification{
+
+    NSDictionary* userInfo = [notification userInfo];
+    NSString* error = userInfo[@"error"];
+    
+    if(nil != error){
+ 
+        [self showMsg:error type:msgLevelError];
+        return;
+    }
+    
+    NSString* action = userInfo[@"action"];
+    
+    if(nil != action){
+        if([action isEqualToString:@"hideHUD"]){
+             [self hideHud:YES];
+        }
+    }
+}
+
+
 
 -(BOOL) findAndResignFirstResponder:(UIView *)theView{
     if([theView isFirstResponder]){
@@ -281,4 +310,22 @@ typedef enum videosFilterMode {
 
     }
 }
+- (UIToolbar *) accessoryView
+{
+	_tbForKeyBoard = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 44.0f)];
+	_tbForKeyBoard.tintColor = [UIColor darkGrayColor];
+	
+	NSMutableArray *items = [NSMutableArray array];
+	//[items addObject:BARBUTTON(@"Clear", @selector(clearText))];
+	[items addObject:SYSBARBUTTON(UIBarButtonSystemItemFlexibleSpace, nil)];
+	[items addObject:BARBUTTON(@"Done", @selector(leaveKeyboardMode))];
+	_tbForKeyBoard.items = items;	
+	
+	return _tbForKeyBoard;
+}
+- (void) leaveKeyboardMode
+{
+	[self findAndResignFirstResponder:self.view];
+}
+
 @end

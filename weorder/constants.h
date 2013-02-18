@@ -24,13 +24,17 @@
 
 #define AWS_S3_ACCESS_KEY_ID          @"AKIAJC63EYWOJ72VK7PA"
 #define AWS_S3_SECRET_KEY             @"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"
-#define AWS_S3_ZIP_BUCKET         @"wework-bucket"
+#define AWS_S3_ZIP_BUCKET         @"weorder-bucket"
 
 
 #define BRNotificationInAppDidUpdate           @"BRNotificationInAppDidUpdate"
 
+#define NotificationFromModel           @"NotificationFromModel"
+
+
 #define KUserDefaultFbId @"fbId"
 #define KUserDefaultFbName @"fbName"
+#define KUserDefaultFbAccessToken @"KUserDefaultFbAccessToken"
 #define KUserDefaultToken @"token"
 
 

@@ -46,5 +46,9 @@
 	<string>explosion_5_38_128.png</string>
 	<key>animation10</key>
 	<string>explosion_5_38_128_corrected.png</string>
+	<key>placeHorderPerson</key>
+	<string>placeholderPerson.jpeg</string>
+	<key>placeHorderGeneral</key>
+	<string>placeholderGeneral.jpeg</string>
 </dict>
 </plist>

@@ -7,7 +7,11 @@
 //
 
 #import "WOStoreBackenViewController.h"
+#import "WOEditPicViewController.h"
 #import "WOCellStorePic.h"
+#import "WORecordStorePic.h"
+#import "Utils.h"
+#import "AppDelegate.h"
 
 
 #ifdef PRPDEBUG
@@ -24,25 +28,31 @@
 UITextFieldDelegate, 
 UITextViewDelegate>
 {
-    
     UIToolbar *_tbForKeyBoard;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *lbFbName;
-@property (weak, nonatomic) IBOutlet UIImageView *fbImg;
+@property (weak, nonatomic) IBOutlet UIImageView *imvFb;
 @property (weak, nonatomic) IBOutlet UILabel *lbName;
 
 @property (weak, nonatomic) IBOutlet UITextField *tfName;
 @property (weak, nonatomic) IBOutlet UILabel *lbDescription;
 @property (weak, nonatomic) IBOutlet UITextView *tvDescription;
+@property (weak, nonatomic) IBOutlet UIButton *btnSaveStoreInfo;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnAddStroePic;
+
+
 
 @property (weak, nonatomic) IBOutlet UILabel *lbStorePics;
-
 @property (weak, nonatomic) IBOutlet UITableView *tb;
-
+@property(nonatomic, strong)NSMutableArray* docs;
+@property(nonatomic, strong)NSIndexPath * indexPathTmp;
 @end
 
 @implementation WOStoreBackenViewController
+
+
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     
@@ -54,12 +64,23 @@ UITextViewDelegate>
     return self;
 }
 
+-(NSMutableArray*)docs{
+    
+    if(nil == _docs){
+        _docs = [[NSMutableArray alloc] init];
+    }
+    return _docs;
+}
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-	self.tfName.inputAccessoryView = [self accessoryView];
     
+	self.tfName.inputAccessoryView = [self accessoryView];
+    self.tfName.clearButtonMode = UITextFieldViewModeAlways;
     self.lbName.text = kSharedModel.lang[@"storeName"];
     [BRStyleSheet styleLabel:self.lbName withType:BRLabelTypeName];
     
@@ -78,21 +99,25 @@ UITextViewDelegate>
 //	self.tb.frame = CGRectMake(0, 500, self.tb.frame.size.width, self.tb.frame.size.height);
     UIImage* backgroundImage = [UIImage imageNamed:@"tool-bar-background.png"];
     self.tb.backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
+    [self _setFbInfo];
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handleFacebookMeDidUpdate:) name:BRNotificationFacebookMeDidUpdate object:[BRDModel sharedInstance]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adjustForKeyboard:) name:UIKeyboardDidShowNotification object:nil];
-
+    
+     
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
  
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BRNotificationFacebookMeDidUpdate object:[BRDModel sharedInstance]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     
@@ -129,13 +154,172 @@ UITextViewDelegate>
 #endif
 }
 
+-(void)_setFbInfo{
+    
+    if(nil != kSharedModel.fbId 
+       && nil ==  self.imvFb.image){
+        self.imvFb.image = [UIImage imageNamed:kSharedModel.theme[@"placeholderPerson"]];
+        NSString *urlFbThumb = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture", kSharedModel.fbId];
+        [Utils showImageAsync:self.imvFb fromUrl:urlFbThumb cacheName:kSharedModel.fbId];
+        self.lbFbName.text = [NSString stringWithFormat:@"store owner: %@", kSharedModel.fbName];
+        self.lbStorePics.text = kSharedModel.lang[@"storePics"]; 
+        [BRStyleSheet styleLabel:self.lbFbName withType:BRLabelTypeDaysUntilBirthdaySubText];
+        
+        self.btnSaveStoreInfo.hidden = NO;
+        self.btnAddStroePic.hidden = NO;
+        
+    } else if (nil == kSharedModel.fbId ) {
+        [kSharedModel fetchFacebookMe];
+        self.btnSaveStoreInfo.hidden = YES;
+        self.btnAddStroePic.hidden = YES;
+    }
+    [self _fetchStoreInfo];
+}
+
+-(void)_handleFacebookMeDidUpdate:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSString* error = userInfo[@"error"];
+    if(nil != error){
+        [self showMsg:error type:msgLevelWarn]; 
+        //self.barBtnJoin.title = kSharedModel.lang[@"actionJoin"];
+        //self.barBtnJoin.enabled = YES;
+        return;
+    }
+    [self _setFbInfo];
+    PRPLog(@"[BRDModel sharedInstance].fbName: %@-[%@ , %@]",
+           [BRDModel sharedInstance].fbName,
+           NSStringFromClass([self class]),
+           NSStringFromSelector(_cmd));   
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BRNotificationFacebookMeDidUpdate object:[BRDModel sharedInstance]];
+}
+
+-(IBAction)_postStoreInfo:(id)sender{
+    NSString* name = self.tfName.text;
+    NSString* description = self.tvDescription.text;
+    if(name.length == 0){
+    
+        [self showMsg:kSharedModel.lang[@"pleaseFillName"] type:msgLevelWarn];
+        [self.tfName becomeFirstResponder];
+        return;
+    }
+    if(description.length == 0){
+        [self showMsg:kSharedModel.lang[@"pleaseFillDescription"] type:msgLevelWarn];
+        [self.tvDescription becomeFirstResponder];
+        return;
+    }
+    
+    __block __weak WOStoreBackenViewController* weakSelf = (WOStoreBackenViewController*)self;
+    double lat = 0.0f;
+    double lng = 0.0f;
+    if(nil != kAppDelegate.location){
+        lat = kAppDelegate.location.coordinate.latitude;
+        lng = kAppDelegate.location.coordinate.longitude;
+    }
+    [kSharedModel postStoreInfo:name 
+                  description:description 
+                  fbId:kSharedModel.fbId 
+                  lat:lat lng:lng
+                  withBlock:^(NSDictionary* res) {
+                      
+        NSString* error = res[@"error"];
+        if(nil != error){
+    
+            [weakSelf showMsg:error type:msgLevelError];
+            return;
+        }
+        
+        NSString* msg = res[@"msg"];
+        
+        if(nil != msg){
+            [weakSelf showMsg:msg type:msgLevelInfo];
+            
+            
+            NSDictionary* doc = res[@"doc"];
+            weakSelf.tfName.text = doc[@"name"];
+            weakSelf.tvDescription.text = doc[@"description"];
+
+            return;
+        }
+
+        
+    }];
+}
+
+-(void)_fetchStoreInfo{
+    
+    if(nil == kSharedModel.fbId) return;
+    
+    __block __weak WOStoreBackenViewController* weakSelf = (WOStoreBackenViewController*)self;
+    [kSharedModel fetchStoreInfoByFbId:kSharedModel.fbId 
+                      withBlock:^(NSDictionary* res) {
+                          
+                          NSString* error = res[@"error"];
+                          if(nil != error){
+                               
+                              [weakSelf showMsg:error type:msgLevelError];
+                              return;
+                          }
+                          
+                          NSString* msg = res[@"msg"];
+                          if(nil !=  msg){
+                              
+                              NSString* msgLocal = kSharedModel.lang[msg];
+                              [weakSelf showMsg:msgLocal type:msgLevelInfo];
+                           
+                          }
+                          
+                          NSDictionary* doc = res[@"doc"];
+                         
+                          if(nil != doc){
+                              [weakSelf _fetchStorePics];
+                              weakSelf.tfName.text = doc[@"name"];
+                              weakSelf.tvDescription.text = doc[@"description"];
+                              return;
+                          }
+                          
+                          
+                      }];
+}
+
+-(void)_fetchStorePics{
+    
+    [self showHud:YES];
+    
+    __block __weak WOStoreBackenViewController* weakSelf = (WOStoreBackenViewController*)self;  
+    [kSharedModel fetchStorePicByFbId: kSharedModel.fbId 
+                              withBlock:^(NSDictionary* res){
+                                  NSString* errMsg = res[@"error"];
+                                  if(nil != errMsg){
+                                      [weakSelf showMsg:errMsg type:msgLevelError];
+                                      return;
+                                  } else  {
+                                      NSMutableArray* docs = (NSMutableArray*)res[@"docs"];
+                                      NSRange range = NSMakeRange(0, docs.count); 
+                                      NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:range];
+                                      [weakSelf.docs removeAllObjects];
+                                      [weakSelf.docs insertObjects:docs atIndexes:indexes];
+                                      if(weakSelf.docs.count > 0){
+                                          [weakSelf.tb reloadData];
+                                          if(nil == weakSelf.indexPathTmp){
+                                              weakSelf.indexPathTmp = [NSIndexPath indexPathForRow:0 inSection:0];
+                                          } 
+                                          
+                                          [weakSelf.tb scrollToRowAtIndexPath:self.indexPathTmp atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                                          
+                                      }
+                                      weakSelf.indexPathTmp = nil;
+                                      [weakSelf hideHud:YES];
+                                  }     
+                                  
+                              }];
+}
 
 
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    return 10;
+    return [self.docs count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,35 +328,13 @@ UITextViewDelegate>
     
 	WOCellStorePic *cell = (WOCellStorePic*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];    
     
-    cell.lbPicDesc.text =  @"description..";
-    cell.imvPic.image = [UIImage imageNamed:@"Icon.png"];
-    
+    WORecordStorePic *record = self.docs[indexPath.row];
+    cell.indexPath = indexPath;
+    cell.record = record;
+        
     return cell;
 }
 
-
-- (UIToolbar *) accessoryView
-{
-	_tbForKeyBoard = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 44.0f)];
-	_tbForKeyBoard.tintColor = [UIColor darkGrayColor];
-	
-	NSMutableArray *items = [NSMutableArray array];
-	//[items addObject:BARBUTTON(@"Clear", @selector(clearText))];
-	[items addObject:SYSBARBUTTON(UIBarButtonSystemItemFlexibleSpace, nil)];
-	[items addObject:BARBUTTON(@"Done", @selector(leaveKeyboardMode))];
-	_tbForKeyBoard.items = items;	
-	
-	return _tbForKeyBoard;
-}
-//- (void) clearText
-//{
-//	[self.tfName setText:@""];
-//}
-
-- (void) leaveKeyboardMode
-{
-	[super findAndResignFirstResponder:self.view];
-}
 CGRect CGRectShrinkHeight(CGRect rect, CGFloat amount)
 {
 	return CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height - amount);
@@ -195,11 +357,14 @@ CGRect CGRectShrinkHeight(CGRect rect, CGFloat amount)
 }
 
 #pragma mark UITableViewDelegate
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    //BRRecordVideo *record = [BRDModel sharedInstance].videos[indexPath.row];
-//}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    WORecordStorePic *record = self.docs[indexPath.row];
+    self.indexPathTmp = indexPath;
+    [self performSegueWithIdentifier:@"segueEditPIc" sender:record];
+}
 
 
 #pragma mark UITextFieldDelegate
@@ -243,15 +408,42 @@ CGRect CGRectShrinkHeight(CGRect rect, CGFloat amount)
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //segueFbChatRoom
-	if ([segue.identifier isEqualToString:@"segueFbChatRoom"])
-	{
+     NSString *identifier = segue.identifier;
+    __block __weak WOStoreBackenViewController* weakSelf = (WOStoreBackenViewController*)self;  
+    if ([identifier isEqualToString:@"segueAddPIc"]) {
+        
+      
+        WOEditPicViewController *destinationVC = (WOEditPicViewController *) segue.destinationViewController;
+        destinationVC.fbId = kSharedModel.fbId;
+        destinationVC.complectionBlock = ^(NSDictionary* res){ 
+                        
+            PRPLog(@"after upload new pic res: %@-[%@ , %@]",
+                   res,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            [weakSelf _fetchStorePics];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
 
-		//self.daysViewController.records = _records;
-	} else if ([segue.identifier isEqualToString:@"segueFbMsgBoard"]) {
-   
+        };        
+    } else if([identifier isEqualToString:@"segueEditPIc"]) {
+        
+        WORecordStorePic *record = (WORecordStorePic *)sender;
+        WOEditPicViewController *destinationVC = (WOEditPicViewController *) segue.destinationViewController;
+        destinationVC.recordToEdit = record;
+        
+        destinationVC.complectionBlock = ^(NSDictionary* res){ 
+            
+            [weakSelf _fetchStorePics];
+            
+            PRPLog(@"after remove old and upload new pic res: %@-[%@ , %@]",
+                   res,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        };        
     }
-    
+
 }
 
 

@@ -8,8 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		B788E57116CE058D0030DA71 /* WOStoreBackenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */; };
+		B78DDBB616D1C9D600D3525C /* WORecordStorePic.m in Sources */ = {isa = PBXBuildFile; fileRef = B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */; };
+		B798BDF916D0A05300557700 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B798BDF816D0A05300557700 /* CoreLocation.framework */; };
+		B798BDFB16D0A05800557700 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B798BDFA16D0A05800557700 /* MapKit.framework */; };
+		B798BE0016D0E42200557700 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = B798BDFF16D0E42200557700 /* ZipArchive.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B798BE1816D0E56E00557700 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = B798BE1016D0E56E00557700 /* ioapi.c */; };
+		B798BE1916D0E56E00557700 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = B798BE1216D0E56E00557700 /* mztools.c */; };
+		B798BE1A16D0E56E00557700 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = B798BE1416D0E56E00557700 /* unzip.c */; };
+		B798BE1B16D0E56E00557700 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = B798BE1616D0E56E00557700 /* zip.c */; };
 		B7D8A4CB16CFE0480053ACFD /* WORecordStore.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D8A4CA16CFE0480053ACFD /* WORecordStore.m */; };
 		B7D8A4CE16CFE7140053ACFD /* WOCellStorePIc.m in Sources */ = {isa = PBXBuildFile; fileRef = B7D8A4CD16CFE7140053ACFD /* WOCellStorePIc.m */; };
+		B7E43B4216D1141100ADA57C /* WOEditPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E43B4116D1141100ADA57C /* WOEditPicViewController.m */; };
+		B7E5E3AA16D20FF400CAAFBE /* placeholderPerson.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B7E5E3A616D20FF400CAAFBE /* placeholderPerson.jpeg */; };
+		B7E5E3AB16D20FF400CAAFBE /* placeholderGeneral.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B7E5E3A716D20FF400CAAFBE /* placeholderGeneral.jpeg */; };
+		B7E5E3AC16D20FF400CAAFBE /* placeholderPerson@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B7E5E3A816D20FF400CAAFBE /* placeholderPerson@2x.jpeg */; };
+		B7E5E3AD16D20FF400CAAFBE /* placeholderGeneral@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B7E5E3A916D20FF400CAAFBE /* placeholderGeneral@2x.jpeg */; };
 		D0113E5E16C7C93300854C51 /* WOStroesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0113E5D16C7C93300854C51 /* WOStroesViewController.m */; };
 		D052E22516CB678100E917C5 /* WONoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D052E22416CB678100E917C5 /* WONoticeViewController.m */; };
 		D052E22816CB67B100E917C5 /* WORecordNotice.m in Sources */ = {isa = PBXBuildFile; fileRef = D052E22716CB67B100E917C5 /* WORecordNotice.m */; };
@@ -239,7 +252,6 @@
 		D0A6958C16C780C400DAC57D /* app-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A6954116C780C400DAC57D /* app-background@2x.png */; };
 		D0A6958D16C780C400DAC57D /* icon-days-remaining.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A6954216C780C400DAC57D /* icon-days-remaining.png */; };
 		D0A6958E16C780C400DAC57D /* icon-days-remaining@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A6954316C780C400DAC57D /* icon-days-remaining@2x.png */; };
-		D0A695A116C7848000DAC57D /* ZipArchive in Resources */ = {isa = PBXBuildFile; fileRef = D0A695A016C7848000DAC57D /* ZipArchive */; };
 		D0A695A416C784E900DAC57D /* BRPostToFacebookWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A695A316C784E900DAC57D /* BRPostToFacebookWallViewController.m */; };
 		D0A695AC16C7859500DAC57D /* WWTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A695A716C7859500DAC57D /* WWTagViewController.m */; };
 		D0A695AD16C7859500DAC57D /* WWTagEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A695A916C7859500DAC57D /* WWTagEditViewController.m */; };
@@ -277,10 +289,31 @@
 /* Begin PBXFileReference section */
 		B788E56F16CE058D0030DA71 /* WOStoreBackenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStoreBackenViewController.h; sourceTree = "<group>"; };
 		B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WOStoreBackenViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B78DDBB416D1C9D600D3525C /* WORecordStorePic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordStorePic.h; sourceTree = "<group>"; };
+		B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordStorePic.m; sourceTree = "<group>"; };
+		B798BDF816D0A05300557700 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B798BDFA16D0A05800557700 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B798BDFE16D0E42200557700 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		B798BDFF16D0E42200557700 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		B798BE0F16D0E56E00557700 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		B798BE1016D0E56E00557700 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		B798BE1116D0E56E00557700 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		B798BE1216D0E56E00557700 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		B798BE1316D0E56E00557700 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		B798BE1416D0E56E00557700 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		B798BE1516D0E56E00557700 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		B798BE1616D0E56E00557700 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		B798BE1716D0E56E00557700 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		B7D8A4C916CFE0480053ACFD /* WORecordStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordStore.h; sourceTree = "<group>"; };
 		B7D8A4CA16CFE0480053ACFD /* WORecordStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordStore.m; sourceTree = "<group>"; };
 		B7D8A4CC16CFE7140053ACFD /* WOCellStorePic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOCellStorePic.h; sourceTree = "<group>"; };
 		B7D8A4CD16CFE7140053ACFD /* WOCellStorePIc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOCellStorePIc.m; sourceTree = "<group>"; };
+		B7E43B4016D1141100ADA57C /* WOEditPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOEditPicViewController.h; sourceTree = "<group>"; };
+		B7E43B4116D1141100ADA57C /* WOEditPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOEditPicViewController.m; sourceTree = "<group>"; };
+		B7E5E3A616D20FF400CAAFBE /* placeholderPerson.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholderPerson.jpeg; sourceTree = "<group>"; };
+		B7E5E3A716D20FF400CAAFBE /* placeholderGeneral.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholderGeneral.jpeg; sourceTree = "<group>"; };
+		B7E5E3A816D20FF400CAAFBE /* placeholderPerson@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholderPerson@2x.jpeg"; sourceTree = "<group>"; };
+		B7E5E3A916D20FF400CAAFBE /* placeholderGeneral@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholderGeneral@2x.jpeg"; sourceTree = "<group>"; };
 		D0113E5C16C7C93300854C51 /* WOStroesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStroesViewController.h; sourceTree = "<group>"; };
 		D0113E5D16C7C93300854C51 /* WOStroesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOStroesViewController.m; sourceTree = "<group>"; };
 		D052E22316CB678100E917C5 /* WONoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WONoticeViewController.h; sourceTree = "<group>"; };
@@ -595,7 +628,6 @@
 		D0A6954116C780C400DAC57D /* app-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-background@2x.png"; sourceTree = "<group>"; };
 		D0A6954216C780C400DAC57D /* icon-days-remaining.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-days-remaining.png"; sourceTree = "<group>"; };
 		D0A6954316C780C400DAC57D /* icon-days-remaining@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-days-remaining@2x.png"; sourceTree = "<group>"; };
-		D0A695A016C7848000DAC57D /* ZipArchive */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ZipArchive; sourceTree = "<group>"; };
 		D0A695A216C784E900DAC57D /* BRPostToFacebookWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPostToFacebookWallViewController.h; sourceTree = "<group>"; };
 		D0A695A316C784E900DAC57D /* BRPostToFacebookWallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRPostToFacebookWallViewController.m; sourceTree = "<group>"; };
 		D0A695A616C7859500DAC57D /* WWTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWTagViewController.h; sourceTree = "<group>"; };
@@ -651,6 +683,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B798BDFB16D0A05800557700 /* MapKit.framework in Frameworks */,
+				B798BDF916D0A05300557700 /* CoreLocation.framework in Frameworks */,
 				D0A6936016C7786F00DAC57D /* AudioToolbox.framework in Frameworks */,
 				D0A6935E16C7786500DAC57D /* Security.framework in Frameworks */,
 				D0A6935C16C7785A00DAC57D /* StoreKit.framework in Frameworks */,
@@ -680,10 +714,47 @@
 				B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */,
 				B7D8A4C916CFE0480053ACFD /* WORecordStore.h */,
 				B7D8A4CA16CFE0480053ACFD /* WORecordStore.m */,
+				B78DDBB416D1C9D600D3525C /* WORecordStorePic.h */,
+				B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */,
 				B7D8A4CC16CFE7140053ACFD /* WOCellStorePic.h */,
 				B7D8A4CD16CFE7140053ACFD /* WOCellStorePIc.m */,
 			);
 			name = WOStoreBacken;
+			sourceTree = "<group>";
+		};
+		B798BDFC16D0E40800557700 /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				B798BE0E16D0E56E00557700 /* minizip */,
+				B798BDFE16D0E42200557700 /* ZipArchive.h */,
+				B798BDFF16D0E42200557700 /* ZipArchive.mm */,
+			);
+			name = ZipArchive;
+			sourceTree = "<group>";
+		};
+		B798BE0E16D0E56E00557700 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				B798BE0F16D0E56E00557700 /* crypt.h */,
+				B798BE1016D0E56E00557700 /* ioapi.c */,
+				B798BE1116D0E56E00557700 /* ioapi.h */,
+				B798BE1216D0E56E00557700 /* mztools.c */,
+				B798BE1316D0E56E00557700 /* mztools.h */,
+				B798BE1416D0E56E00557700 /* unzip.c */,
+				B798BE1516D0E56E00557700 /* unzip.h */,
+				B798BE1616D0E56E00557700 /* zip.c */,
+				B798BE1716D0E56E00557700 /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		B7E43B4316D1142B00ADA57C /* WOEditPic */ = {
+			isa = PBXGroup;
+			children = (
+				B7E43B4016D1141100ADA57C /* WOEditPicViewController.h */,
+				B7E43B4116D1141100ADA57C /* WOEditPicViewController.m */,
+			);
+			name = WOEditPic;
 			sourceTree = "<group>";
 		};
 		D0113E5F16C7C93900854C51 /* WOStores */ = {
@@ -746,7 +817,7 @@
 		D0A6937B16C77A8E00DAC57D /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				D0A695A016C7848000DAC57D /* ZipArchive */,
+				B798BDFC16D0E40800557700 /* ZipArchive */,
 				D0A693E816C77CF200DAC57D /* ErrorHandler.h */,
 				D0A693E916C77CF200DAC57D /* ErrorHandler.m */,
 				D0A693EA16C77CF200DAC57D /* PRPDebug.h */,
@@ -1049,6 +1120,7 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				B7E43B4316D1142B00ADA57C /* WOEditPic */,
 				B788E56E16CE045E0030DA71 /* WOStoreBacken */,
 				D052E22216CB668A00E917C5 /* Notice */,
 				D0113E5F16C7C93900854C51 /* WOStores */,
@@ -1124,6 +1196,10 @@
 		D0A694A016C7802300DAC57D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B7E5E3A616D20FF400CAAFBE /* placeholderPerson.jpeg */,
+				B7E5E3A816D20FF400CAAFBE /* placeholderPerson@2x.jpeg */,
+				B7E5E3A716D20FF400CAAFBE /* placeholderGeneral.jpeg */,
+				B7E5E3A916D20FF400CAAFBE /* placeholderGeneral@2x.jpeg */,
 				D0A694F916C780C400DAC57D /* indicator.png */,
 				D0A694FA16C780C400DAC57D /* indicator@2x.png */,
 				D0A694FB16C780C400DAC57D /* tagSelected.png */,
@@ -1337,6 +1413,8 @@
 		D0EF0B5C16C5373B00921E3A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B798BDFA16D0A05800557700 /* MapKit.framework */,
+				B798BDF816D0A05300557700 /* CoreLocation.framework */,
 				D0A6935F16C7786F00DAC57D /* AudioToolbox.framework */,
 				D0A6935D16C7786500DAC57D /* Security.framework */,
 				D0A6935B16C7785A00DAC57D /* StoreKit.framework */,
@@ -1590,7 +1668,6 @@
 				D0A6958C16C780C400DAC57D /* app-background@2x.png in Resources */,
 				D0A6958D16C780C400DAC57D /* icon-days-remaining.png in Resources */,
 				D0A6958E16C780C400DAC57D /* icon-days-remaining@2x.png in Resources */,
-				D0A695A116C7848000DAC57D /* ZipArchive in Resources */,
 				D0A695CA16C78B0F00DAC57D /* Icon-Small@2x.png in Resources */,
 				D0A695CB16C78B0F00DAC57D /* Icon-Small-50.png in Resources */,
 				D0A695CC16C78B0F00DAC57D /* Icon-Small.png in Resources */,
@@ -1600,6 +1677,10 @@
 				D0A695D316C78F3800DAC57D /* Default-568h@2x.png in Resources */,
 				D0A695D416C78F3800DAC57D /* Default@2x.png in Resources */,
 				D0A695D516C78F3800DAC57D /* Default.png in Resources */,
+				B7E5E3AA16D20FF400CAAFBE /* placeholderPerson.jpeg in Resources */,
+				B7E5E3AB16D20FF400CAAFBE /* placeholderGeneral.jpeg in Resources */,
+				B7E5E3AC16D20FF400CAAFBE /* placeholderPerson@2x.jpeg in Resources */,
+				B7E5E3AD16D20FF400CAAFBE /* placeholderGeneral@2x.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1710,6 +1791,13 @@
 				B788E57116CE058D0030DA71 /* WOStoreBackenViewController.m in Sources */,
 				B7D8A4CB16CFE0480053ACFD /* WORecordStore.m in Sources */,
 				B7D8A4CE16CFE7140053ACFD /* WOCellStorePIc.m in Sources */,
+				B798BE0016D0E42200557700 /* ZipArchive.mm in Sources */,
+				B798BE1816D0E56E00557700 /* ioapi.c in Sources */,
+				B798BE1916D0E56E00557700 /* mztools.c in Sources */,
+				B798BE1A16D0E56E00557700 /* unzip.c in Sources */,
+				B798BE1B16D0E56E00557700 /* zip.c in Sources */,
+				B7E43B4216D1141100ADA57C /* WOEditPicViewController.m in Sources */,
+				B78DDBB616D1C9D600D3525C /* WORecordStorePic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

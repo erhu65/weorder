@@ -51,7 +51,7 @@ typedef enum subCategoriesSortType {
 + (BRDModel*)sharedInstance;
 
 
-@property (nonatomic, strong) ACAccount* facebookAccount;
+@property(nonatomic, strong)ACAccount* facebookAccount;
 @property(nonatomic, strong)NSDictionary* lang;
 @property(nonatomic, strong)NSDictionary* theme;
 
@@ -200,6 +200,7 @@ typedef enum subCategoriesSortType {
              sound:(NSString*)sound
              badge:(NSString*)badge
        withBlock:(void (^)(NSDictionary* userInfo))block;
+
 - (void)fetchNoticeByFbId:(NSString*)fbId
                   withPage:(NSNumber*)page
                  isUnRead:(BOOL)isUnRead
@@ -211,4 +212,35 @@ typedef enum subCategoriesSortType {
 -(void)delNotice:(NSString*)_id
      withBlock:(void (^)(NSDictionary* res))block;
 
+- (void)postStoreInfo:(NSString*)name
+              description:(NSString*)description
+        fbId:(NSString*)fbId
+        lat:(double)lat
+        lng:(double)lng
+         withBlock:(void (^)(NSDictionary* res))block;
+- (void)fetchStoreInfoByFbId:(NSString*)fbId
+                withBlock:(void (^)(NSDictionary* userInfo))block;
+
+-(void)saveImageAsZipAndUploadToAWS:(UIImage*)pickedImage
+                          withBlock:(void (^)(NSDictionary* userInfo))block;
+-(void)saveImageAndUploadToAWS:(UIImage*)pickedImage
+                          withBlock:(void (^)(NSDictionary* userInfo))block;
+- (void)delAwsS3Img:(NSString*)uniquiDataKey
+          withBlock:(void (^)(NSDictionary* userInfo))block;
+
+- (void)postStorePic:(NSString*)uniqueKey
+          description:(NSString*)description
+                 fbId:(NSString*)fbId
+            withBlock:(void (^)(NSDictionary* res))block;
+
+- (void)fetchStorePicByFbId:(NSString*)fbId
+                withBlock:(void (^)(NSDictionary* userInfo))block;
+
+- (void)updStorePic:(NSString*)_id
+        uniqueKey:(NSString*)uniqueKey
+        description:(NSString*)description
+        withBlock:(void (^)(NSDictionary* res))block;
+
+-(void)delStorePic:(NSString*)_id
+       withBlock:(void (^)(NSDictionary* res))block;
 @end

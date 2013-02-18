@@ -8,6 +8,7 @@
 
 #import "SurfsUpAppDelegate.h"
 #import "WebViewJavascriptBridge.h"
+#import <CoreLocation/CoreLocation.h>
 
 #define kTabNoticeUnRead 8001
 
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property(strong, nonatomic)NSString* token;
+@property(nonatomic, strong) CLLocation* location;
 
 @property (strong, nonatomic) UIWebView *webview;
 @property (strong, nonatomic) WebViewJavascriptBridge *javascriptBridge;

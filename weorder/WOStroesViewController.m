@@ -32,14 +32,16 @@
     [super viewDidLoad];
     
     
-    if(nil == kSharedModel.fbId){
-        [kSharedModel fetchFacebookMe];
-    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if(nil == kSharedModel.fbId){
+        [kSharedModel fetchFacebookMe];
+    }
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handleFacebookMeDidUpdate:) name:BRNotificationFacebookMeDidUpdate object:kSharedModel];
     
 }

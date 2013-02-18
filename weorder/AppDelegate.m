@@ -12,12 +12,13 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "HMIAPHelper.h"
 
+
 @interface AppDelegate ()
 <UIAlertViewDelegate,
 MFMailComposeViewControllerDelegate,
-UIWebViewDelegate>
+UIWebViewDelegate, CLLocationManagerDelegate>
 {
-    
+    CLLocationManager *locationManager;
 }
 @end
 
@@ -84,6 +85,13 @@ void exceptionHandler(NSException *exception)
     [kSharedModel getSocketUrl];
     //[HMIAPHelper sharedInstance];//restore the pervious purchased products first
         
+    //get user's location
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+    
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 							
@@ -365,5 +373,22 @@ void exceptionHandler(NSException *exception)
         }
     }
 }
+
+#pragma mark CLLocationManagerDelegate
+//only for ios 6
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    self.location = [locations objectAtIndex:0];
+    
+    return;
+    PRPLog(@"self.location.coordinate.latitude: %f \n\
+           self.location.coordinate.longitude: %f \n\
+           - [%@ , %@]",
+           self.location.coordinate.latitude,
+           self.location.coordinate.longitude,
+           NSStringFromClass([self class]),
+           NSStringFromSelector(_cmd));
+}
+
 
 @end

@@ -11,5 +11,6 @@
 
 
 @property(nonatomic, strong)NSString* strImgUrl;
+@property(nonatomic, strong)NSURL* awsS3ImgUrl;
 @property(nonatomic, strong)NSData* dataImg;
 @end

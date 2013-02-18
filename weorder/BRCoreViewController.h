@@ -27,6 +27,8 @@ typedef enum msgLevel {
 }
 @property(nonatomic, strong)NSDictionary* lang;
 @property BOOL isDisableInAppNotification;
+@property(nonatomic, strong) UIToolbar *tbForKeyBoard;
+
 - (IBAction)cancelAndDismiss:(id)sender;
 - (IBAction)saveAndDismiss:(id)sender;
 -(void)handleErrMsg:(NSString*) errMsg;
@@ -46,5 +48,5 @@ typedef enum msgLevel {
 -(void)playSoundEffect:(NSString*)soundName 
                soundId:(SystemSoundID)soundId;
 -(BOOL) findAndResignFirstResponder:(UIView *)theView;
-
+- (UIToolbar *) accessoryView;
 @end

@@ -11,5 +11,11 @@
 @interface UIImageView (RemoteFile)
 
 - (void)setImageWithRemoteFileURL:(NSString *)urlString placeHolderImage:(UIImage *)placeholderImage;
+
+- (void)setImageWithS3URL:(NSURL*)url
+         placeHolderImage:(UIImage *)placeholderImage 
+            withUniqueKey:(NSString*)uniqueKey;
+
 - (void)setImageWithFbThumb:(NSString *)fbid placeHolderImage:(UIImage *)placeholderImage;
+
 @end
