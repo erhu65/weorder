@@ -233,15 +233,29 @@ typedef enum subCategoriesSortType {
           description:(NSString*)description
                  fbId:(NSString*)fbId
             withBlock:(void (^)(NSDictionary* res))block;
-
 - (void)fetchStorePicByFbId:(NSString*)fbId
                 withBlock:(void (^)(NSDictionary* userInfo))block;
-
 - (void)updStorePic:(NSString*)_id
         uniqueKey:(NSString*)uniqueKey
         description:(NSString*)description
         withBlock:(void (^)(NSDictionary* res))block;
-
 -(void)delStorePic:(NSString*)_id
        withBlock:(void (^)(NSDictionary* res))block;
+
+- (void)postItem:(NSString*)name
+         desc:(NSString*)desc
+            price:(NSNumber*)price
+                stroeId:(NSString*)stroeId
+           withBlock:(void (^)(NSDictionary* res))block;
+- (void)fetchItemsByStoreId:(NSString*)stroeId
+                     byPage:(NSNumber*)page
+                  withBlock:(void (^)(NSDictionary* userInfo))block;
+- (void)updItem:(NSString*)_id
+          name:(NSString*)name
+        desc:(NSString*)desc
+          price:(NSNumber*)price
+          withBlock:(void (^)(NSDictionary* res))block;
+-(void)delItem:(NSString*)_id
+     withBlock:(void (^)(NSDictionary* res))block;
+
 @end

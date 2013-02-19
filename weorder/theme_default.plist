@@ -50,5 +50,7 @@
 	<string>placeholderPerson.jpeg</string>
 	<key>placeHorderGeneral</key>
 	<string>placeholderGeneral.jpeg</string>
+	<key>bgWood</key>
+	<string>tool-bar-background.png</string>
 </dict>
 </plist>

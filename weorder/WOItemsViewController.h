@@ -19,7 +19,7 @@ typedef enum WOItemsViewControllerMode {
 
 @interface WOItemsViewController : BRCoreViewController
 @property(nonatomic, assign) WOItemsViewControllerMode mode;
-@property(nonatomic, strong) NSString* fbId;
-@property(nonatomic, strong) NSString* fbNmae;
+
+@property(nonatomic, strong) NSString* storeId;
 @property(nonatomic, copy)WOItemsViewControllerCompletionBlock complectionBlock;
 @end

@@ -56,6 +56,7 @@ UITextViewDelegate>
 
 
 
+@property(nonatomic, strong)WORecordStore* currentRecord;
 @property (weak, nonatomic) IBOutlet UILabel *lbStorePics;
 @property (weak, nonatomic) IBOutlet UITableView *tb;
 @property(nonatomic, strong)NSMutableArray* docs;
@@ -83,8 +84,6 @@ UITextViewDelegate>
     }
     return _docs;
 }
-
-
 
 - (void)viewDidLoad
 {
@@ -303,6 +302,7 @@ UITextViewDelegate>
 }
 -(void)_populateStoreInfoWithRecord:(WORecordStore*)record {
     
+    self.currentRecord = record;
     self.tfName.text = record.name;
     self.tvDescription.text = record.description;
     self.lbTypeName.text  = record.mainCategoryNme;
@@ -488,9 +488,7 @@ CGRect CGRectShrinkHeight(CGRect rect, CGFloat amount)
         WOItemsViewController *destinationVC = (WOItemsViewController *) segue.destinationViewController;
         destinationVC.mode = WOItemsViewControllerModeBackend;
         
-        destinationVC.fbId = kSharedModel.fbId;
-        destinationVC.fbNmae = kSharedModel.fbName;
-        
+        destinationVC.storeId = self.currentRecord._id;
         destinationVC.complectionBlock = ^(NSDictionary* res) {
             
             [weakSelf.navigationController popViewControllerAnimated:YES];

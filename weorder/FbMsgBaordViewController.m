@@ -180,7 +180,7 @@ UIScrollViewDelegate>
     
     if([self.docs count] > 3){
         NSIndexPath *firstRow = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tbMsgBoard scrollToRowAtIndexPath:firstRow atScrollPosition:UITableViewRowAnimationTop animated:YES];
+        [self.tbMsgBoard scrollToRowAtIndexPath:firstRow atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     [self _fetchMsgs:@0 videoId:self.videoId];
     

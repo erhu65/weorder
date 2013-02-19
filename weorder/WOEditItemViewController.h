@@ -13,8 +13,9 @@ typedef void(^WOEditItemViewControllerCompletionBlock)(NSDictionary* res);
 
 @interface WOEditItemViewController : BRCoreViewController
 
-@property (strong, nonatomic) NSString *fbId;
+
 @property (strong, nonatomic) WORecordItem *recordToEdit;
+@property(nonatomic, strong) NSString* storeId;
 
 @property(nonatomic, copy)WOEditItemViewControllerCompletionBlock complectionBlock;
 

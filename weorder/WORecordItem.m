@@ -9,5 +9,18 @@
 #import "WORecordItem.h"
 
 @implementation WORecordItem
+-(id)initWithJsonDic:(NSDictionary *)dic{
+    
+    self = [super init];
+    if (self) {
+        
+        self._id =  [dic objectForKey:@"_id"];
+        self.desc = [dic objectForKey:@"desc"];
+        self.name = [dic objectForKey:@"name"];          
+        self.price = (NSNumber*)[dic objectForKey:@"price"]; 
+    }
+    return self;
+}
+
 
 @end

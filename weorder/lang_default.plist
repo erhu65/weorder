@@ -211,6 +211,10 @@
 	<key>desc</key>
 	<string>Description:</string>
 	<key>price</key>
-	<string>Price:</string>
+	<string>$:</string>
+	<key>itemPIc</key>
+	<string>Item pic:</string>
+	<key>plseaseChoolseAItemPic</key>
+	<string>Please Choose a Item Pic</string>
 </dict>
 </plist>

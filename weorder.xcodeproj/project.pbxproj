@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B701538416D3CD3000849939 /* WOCellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B701538316D3CD3000849939 /* WOCellItem.m */; };
 		B788E57116CE058D0030DA71 /* WOStoreBackenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */; };
 		B78DDBB616D1C9D600D3525C /* WORecordStorePic.m in Sources */ = {isa = PBXBuildFile; fileRef = B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */; };
 		B795FF0A16D33786004B0594 /* dropDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B795FF0816D33786004B0594 /* dropDown.png */; };
@@ -292,6 +293,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B701538216D3CD3000849939 /* WOCellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOCellItem.h; sourceTree = "<group>"; };
+		B701538316D3CD3000849939 /* WOCellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOCellItem.m; sourceTree = "<group>"; };
 		B788E56F16CE058D0030DA71 /* WOStoreBackenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStoreBackenViewController.h; sourceTree = "<group>"; };
 		B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WOStoreBackenViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B78DDBB416D1C9D600D3525C /* WORecordStorePic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordStorePic.h; sourceTree = "<group>"; };
@@ -742,6 +745,8 @@
 				B795FF0F16D3770D004B0594 /* WOItemsViewController.m */,
 				B795FF1116D37970004B0594 /* WORecordItem.h */,
 				B795FF1216D37970004B0594 /* WORecordItem.m */,
+				B701538216D3CD3000849939 /* WOCellItem.h */,
+				B701538316D3CD3000849939 /* WOCellItem.m */,
 			);
 			name = WOItems;
 			sourceTree = "<group>";
@@ -1840,6 +1845,7 @@
 				B795FF1016D3770D004B0594 /* WOItemsViewController.m in Sources */,
 				B795FF1316D37970004B0594 /* WORecordItem.m in Sources */,
 				B795FF1716D37C25004B0594 /* WOEditItemViewController.m in Sources */,
+				B701538416D3CD3000849939 /* WOCellItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
