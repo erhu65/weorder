@@ -17,6 +17,7 @@
 #import "WWRecordTag.h"
 #import "BRRecordMsgBoard.h"
 #import "BRRecordFriend.h"
+#import "WORecordStore.h"
 #import "WORecordStorePic.h"
 #import "BRDSettings.h"
 #import <Social/Social.h>
@@ -4546,6 +4547,7 @@ static BRDModel *_sharedInstance = nil;
                  fbId:(NSString*)fbId
                   lat:(double)lat
                   lng:(double)lng
+       mainCategoryId:(NSString*)mainCategoryId
             withBlock:(void (^)(NSDictionary* res))block{
     dispatch_queue_t concurrentQueue =
     dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -4558,7 +4560,7 @@ static BRDModel *_sharedInstance = nil;
         [urlRequest setTimeoutInterval:30.0f];
         [urlRequest setHTTPMethod:@"POST"];
         
-        NSString *body = [NSString stringWithFormat:@"name=%@&description=%@&fbId=%@&lat=%f&lng=%f", name, description, fbId, lat, lng];
+        NSString *body = [NSString stringWithFormat:@"name=%@&description=%@&fbId=%@&lat=%f&lng=%f&mainCategoryId=%@", name, description, fbId, lat, lng, mainCategoryId];
         
         PRPLog(@"http request urlPostStore: %@ \n\
                http request body: %@ \n\
@@ -4574,6 +4576,7 @@ static BRDModel *_sharedInstance = nil;
         NSString* errMsg;
         NSString* msg;
         NSDictionary* doc;
+        WORecordStore* record;
         NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest
                                              returningResponse:&response
                                                          error:&error];
@@ -4611,6 +4614,8 @@ static BRDModel *_sharedInstance = nil;
                                NSStringFromSelector(_cmd));
                         msg = [deserializedDictionary objectForKey:@"msg"];
                         doc = [deserializedDictionary objectForKey:@"doc"];
+                        record = [[WORecordStore alloc] initWithJsonDic:doc];
+                   
                     }
                     
                 } else if ([jsonObject isKindOfClass:[NSArray class]]){
@@ -4667,7 +4672,7 @@ static BRDModel *_sharedInstance = nil;
                 res = @{@"error":errMsg};
             } else if (nil !=  msg) {
                 
-                res = @{@"msg": msg, @"doc": doc};
+                res = @{@"msg": msg, @"record": record};
             }
             
             block(res);
@@ -4700,6 +4705,7 @@ static BRDModel *_sharedInstance = nil;
         NSString* errMsg;
         NSString* msg;
         NSDictionary* doc;
+        WORecordStore* record;
         NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest
                                              returningResponse:&response
                                                          error:&error];
@@ -4746,6 +4752,7 @@ static BRDModel *_sharedInstance = nil;
                             }
                             if(nil != [deserializedDictionary objectForKey:@"doc"]){
                                doc = [deserializedDictionary objectForKey:@"doc"];
+                               record = [[WORecordStore alloc] initWithJsonDic:doc];
                             }
                            
                         }
@@ -4807,7 +4814,7 @@ static BRDModel *_sharedInstance = nil;
                 if(nil !=  msg){
                     res = @{@"msg": msg};
                 } else {
-                    res = @{@"doc":doc};
+                    res = @{@"record": record};
                 }
                 
             }

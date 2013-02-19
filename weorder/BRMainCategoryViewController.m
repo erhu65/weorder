@@ -14,10 +14,7 @@
 #import "NSMutableArray+Shuffling.h"
 
 
-typedef enum mainCategoryFilterMode {
-    mainCategoryFilterModeAll = 0,
-    mainCategoryFilterModeFavorite = 1
-} mainCategoryFilterMode;
+
 
 
 #ifdef PRPDEBUG
@@ -41,7 +38,7 @@ UIAlertViewDelegate>
 
 @property(nonatomic, strong)NSMutableArray* docs;
 
-@property mainCategoryFilterMode mode;
+
 @property(nonatomic, strong)NSNumber* page;
 @property(nonatomic, strong)NSNumber* lastPage;
 @property (weak, nonatomic) IBOutlet UIButton *sortBtn;
@@ -126,8 +123,7 @@ UIAlertViewDelegate>
     PRPLog(@"self.tabBarController.selectedIndex: %d -[%@ , %@]",
            self.tabBarController.selectedIndex,
            NSStringFromClass([self class]),
-           NSStringFromSelector(_cmd));
-    self.mode = self.tabBarController.selectedIndex;
+           NSStringFromSelector(_cmd));    
     
     if(self.mode == mainCategoryFilterModeAll){
         [self _populateLang];
@@ -136,9 +132,14 @@ UIAlertViewDelegate>
     } else if (self.mode == mainCategoryFilterModeFavorite ){
         
         self.title = self.lang[@"titleFavoriteCategory"];
-
     }
-
+    //modal mode
+    if(self.mode == mainCategoryFilterModeJustForSelection){
+        self.filterBar.hidden = YES;
+    } else {
+        self.mode = self.tabBarController.selectedIndex;
+    }
+    
 
 }
 -(void) viewWillAppear:(BOOL)animated
@@ -147,8 +148,9 @@ UIAlertViewDelegate>
     
 
     
-
-    
+    [self.noticeChildViewController
+     toggleSlide:nil msg:kSharedModel.lang[@"plseaseSelectYourStoreType"]
+     stayTime:5.0f];
     
     if(self.docs.count == 0){
        [self _handleRefreshFromFirstPage:nil];
@@ -178,7 +180,9 @@ UIAlertViewDelegate>
     [self showHud:YES];  
     __weak __block BRMainCategoryViewController *weakSelf = self;
     
-    if(self.mode == mainCategoryFilterModeAll){
+    if(self.mode == mainCategoryFilterModeAll
+       || self.mode == mainCategoryFilterModeJustForSelection
+       ){
         [[BRDModel sharedInstance] fetchMainCategoriesWithPage:self.page WithBlock:^(NSDictionary* res){
             [weakSelf hideHud:YES];
             NSString* errMsg = res[@"error"];
@@ -364,7 +368,17 @@ UIAlertViewDelegate>
         BRCellMainCategory *cell =  (BRCellMainCategory *)[self.tb dequeueReusableCellWithIdentifier:CellIdentifier];
         
         BRRecordMainCategory* record = [self.docs objectAtIndex:indexPath.row];
-        [cell.btnFavorite addTarget:self action:@selector(_toggleFavoriteHandler:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //modal mode
+        if(self.mode == mainCategoryFilterModeJustForSelection){
+            cell.btnFavorite.hidden = YES;
+            cell.btnFavorite.enabled = NO; 
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        } else {
+            [cell.btnFavorite addTarget:self action:@selector(_toggleFavoriteHandler:) forControlEvents:UIControlEventTouchUpInside];
+        }
+
+
         
         if(self.mode == mainCategoryFilterModeFavorite) {
 
@@ -435,7 +449,7 @@ UIAlertViewDelegate>
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (tableView == filterTableView) {
         
@@ -451,6 +465,15 @@ UIAlertViewDelegate>
         [self hideFilterTable];
         
     } else {
+        
+        if(self.mode == mainCategoryFilterModeJustForSelection){
+            //modal mode
+            BRRecordMainCategory* record = [self.docs objectAtIndex:indexPath.row];
+            NSDictionary* res = @{@"selectedMainCatetgoryName": record.name, @"selectedMainCatetgoryId": record.uid};
+            self.complectionBlock(res);
+            return;
+        }
+
 
     }
 }

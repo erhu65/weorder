@@ -8,7 +8,11 @@
 
 #import "WOStoreBackenViewController.h"
 #import "WOEditPicViewController.h"
+#import "WOItemsViewController.h"
+#import "BRMainCategoryViewController.h"
+
 #import "WOCellStorePic.h"
+#import "WORecordStore.h"
 #import "WORecordStorePic.h"
 #import "Utils.h"
 #import "AppDelegate.h"
@@ -31,6 +35,9 @@ UITextViewDelegate>
     UIToolbar *_tbForKeyBoard;
 }
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnItems;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *lbFbName;
 @property (weak, nonatomic) IBOutlet UIImageView *imvFb;
 @property (weak, nonatomic) IBOutlet UILabel *lbName;
@@ -38,6 +45,11 @@ UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *tfName;
 @property (weak, nonatomic) IBOutlet UILabel *lbDescription;
 @property (weak, nonatomic) IBOutlet UITextView *tvDescription;
+@property (weak, nonatomic) IBOutlet UILabel *lbStoreType;
+@property (weak, nonatomic) IBOutlet UIButton *btnStoreType;
+@property (weak, nonatomic) IBOutlet UILabel *lbTypeName;
+@property (strong, nonatomic) IBOutlet NSString *selectedMainCatetgoryId;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnSaveStoreInfo;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnAddStroePic;
@@ -78,6 +90,7 @@ UITextViewDelegate>
 {
     [super viewDidLoad];
     
+    self.barBtnItems.title = kSharedModel.lang[@"items"];
     
 	self.tfName.inputAccessoryView = [self accessoryView];
     self.tfName.clearButtonMode = UITextFieldViewModeAlways;
@@ -89,6 +102,11 @@ UITextViewDelegate>
 
     self.lbDescription.text = kSharedModel.lang[@"soreDescription"];    
     [BRStyleSheet styleLabel:self.lbDescription withType:BRLabelTypeName];
+    
+    self.lbStoreType.text = kSharedModel.lang[@"storeType"]; 
+    [BRStyleSheet styleLabel:self.lbStoreType withType:BRLabelTypeName];
+    
+    self.lbTypeName.text = @"";
     
     self.lbStorePics.text = kSharedModel.lang[@"storePics"]; 
     [BRStyleSheet styleLabel:self.lbStorePics withType:BRLabelTypeName];
@@ -197,6 +215,7 @@ UITextViewDelegate>
 -(IBAction)_postStoreInfo:(id)sender{
     NSString* name = self.tfName.text;
     NSString* description = self.tvDescription.text;
+    NSString* mainCateogryId = self.lbTypeName.text;
     if(name.length == 0){
     
         [self showMsg:kSharedModel.lang[@"pleaseFillName"] type:msgLevelWarn];
@@ -206,6 +225,11 @@ UITextViewDelegate>
     if(description.length == 0){
         [self showMsg:kSharedModel.lang[@"pleaseFillDescription"] type:msgLevelWarn];
         [self.tvDescription becomeFirstResponder];
+        return;
+    }
+    
+    if(mainCateogryId.length == 0){
+        [self showMsg:kSharedModel.lang[@"pleaseSelectTypeFirst"] type:msgLevelWarn];
         return;
     }
     
@@ -220,6 +244,7 @@ UITextViewDelegate>
                   description:description 
                   fbId:kSharedModel.fbId 
                   lat:lat lng:lng
+                   mainCategoryId:self.selectedMainCatetgoryId 
                   withBlock:^(NSDictionary* res) {
                       
         NSString* error = res[@"error"];
@@ -234,15 +259,12 @@ UITextViewDelegate>
         if(nil != msg){
             [weakSelf showMsg:msg type:msgLevelInfo];
             
-            
-            NSDictionary* doc = res[@"doc"];
-            weakSelf.tfName.text = doc[@"name"];
-            weakSelf.tvDescription.text = doc[@"description"];
+            WORecordStore* record =( WORecordStore* ) res[@"record"];
+            [weakSelf _populateStoreInfoWithRecord:record];
 
             return;
         }
 
-        
     }];
 }
 
@@ -269,19 +291,23 @@ UITextViewDelegate>
                            
                           }
                           
-                          NSDictionary* doc = res[@"doc"];
-                         
-                          if(nil != doc){
+                          WORecordStore* record =( WORecordStore* ) res[@"record"];
+                          if(nil != record){
                               [weakSelf _fetchStorePics];
-                              weakSelf.tfName.text = doc[@"name"];
-                              weakSelf.tvDescription.text = doc[@"description"];
+                              [weakSelf _populateStoreInfoWithRecord:record];
                               return;
                           }
                           
                           
                       }];
 }
-
+-(void)_populateStoreInfoWithRecord:(WORecordStore*)record {
+    
+    self.tfName.text = record.name;
+    self.tvDescription.text = record.description;
+    self.lbTypeName.text  = record.mainCategoryNme;
+    self.selectedMainCatetgoryId = record.mainCategoryId;
+}
 -(void)_fetchStorePics{
     
     [self showHud:YES];
@@ -442,7 +468,40 @@ CGRect CGRectShrinkHeight(CGRect rect, CGFloat amount)
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
         };        
+    } else if([identifier isEqualToString:@"seguePopMainCategorySelector"]){
+        BRMainCategoryViewController *destinationVC = (BRMainCategoryViewController *) segue.destinationViewController;
+        destinationVC.mode = mainCategoryFilterModeJustForSelection;
+        destinationVC.complectionBlock = ^(NSDictionary* res) {
+            
+            PRPLog(@"after select MainCatetgory res: %@-[%@ , %@]",
+                   res,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            
+            NSString* selectedMainCatetgoryId = res[@"selectedMainCatetgoryId"];
+            NSString* selectedMainCatetgoryName = res[@"selectedMainCatetgoryName"];
+            weakSelf.lbTypeName.text = selectedMainCatetgoryName;
+            weakSelf.selectedMainCatetgoryId = selectedMainCatetgoryId;
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        };
+    }else if([identifier isEqualToString:@"segueItems"]){
+        WOItemsViewController *destinationVC = (WOItemsViewController *) segue.destinationViewController;
+        destinationVC.mode = WOItemsViewControllerModeBackend;
+        
+        destinationVC.fbId = kSharedModel.fbId;
+        destinationVC.fbNmae = kSharedModel.fbName;
+        
+        destinationVC.complectionBlock = ^(NSDictionary* res) {
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            PRPLog(@"after select MainCatetgory res: %@-[%@ , %@]",
+                   res,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            
+        };
     }
+
 
 }
 

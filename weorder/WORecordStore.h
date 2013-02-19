@@ -16,6 +16,9 @@
 @property(nonatomic, strong)NSString* fbId;
 @property(nonatomic, strong)NSString* fbName;
 
+@property(nonatomic, strong)NSString* mainCategoryId;
+@property(nonatomic, strong)NSString* mainCategoryNme;
+
 @property(nonatomic, assign) double lat;
 @property(nonatomic, assign) double lng;
 

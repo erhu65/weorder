@@ -9,7 +9,7 @@
 #import "BRCoreViewController.h"
 @class WORecordStorePic;
 
-typedef void(^BRBirthdayEditViewControllerCompletionBlock)(NSDictionary* res);
+typedef void(^WOEditPicViewControllerCompletionBlock)(NSDictionary* res);
 
 
 @interface WOEditPicViewController : BRCoreViewController
@@ -17,6 +17,6 @@ typedef void(^BRBirthdayEditViewControllerCompletionBlock)(NSDictionary* res);
 @property (strong, nonatomic) NSString *fbId;
 @property (strong, nonatomic) WORecordStorePic *recordToEdit;
 
-@property(nonatomic, copy)BRBirthdayEditViewControllerCompletionBlock complectionBlock;
+@property(nonatomic, copy)WOEditPicViewControllerCompletionBlock complectionBlock;
 
 @end

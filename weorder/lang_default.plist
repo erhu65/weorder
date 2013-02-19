@@ -192,5 +192,25 @@
 	<string>Delete</string>
 	<key>areYouSureToDelete</key>
 	<string>Are you sure to delete?</string>
+	<key>storeType</key>
+	<string>Store Type:</string>
+	<key>pleaseSelectTypeFirst</key>
+	<string>Please select a store type first</string>
+	<key>plseaseSelectYourStoreType</key>
+	<string>Please select your sotre type</string>
+	<key>items</key>
+	<string>Itmes</string>
+	<key>myStroeItems</key>
+	<string>My Store Imtes</string>
+	<key>addItem</key>
+	<string>Add Item</string>
+	<key>editItem</key>
+	<string>Edit Item</string>
+	<key>name</key>
+	<string>Name:</string>
+	<key>desc</key>
+	<string>Description:</string>
+	<key>price</key>
+	<string>Price:</string>
 </dict>
 </plist>

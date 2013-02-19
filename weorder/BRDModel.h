@@ -217,7 +217,8 @@ typedef enum subCategoriesSortType {
         fbId:(NSString*)fbId
         lat:(double)lat
         lng:(double)lng
-         withBlock:(void (^)(NSDictionary* res))block;
+        mainCategoryId:(NSString*)mainCategoryId
+        withBlock:(void (^)(NSDictionary* res))block;
 - (void)fetchStoreInfoByFbId:(NSString*)fbId
                 withBlock:(void (^)(NSDictionary* userInfo))block;
 

@@ -86,7 +86,7 @@
 {
     _descLb = descLb;
     if (_descLb) {
-        [BRStyleSheet styleLabel:_descLb withType:BRLabelTypeBirthdayDate];
+        [BRStyleSheet styleLabel:_descLb withType:BRLabelTypeDaysUntilBirthdaySubText];
     }
 }
 

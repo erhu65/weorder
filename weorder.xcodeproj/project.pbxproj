@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		B788E57116CE058D0030DA71 /* WOStoreBackenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */; };
 		B78DDBB616D1C9D600D3525C /* WORecordStorePic.m in Sources */ = {isa = PBXBuildFile; fileRef = B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */; };
+		B795FF0A16D33786004B0594 /* dropDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B795FF0816D33786004B0594 /* dropDown.png */; };
+		B795FF0B16D33786004B0594 /* dropDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B795FF0916D33786004B0594 /* dropDown@2x.png */; };
+		B795FF1016D3770D004B0594 /* WOItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF0F16D3770D004B0594 /* WOItemsViewController.m */; };
+		B795FF1316D37970004B0594 /* WORecordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF1216D37970004B0594 /* WORecordItem.m */; };
+		B795FF1716D37C25004B0594 /* WOEditItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF1616D37C25004B0594 /* WOEditItemViewController.m */; };
 		B798BDF916D0A05300557700 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B798BDF816D0A05300557700 /* CoreLocation.framework */; };
 		B798BDFB16D0A05800557700 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B798BDFA16D0A05800557700 /* MapKit.framework */; };
 		B798BE0016D0E42200557700 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = B798BDFF16D0E42200557700 /* ZipArchive.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -291,6 +296,14 @@
 		B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WOStoreBackenViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B78DDBB416D1C9D600D3525C /* WORecordStorePic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordStorePic.h; sourceTree = "<group>"; };
 		B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordStorePic.m; sourceTree = "<group>"; };
+		B795FF0816D33786004B0594 /* dropDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropDown.png; sourceTree = "<group>"; };
+		B795FF0916D33786004B0594 /* dropDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropDown@2x.png"; sourceTree = "<group>"; };
+		B795FF0E16D3770D004B0594 /* WOItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOItemsViewController.h; sourceTree = "<group>"; };
+		B795FF0F16D3770D004B0594 /* WOItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOItemsViewController.m; sourceTree = "<group>"; };
+		B795FF1116D37970004B0594 /* WORecordItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordItem.h; sourceTree = "<group>"; };
+		B795FF1216D37970004B0594 /* WORecordItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordItem.m; sourceTree = "<group>"; };
+		B795FF1516D37C25004B0594 /* WOEditItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOEditItemViewController.h; sourceTree = "<group>"; };
+		B795FF1616D37C25004B0594 /* WOEditItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOEditItemViewController.m; sourceTree = "<group>"; };
 		B798BDF816D0A05300557700 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B798BDFA16D0A05800557700 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B798BDFE16D0E42200557700 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
@@ -722,6 +735,26 @@
 			name = WOStoreBacken;
 			sourceTree = "<group>";
 		};
+		B795FF0D16D37659004B0594 /* WOItems */ = {
+			isa = PBXGroup;
+			children = (
+				B795FF0E16D3770D004B0594 /* WOItemsViewController.h */,
+				B795FF0F16D3770D004B0594 /* WOItemsViewController.m */,
+				B795FF1116D37970004B0594 /* WORecordItem.h */,
+				B795FF1216D37970004B0594 /* WORecordItem.m */,
+			);
+			name = WOItems;
+			sourceTree = "<group>";
+		};
+		B795FF1416D37BAC004B0594 /* WOEditItem */ = {
+			isa = PBXGroup;
+			children = (
+				B795FF1516D37C25004B0594 /* WOEditItemViewController.h */,
+				B795FF1616D37C25004B0594 /* WOEditItemViewController.m */,
+			);
+			name = WOEditItem;
+			sourceTree = "<group>";
+		};
 		B798BDFC16D0E40800557700 /* ZipArchive */ = {
 			isa = PBXGroup;
 			children = (
@@ -1120,11 +1153,13 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				B795FF1416D37BAC004B0594 /* WOEditItem */,
+				B795FF0D16D37659004B0594 /* WOItems */,
+				D0A695B916C7861C00DAC57D /* MainCategory */,
 				B7E43B4316D1142B00ADA57C /* WOEditPic */,
 				B788E56E16CE045E0030DA71 /* WOStoreBacken */,
 				D052E22216CB668A00E917C5 /* Notice */,
 				D0113E5F16C7C93900854C51 /* WOStores */,
-				D0A695B916C7861C00DAC57D /* MainCategory */,
 				D0A695AF16C785A100DAC57D /* myRoom */,
 				D0A695A516C7858B00DAC57D /* Tag */,
 				D0A695A216C784E900DAC57D /* BRPostToFacebookWallViewController.h */,
@@ -1196,6 +1231,8 @@
 		D0A694A016C7802300DAC57D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B795FF0816D33786004B0594 /* dropDown.png */,
+				B795FF0916D33786004B0594 /* dropDown@2x.png */,
 				B7E5E3A616D20FF400CAAFBE /* placeholderPerson.jpeg */,
 				B7E5E3A816D20FF400CAAFBE /* placeholderPerson@2x.jpeg */,
 				B7E5E3A716D20FF400CAAFBE /* placeholderGeneral.jpeg */,
@@ -1681,6 +1718,8 @@
 				B7E5E3AB16D20FF400CAAFBE /* placeholderGeneral.jpeg in Resources */,
 				B7E5E3AC16D20FF400CAAFBE /* placeholderPerson@2x.jpeg in Resources */,
 				B7E5E3AD16D20FF400CAAFBE /* placeholderGeneral@2x.jpeg in Resources */,
+				B795FF0A16D33786004B0594 /* dropDown.png in Resources */,
+				B795FF0B16D33786004B0594 /* dropDown@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1798,6 +1837,9 @@
 				B798BE1B16D0E56E00557700 /* zip.c in Sources */,
 				B7E43B4216D1141100ADA57C /* WOEditPicViewController.m in Sources */,
 				B78DDBB616D1C9D600D3525C /* WORecordStorePic.m in Sources */,
+				B795FF1016D3770D004B0594 /* WOItemsViewController.m in Sources */,
+				B795FF1316D37970004B0594 /* WORecordItem.m in Sources */,
+				B795FF1716D37C25004B0594 /* WOEditItemViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

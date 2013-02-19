@@ -9,8 +9,19 @@
 #import "BRCoreViewController.h"
 
 
+typedef void(^BRMainCategoryViewControllerCompletionBlock)(NSDictionary* res);
+
+typedef enum mainCategoryFilterMode {
+    mainCategoryFilterModeAll = 0,
+    mainCategoryFilterModeFavorite = 1,
+    mainCategoryFilterModeJustForSelection = 2
+} mainCategoryFilterMode;
+
+
 @interface BRMainCategoryViewController : BRCoreViewController
 
+@property(nonatomic, assign) mainCategoryFilterMode mode;
 
+@property(nonatomic, copy)BRMainCategoryViewControllerCompletionBlock complectionBlock;
 
 @end
