@@ -31,6 +31,9 @@
 
 #define NotificationFromModel           @"NotificationFromModel"
 
+#define KAPIItemPicOptional @"ItemPicOptional"
+
+
 
 #define KUserDefaultFbId @"fbId"
 #define KUserDefaultFbName @"fbName"

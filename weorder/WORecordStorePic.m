@@ -18,8 +18,6 @@
         self.description = [dic objectForKey:@"description"];
         self.uniqueKey = [dic objectForKey:@"uniqueKey"];
         self.fbId = [dic objectForKey:@"fbId"];
-
-        
         
         self.awsS3ImgUrl =  (NSURL* )[dic objectForKey:@"awsS3ImgUrl"];
 

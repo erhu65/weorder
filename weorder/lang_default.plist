@@ -206,6 +206,10 @@
 	<string>Add Item</string>
 	<key>editItem</key>
 	<string>Edit Item</string>
+	<key>addItemPic</key>
+	<string>Add Item pic</string>
+	<key>editItemPic</key>
+	<string>Edit item pic</string>
 	<key>name</key>
 	<string>Name:</string>
 	<key>desc</key>
@@ -214,7 +218,11 @@
 	<string>$:</string>
 	<key>itemPIc</key>
 	<string>Item pic:</string>
-	<key>plseaseChoolseAItemPic</key>
+	<key>pleaseChoolseAItemPic</key>
 	<string>Please Choose a Item Pic</string>
+	<key>ItemPicNeed</key>
+	<string>Item Pic(Need):</string>
+	<key>ItemPicOptional</key>
+	<string>Item Pic(Optional):</string>
 </dict>
 </plist>

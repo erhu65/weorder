@@ -1,18 +1,20 @@
 //
-//  WOItemsViewController.m
+//  WOItemPicOptionalViewController.m
 //  weorder
 //
-//  Created by Peter2 on 2/19/13.
+//  Created by Peter2 on 2/20/13.
 //  Copyright (c) 2013 peter. All rights reserved.
 //
 
-#import "WOItemsViewController.h"
-#import "WOEditItemViewController.h"
+#import "WOItemPicOptionalViewController.h"
+#import "WOEditItemPicOptioinalViewController.h"
 #import "WORecordItem.h"
-#import "WOCellItem.h"
+#import "WORecordItemPicOptional.h"
+#import "WOCellItemPicOptional.h"
+#import "LineLayout.h"
 
+@interface WOItemPicOptionalViewController ()
 
-@interface WOItemsViewController ()
 <UICollectionViewDataSource, UICollectionViewDelegate,
 UIScrollViewDelegate>
 {
@@ -25,9 +27,11 @@ UIScrollViewDelegate>
 @property(nonatomic, strong)NSIndexPath * indexPathTmp;
 @property (weak, nonatomic) IBOutlet UICollectionView *cv;
 
+@property (weak, nonatomic) IBOutlet UILabel *lbItemPicOptional;
+
 @end
 
-@implementation WOItemsViewController
+@implementation WOItemPicOptionalViewController
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     
@@ -47,24 +51,48 @@ UIScrollViewDelegate>
     return _docs;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    self.cv.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:kSharedModel.theme[@"bgWood"]]];
+	// Do any additional setup after loading the view.
+    self.lbItemPicOptional.text = kSharedModel.lang[@"ItemPicOptional"];
+    [BRStyleSheet styleLabel:self.lbItemPicOptional withType:BRLabelTypeName];
     
-    if(self.mode == WOItemsViewControllerModeBackend){
-        //my itmes list
-        self.title = kSharedModel.lang[@"myStroeItems"];
-        
-    } else {
-        //someone else's store items list
-        //self.title = kSharedModel.lang[@"myStroeItems"];
-        
-    }
-    [self _fetchItemsByStoreId:self.storeId];
+    PRPLog(@"self.item._id: %@-[%@ , %@]",
+           self.item._id,
+           NSStringFromClass([self class]),
+           NSStringFromSelector(_cmd));
+    self.cv.backgroundView =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:kSharedModel.theme[@"bgWood"]]];
+   
+    [self _fetchItemPicOptionalsByItem:self.item];
+}
 
+- (void)_fetchItemPicOptionalsByItem:(WORecordItem*)reocrd{
+     [self showHud:YES];
+    __block __weak WOItemPicOptionalViewController* weakSelf = (WOItemPicOptionalViewController*)self;
+    [kSharedModel fetchItemPicOptionalsByItem:reocrd 
+                                       byPage:self.page
+                                    withBlock:^(NSDictionary* res) { 
+                                        
+                                        NSString* error  = res[@"error"];
+                                        if(nil != error){
+                                            
+                                            [weakSelf showMsg:error type:msgLevelError];
+                                            return;
+                                        }
+                                        
+                                        NSMutableArray* docs =(NSMutableArray*)res[@"docs"];
+                                        NSRange range = NSMakeRange(0, docs.count); 
+                                        NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:range];
+                                        [weakSelf.docs insertObjects:docs atIndexes:indexes]; 
+                                        weakSelf.isLastPage = (NSNumber*)res[@"isLastPage"];
+                                        weakSelf.page = (NSNumber*) res[@"page"];
+                                        if(weakSelf.docs.count> 0){
+                                            [weakSelf.cv reloadData];
+                                        }
+                                         [weakSelf hideHud:YES];
+                                    }];
+    
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -90,54 +118,22 @@ UIScrollViewDelegate>
 	return YES;
 }
 
--(void)_fetchItemsByStoreId:(NSString*)storeId{
-     [self showHud:YES];
-    __block __weak WOItemsViewController* weakSelf = (WOItemsViewController*)self;
-    
-    [kSharedModel fetchItemsByStoreId:storeId 
-                               byPage:self.page
-                            withBlock:^(NSDictionary* res) {
-
-        NSString* error  = res[@"error"];
-        if(nil != error){
-            [weakSelf showMsg:error type:msgLevelError];
-            return;
-        }                       
-        PRPLog(@"after successfully _fetchItemsByStoreId res: %@-[%@ , %@]",
-               res,
-               NSStringFromClass([self class]),
-               NSStringFromSelector(_cmd));
-                                NSMutableArray* docs =(NSMutableArray*)res[@"docs"];
-                                NSRange range = NSMakeRange(0, docs.count); 
-                                NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:range];
-                                [weakSelf.docs insertObjects:docs atIndexes:indexes];
-
-                                weakSelf.isLastPage = (NSNumber*)res[@"isLastPage"];
-                                weakSelf.page = (NSNumber*) res[@"page"];
-                                if(weakSelf.docs.count> 0){
-                                    [weakSelf.cv reloadData];
-                                }
-                                 [weakSelf hideHud:YES];
-    }];
-    
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSString *identifier = segue.identifier;
-    __block __weak WOItemsViewController* weakSelf = (WOItemsViewController*)self;  
-    if ([identifier isEqualToString:@"segueAddItem"]) {
-        WOEditItemViewController *destinationVC = (WOEditItemViewController *) segue.destinationViewController;
+    __block __weak WOItemPicOptionalViewController* weakSelf = (WOItemPicOptionalViewController*)self;  
+    if ([identifier isEqualToString:@"segueAddItempicOptional"]) {
+        WOEditItemPicOptioinalViewController *destinationVC = (WOEditItemPicOptioinalViewController *) segue.destinationViewController;
         destinationVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        destinationVC.storeId = self.storeId;
+        destinationVC.item = self.item;
         destinationVC.complectionBlock = ^(NSDictionary* res){ 
             
-            PRPLog(@"after add new item res: %@-[%@ , %@]",
+            PRPLog(@"after add new itemPicOptional res: %@-[%@ , %@]",
                    res,
                    NSStringFromClass([self class]),
                    NSStringFromSelector(_cmd));
             if(nil !=  res){
-                WORecordItem* record = res[@"record"];
+                WORecordItemPicOptional* record = res[@"record"];
                 int insertRow = weakSelf.docs.count;
                 [weakSelf.docs addObject:record];
                 NSIndexPath* insertedIndexPath = [NSIndexPath indexPathForRow:insertRow inSection:0];
@@ -145,24 +141,24 @@ UIScrollViewDelegate>
                 [weakSelf.cv insertItemsAtIndexPaths:arrOfIndexPath];
                 [weakSelf.cv scrollToItemAtIndexPath:insertedIndexPath atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
             }
-   
+            
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
             
         };        
-    } else if([identifier isEqualToString:@"segueEditItem"]) {
+    } else if([identifier isEqualToString:@"segueEditItempicOptional"]) {
         
-       
-        WOCellItem* selectedCell =(WOCellItem*) sender;
+        
+        WOCellItemPicOptional* selectedCell =(WOCellItemPicOptional*) sender;
         NSIndexPath* slectedIndexPath = [self.cv indexPathForCell:selectedCell];
-        WORecordItem *record = self.docs[slectedIndexPath.row];
+        WORecordItemPicOptional *record = self.docs[slectedIndexPath.row];
         
-        WOEditItemViewController *destinationVC = (WOEditItemViewController *) segue.destinationViewController;
+        WOEditItemPicOptioinalViewController *destinationVC = (WOEditItemPicOptioinalViewController *) segue.destinationViewController;
         destinationVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         destinationVC.recordToEdit = record;
         
         destinationVC.complectionBlock = ^(NSDictionary* res){ 
-                        
-            PRPLog(@"after upd old item res: %@-[%@ , %@]",
+            
+            PRPLog(@"after upd old itemPicOptional res: %@-[%@ , %@]",
                    res,
                    NSStringFromClass([self class]),
                    NSStringFromSelector(_cmd));
@@ -171,27 +167,28 @@ UIScrollViewDelegate>
                 
                 //do update
                 if(nil != res[@"record"]){
-                    WORecordItem* recordUpdated = res[@"record"];
+                    WORecordItemPicOptional* recordUpdated = res[@"record"];
                     self.docs[slectedIndexPath.row] = recordUpdated;
                     NSArray* arrOfIndexPath = @[slectedIndexPath];
                     [weakSelf.cv reloadItemsAtIndexPaths:arrOfIndexPath];
+
                 } else if (nil != type 
                            && [type isEqualToString:@"del"]){
-                //do remove
+                    //do remove
                     [self.docs removeObject:record];
                     NSArray* arrOfIndexPath = @[slectedIndexPath];
                     [weakSelf.cv deleteItemsAtIndexPaths:arrOfIndexPath];
+                    
                 }
-
+                
             }
             
             [weakSelf dismissViewControllerAnimated:YES completion:nil];
-
+            
         };        
     }
-    
-    
 }
+
 
 #pragma mark UICollectionViewDataSource, UICollectionViewDelegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -203,11 +200,11 @@ UIScrollViewDelegate>
 }
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString* cellIdentifier = @"WOCellItem";
+    static NSString* cellIdentifier = @"WOCellItemPicOptional";
     
-    WOCellItem* cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    WOCellItemPicOptional* cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    WORecordItem* record = self.docs[indexPath.row];
+    WORecordItemPicOptional* record = self.docs[indexPath.row];
     cell.record = record;
     cell.indexPath = indexPath;
     
@@ -215,12 +212,11 @@ UIScrollViewDelegate>
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    WORecordItem* record = self.docs[indexPath.row];
-    
-    PRPLog(@"selcte WORecordItem._id: %@-[%@ , %@]",
-           record._id,
-           NSStringFromClass([self class]),
-           NSStringFromSelector(_cmd));
+//    WORecordItemPicOptional* record = self.docs[indexPath.row];
+//    PRPLog(@"selcte WORecordItemPicOptional._id: %@-[%@ , %@]",
+//           record._id,
+//           NSStringFromClass([self class]),
+//           NSStringFromSelector(_cmd));
 }
 
 #pragma mark UIScrollViewDelegate
@@ -235,9 +231,8 @@ UIScrollViewDelegate>
             int page_ = [self.page intValue];
             page_++;
             self.page = [[NSNumber alloc] initWithInt:page_];
-            [self _fetchItemsByStoreId:self.storeId];
+            [self _fetchItemPicOptionalsByItem:self.item];
         }
-        
 	}
 	// Reset the trigger
 	addItemsTrigger = NO;
@@ -254,7 +249,6 @@ UIScrollViewDelegate>
 	if (scrollView.contentOffset.x < -70)
 		addItemsTrigger = YES;
 }
-
 
 
 @end

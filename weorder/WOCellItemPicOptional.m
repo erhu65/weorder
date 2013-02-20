@@ -1,17 +1,18 @@
 //
-//  WOCellItem.m
+//  WOCellItemPicOptional.m
 //  weorder
 //
-//  Created by Peter2 on 2/19/13.
+//  Created by Peter2 on 2/20/13.
 //  Copyright (c) 2013 peter. All rights reserved.
 //
 
-#import "WOCellItem.h"
-#import "WORecordItem.h"
+#import "WOCellItemPicOptional.h"
+#import "WORecordItemPicOptional.h"
+
 #import "UIImageView+RemoteFile.h"
 #import "QuartzCore/QuartzCore.h"
 
-@implementation WOCellItem
+@implementation WOCellItemPicOptional
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
@@ -24,12 +25,11 @@
 }
 
 
--(void)setRecord:(WORecordItem *)record{
+-(void)setRecord:(WORecordItemPicOptional *)record{
     
     
     self.imvPIc.image = [UIImage imageNamed:@"Icon"];
-    self.lbNmae.text = record.name;
-    self.lbPrice.text = [NSString stringWithFormat:@"%i", [record.price integerValue]];
+    self.lbDesc.text = record.desc;
     
     self.layer.masksToBounds = NO;
     self.layer.borderColor = [UIColor grayColor].CGColor;
@@ -40,7 +40,7 @@
     self.layer.shadowOffset = CGSizeZero;
     self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
     self.layer.shouldRasterize = YES;
-
+    
     self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:kSharedModel.theme[@"bgWood"]]];
     
     if (nil != record.awsS3ImgUrl) {
@@ -54,19 +54,11 @@
     }
 }
 
--(void) setLbNmae:(UILabel *)lbNmae
+-(void) setLbDesc:(UILabel *)lbDesc
 {
-    _lbNmae = lbNmae;
-    if (_lbNmae) {
-        [BRStyleSheet styleLabel:_lbNmae withType:BRLabelTypeName];
-    }
-}
-
--(void) setLbPrice:(UILabel *)lbPrice
-{
-    _lbPrice = lbPrice;
-    if (_lbPrice) {
-        [BRStyleSheet styleLabel:_lbPrice withType:BRLabelTypeName];
+    _lbDesc = lbDesc;
+    if (_lbDesc) {
+        [BRStyleSheet styleLabel:_lbDesc withType:BRLabelTypeName];
     }
 }
 

@@ -9,7 +9,7 @@
 #import "WORecordItem.h"
 
 @implementation WORecordItem
--(id)initWithJsonDic:(NSDictionary *)dic{
+-(id)initWithJsonDic:(NSMutableDictionary *)dic{
     
     self = [super init];
     if (self) {
@@ -18,6 +18,12 @@
         self.desc = [dic objectForKey:@"desc"];
         self.name = [dic objectForKey:@"name"];          
         self.price = (NSNumber*)[dic objectForKey:@"price"]; 
+        self.picKey = [dic objectForKey:@"picKey"]; 
+        
+        self.awsS3ImgUrl =  (NSURL* )[dic objectForKey:@"awsS3ImgUrl"];
+        
+        self.isPicModified = NO;
+        
     }
     return self;
 }

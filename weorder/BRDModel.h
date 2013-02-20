@@ -44,6 +44,8 @@ typedef enum subCategoriesSortType {
 @class BRRecordMainCategory;
 @class BRRecordSubCategory;
 @class BRRecordVideo;
+@class WORecordItem;
+@class WORecordItemPicOptional;
 @class ACAccount;
 
 @interface BRDModel : NSObject
@@ -244,8 +246,9 @@ typedef enum subCategoriesSortType {
 
 - (void)postItem:(NSString*)name
          desc:(NSString*)desc
-            price:(NSNumber*)price
-                stroeId:(NSString*)stroeId
+        price:(NSNumber*)price
+          picKey:(NSString*)picKey
+        stroeId:(NSString*)stroeId
            withBlock:(void (^)(NSDictionary* res))block;
 - (void)fetchItemsByStoreId:(NSString*)stroeId
                      byPage:(NSNumber*)page
@@ -254,8 +257,19 @@ typedef enum subCategoriesSortType {
           name:(NSString*)name
         desc:(NSString*)desc
           price:(NSNumber*)price
+         picKey:(NSString*)picKey
           withBlock:(void (^)(NSDictionary* res))block;
 -(void)delItem:(NSString*)_id
+     withBlock:(void (^)(NSDictionary* res))block;
+
+- (void)postItemPicOptional:(WORecordItemPicOptional*)reocrd
+       withBlock:(void (^)(NSDictionary* res))block;
+- (void)fetchItemPicOptionalsByItem:(WORecordItem*)item
+                     byPage:(NSNumber*)page
+                  withBlock:(void (^)(NSDictionary* res))block;
+- (void)updItemPicOptional:(WORecordItemPicOptional*)reocrd
+      withBlock:(void (^)(NSDictionary* res))block;
+-(void)delItemPicOptional:(WORecordItemPicOptional*)reocrd
      withBlock:(void (^)(NSDictionary* res))block;
 
 @end

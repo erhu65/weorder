@@ -1,20 +1,20 @@
 //
-//  WOEditItemViewController.m
+//  WOEditItemPicOptioinalViewController.m
 //  weorder
 //
-//  Created by Peter2 on 2/19/13.
+//  Created by Peter2 on 2/20/13.
 //  Copyright (c) 2013 peter. All rights reserved.
 //
 
-#import "WOEditItemViewController.h"
-#import "WOItemPicOptionalViewController.h"
-
+#import "WOEditItemPicOptioinalViewController.h"
 #import "WORecordItem.h"
+#import "WORecordItemPicOptional.h"
 #import "Utils.h"
 
 #define KAlertviewSureToDel 1003
 
-@interface WOEditItemViewController ()
+
+@interface WOEditItemPicOptioinalViewController ()
 <UIImagePickerControllerDelegate,UINavigationControllerDelegate,
 UIActionSheetDelegate,
 UIAlertViewDelegate>
@@ -24,11 +24,7 @@ UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnBack;
-@property (weak, nonatomic) IBOutlet UILabel *lbName;
-@property (weak, nonatomic) IBOutlet UILabel *lbPrice;
 @property (weak, nonatomic) IBOutlet UILabel *lbDesc;
-@property (weak, nonatomic) IBOutlet UITextField *tfName;
-@property (weak, nonatomic) IBOutlet UITextField *tfPrice;
 @property (weak, nonatomic) IBOutlet UITextView *tvDesc;
 
 @property (weak, nonatomic) IBOutlet UILabel *lbItemPIc;
@@ -36,37 +32,20 @@ UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *btnItemPic;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSave;
-
 @property (weak, nonatomic) IBOutlet UIButton *btnDel;
-@property (weak, nonatomic) IBOutlet UIView *containerItemPicOptional;
-
 
 @end
 
-@implementation WOEditItemViewController
-
+@implementation WOEditItemPicOptioinalViewController
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.noticeChildViewController.view.hidden = YES;
     self.barBtnBack.title = kSharedModel.lang[@"actionBack"];
-    
-    self.lbName.text = kSharedModel.lang[@"name"]; 
-    [BRStyleSheet styleLabel:self.lbName withType:BRLabelTypeName];
-    self.tfName.inputAccessoryView = [self accessoryView];
-    self.tfName.clearButtonMode = UITextFieldViewModeAlways;
-
-    
-    self.lbPrice.text = kSharedModel.lang[@"price"]; 
-    [BRStyleSheet styleLabel:self.lbPrice withType:BRLabelTypeName];
-    self.tfPrice.keyboardType = UIKeyboardTypeNumberPad;
-    self.tfPrice.inputAccessoryView = [self accessoryView];
-    self.tfPrice.clearButtonMode = UITextFieldViewModeAlways;
-    
-    self.tfPrice.clearButtonMode = UITextFieldViewModeAlways;
-    
+        
     self.lbDesc.text = kSharedModel.lang[@"desc"]; 
     [BRStyleSheet styleLabel:self.lbDesc withType:BRLabelTypeName];
     self.tvDesc.text = @"";
@@ -74,7 +53,7 @@ UIAlertViewDelegate>
     
     self.lbItemPIc.text = kSharedModel.lang[@"ItemPicNeed"];
     [BRStyleSheet styleLabel:self.lbItemPIc withType:BRLabelTypeName];
-        
+    
     // prepare image picker
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
 		imagePC = [[UIImagePickerController alloc] init];
@@ -82,8 +61,7 @@ UIAlertViewDelegate>
 		imagePC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePC.allowsEditing = YES;
 	}
-
-	// Do any additional setup after loading the view.
+    
     if(nil != self.recordToEdit){
         
         NSString* cacheNamePath = [Utils filePathInCaches:self.recordToEdit.picKey withSuffix:nil];
@@ -91,24 +69,22 @@ UIAlertViewDelegate>
         if (isFileExist) {
             self.imvItemPIc.image  =  [Utils readCacheImage:cacheNamePath];
         } 
-        self.tfName.text = self.recordToEdit.name;
-        self.tfPrice.text = [self.recordToEdit.price stringValue];
         self.tvDesc.text = self.recordToEdit.desc;
         [self.btnItemPic setBackgroundImage:nil forState:UIControlStateNormal];
         
-        self.navBar.topItem.title = kSharedModel.lang[@"editItem"];
+        self.navBar.topItem.title = kSharedModel.lang[@"editItemPic"];
     } else {
         
-        self.navBar.topItem.title = kSharedModel.lang[@"addItem"];
+        self.navBar.topItem.title = kSharedModel.lang[@"addItemPic"];
         self.btnDel.hidden = YES;
         self.btnDel.enabled = NO;
-        self.lbItemPIc.text = kSharedModel.lang[@"itemPIc"]; 
+       
         [BRStyleSheet styleLabel:self.lbItemPIc withType:BRLabelTypeName];
         
         [self.btnItemPic setBackgroundImage:[UIImage imageNamed:kSharedModel.theme[@"placeHorderGeneral"]] forState:UIControlStateNormal];
     }
-    
 }
+
 
 -(void)viewDidAppear:(BOOL)animated{
     
@@ -130,16 +106,12 @@ UIAlertViewDelegate>
     self.noticeChildViewController.view.hidden = NO;
     
 }
-
-
 - (IBAction)_back:(id)sender {
     
     self.complectionBlock(nil);
-    
 }
 
--(IBAction)_showChoosePicActionSheet:(id)sender {
-    
+- (IBAction)_showChoosePicActionSheet:(id)sender {    
 	UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:kSharedModel.lang[@"choosePIc"] delegate:self cancelButtonTitle:kSharedModel.lang[@"actionCancel"] destructiveButtonTitle:nil otherButtonTitles:kSharedModel.lang[@"takeFromCamera"] , kSharedModel.lang[@"takeFromLibrary"] , nil];
     
 	popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
@@ -205,31 +177,21 @@ UIAlertViewDelegate>
         
         if([title isEqualToString:kSharedModel.lang[@"actionOK"]]){
             
-            [self _delItem:self.recordToEdit._id];
+            [self _delItemPicOptioinal:self.recordToEdit];
             
         }
     } 
 }
--(IBAction)_confirmToDel:(id)sender{
-    
+- (IBAction)_confirmToDel:(id)sender {
     UIAlertView* av = [[UIAlertView alloc] initWithTitle:kSharedModel.lang[@"warn"] 
                                                  message:kSharedModel.lang[@"areYouSureToDelete"] delegate:self cancelButtonTitle:kSharedModel.lang[@"actionOK"] otherButtonTitles:kSharedModel.lang[@"actionCancel"], nil];
     av.tag = KAlertviewSureToDel;
     [av show];
 }
 
-
-
 - (IBAction)_save:(id)sender {
-            
-    NSString* name = self.tfName.text;
-    NSString* desc = self.tvDesc.text;
-    NSNumber* price = [[NSNumber alloc] initWithInt:[self.tfPrice.text integerValue]];
-    if(name.length == 0){
     
-        [self showMsg:kSharedModel.lang[@"pleaseFillName"] type:msgLevelWarn];
-        return;
-    }
+    NSString* desc = self.tvDesc.text;
     if(desc.length == 0){
         
         [self showMsg:kSharedModel.lang[@"pleaseFillDescription"] type:msgLevelWarn];
@@ -240,12 +202,10 @@ UIAlertViewDelegate>
         [self showMsg:kSharedModel.lang[@"pleaseChoolseAItemPic"] type:msgLevelWarn];
         return;
     }
-    
+    [self showHud:YES];
     if(nil !=  self.recordToEdit){
         //update  item
         NSString* uniqueKeyOld = self.recordToEdit.picKey;
-        self.recordToEdit.name = self.tfName.text;
-        self.recordToEdit.price = [[NSNumber alloc] initWithInt:[self.tfPrice.text intValue]];
         self.recordToEdit.desc = self.tvDesc.text;
         
         if(self.recordToEdit.isPicModified){
@@ -256,11 +216,8 @@ UIAlertViewDelegate>
                    pickedImage,
                    NSStringFromClass([self class]),
                    NSStringFromSelector(_cmd));
-            
-            
-            
             [self showHud:YES];
-            __block __weak WOEditItemViewController* weakSelf =(WOEditItemViewController*) self;
+            __block __weak WOEditItemPicOptioinalViewController* weakSelf =(WOEditItemPicOptioinalViewController*) self;
             [kSharedModel delAwsS3Img:uniqueKeyOld withBlock:^(NSDictionary* resByDel) {
                 NSString* cacheNamePath = [Utils filePathInCaches:uniqueKeyOld withSuffix:nil];
                 [[NSFileManager defaultManager] removeItemAtPath:cacheNamePath error:nil];     
@@ -289,12 +246,12 @@ UIAlertViewDelegate>
                        NSStringFromSelector(_cmd));
                 weakSelf.recordToEdit.picKey = uniqueKeyNew;
                 
-                [weakSelf _updItem:weakSelf.recordToEdit._id name:weakSelf.recordToEdit.name desc:weakSelf.recordToEdit.desc price:weakSelf.recordToEdit.price picKey:uniqueKeyNew];
+                [weakSelf _updItemPicOptioinal:weakSelf.recordToEdit];
                 
             }];
             
         } else {
-                [self _updItem:self.recordToEdit._id name:self.recordToEdit.name desc:self.recordToEdit.desc price:self.recordToEdit.price picKey:uniqueKeyOld];
+            [self _updItemPicOptioinal:self.recordToEdit];
             
         }
         
@@ -308,7 +265,7 @@ UIAlertViewDelegate>
                NSStringFromSelector(_cmd));
         
         [self showHud:YES];
-        __block __weak WOEditItemViewController* weakSelf =(WOEditItemViewController*) self;
+        __block __weak WOEditItemPicOptioinalViewController* weakSelf =(WOEditItemPicOptioinalViewController*) self;
         
         [kSharedModel saveImageAndUploadToAWS:pickedImage withBlock:^(NSDictionary* res) { 
             
@@ -332,21 +289,21 @@ UIAlertViewDelegate>
                    NSStringFromClass([self class]),
                    NSStringFromSelector(_cmd));
             
-            [self _postItem:name desc:desc price:price picKey:uniqueFileName stroeId:self.storeId];
+            NSDictionary* docToAdd = @{@"desc": desc, @"picKey": uniqueFileName, @"itemId": self.item._id};
+            
+            WORecordItemPicOptional* reocrdToAdd = [[WORecordItemPicOptional alloc] initWithJsonDic:docToAdd];
+            
+            [self _postItemPicOptional:reocrdToAdd];
         }];
         
     }
 }
 
-- (void)_postItem:(NSString*)name
-            desc:(NSString*)desc
-           price:(NSNumber*)price
-           picKey:(NSString*)picKey
-          stroeId:(NSString*)stroeId{
-    
+- (void)_postItemPicOptional:(WORecordItemPicOptional*)reocrd{
     [self showHud:YES];
-    __block __weak WOEditItemViewController* weakSelf = (WOEditItemViewController*)self;
-    [kSharedModel postItem:name desc:desc price:price picKey:picKey stroeId:stroeId withBlock:^(NSDictionary* res) { 
+    __block __weak WOEditItemPicOptioinalViewController* weakSelf = (WOEditItemPicOptioinalViewController*)self;
+    [kSharedModel postItemPicOptional:reocrd 
+                            withBlock:^(NSDictionary* res) { 
         
         NSString* error  = res[@"error"];
         if(nil != error){
@@ -354,22 +311,19 @@ UIAlertViewDelegate>
             [weakSelf showMsg:error type:msgLevelError];
             return;
         }
-     [weakSelf hideHud:YES];
-     self.complectionBlock(res);
+        
+        [weakSelf hideHud:YES];
+        self.complectionBlock(res);
         
     }];
     
 }
 
-- (void)_updItem:(NSString*)_id
-           name:(NSString*)name
-           desc:(NSString*)desc
-          price:(NSNumber*)price
-         picKey:(NSString*)picKey{
-    
+
+- (void)_updItemPicOptioinal:(WORecordItemPicOptional*)reocrd{
     [self showHud:YES];
-    __block __weak WOEditItemViewController* weakSelf = (WOEditItemViewController*)self;
-    [kSharedModel updItem:_id name:name desc:desc price:price picKey:picKey withBlock:^(NSDictionary* res){ 
+    __block __weak WOEditItemPicOptioinalViewController* weakSelf = (WOEditItemPicOptioinalViewController*)self;
+    [kSharedModel updItemPicOptional:reocrd withBlock:^(NSDictionary* res){ 
         
         NSString* error  = res[@"error"];
         if(nil != error){
@@ -384,11 +338,10 @@ UIAlertViewDelegate>
     
 }
 
-
-- (void)_delItem:(NSString*)_id{
+- (void)_delItemPicOptioinal:(WORecordItemPicOptional*)reocrd{
     
-    __block __weak WOEditItemViewController* weakSelf = (WOEditItemViewController*)self;
     [self showHud:YES];
+    __block __weak WOEditItemPicOptioinalViewController* weakSelf = (WOEditItemPicOptioinalViewController*)self;
     NSString* uniqueKeyOld = self.recordToEdit.picKey;
     [kSharedModel delAwsS3Img:uniqueKeyOld
                     withBlock:^(NSDictionary* resByDel) {
@@ -396,57 +349,22 @@ UIAlertViewDelegate>
                         NSString* cacheNamePath = [Utils filePathInCaches:uniqueKeyOld withSuffix:nil];
                         [[NSFileManager defaultManager] removeItemAtPath:cacheNamePath error:nil]; 
                         
-                        [kSharedModel delItem:_id  
-                                        withBlock:^(NSDictionary* res) {
+                        [kSharedModel delItemPicOptional:reocrd
+                                    withBlock:^(NSDictionary* res) {
+                                        
+                                        NSString* error = res[@"error"];
+                                        if(nil != error){
                                             
-                                            NSString* error = res[@"error"];
-                                            if(nil != error){
-                                                
-                                                [weakSelf showMsg:error type:msgLevelError];
-                                                return;
-                                            }
-                                            NSDictionary* resDel = @{@"type": @"del"};
-                                            [weakSelf hideHud:YES];
-                                            weakSelf.complectionBlock(resDel);
-                                        }];
+                                            [weakSelf showMsg:error type:msgLevelError];
+                                            return;
+                                        }
+                                        NSDictionary* resDel = @{@"type": @"del"};
+                                        [weakSelf hideHud:YES];
+                                        weakSelf.complectionBlock(resDel);
+                                    }];
                         
                     }];          
     
 }
 
-#pragma mark Segues
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-	if ([identifier isEqualToString:@"EmbedItemPicOptional"])
-	{
-        if(!self.recordToEdit) {
-            self.containerItemPicOptional.hidden = YES;
-            return NO;
-        }
-		
-	}
-	return YES;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	if ([segue.identifier isEqualToString:@"EmbedItemPicOptional"])
-	{
-		self.embedWOItemPicOptionalViewController =(WOItemPicOptionalViewController*) segue.destinationViewController;
-        self.embedWOItemPicOptionalViewController.item = self.recordToEdit;
-	}
-}
-- (void)didReceiveMemoryWarning
-{
-	[super didReceiveMemoryWarning];
-	
-	if ([self isViewLoaded] && self.view.window == nil)
-	{
-		self.view = nil;
-        
-		[self.embedWOItemPicOptionalViewController willMoveToParentViewController:nil];
-		[self.embedWOItemPicOptionalViewController removeFromParentViewController];
-		
-	}
-}
 @end

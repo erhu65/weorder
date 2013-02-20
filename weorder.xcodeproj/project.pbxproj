@@ -15,6 +15,11 @@
 		B795FF1016D3770D004B0594 /* WOItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF0F16D3770D004B0594 /* WOItemsViewController.m */; };
 		B795FF1316D37970004B0594 /* WORecordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF1216D37970004B0594 /* WORecordItem.m */; };
 		B795FF1716D37C25004B0594 /* WOEditItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF1616D37C25004B0594 /* WOEditItemViewController.m */; };
+		B796DF3016D49A0D00CBA3E6 /* WOItemPicOptionalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B796DF2F16D49A0D00CBA3E6 /* WOItemPicOptionalViewController.m */; };
+		B796DF3316D49AD800CBA3E6 /* WORecordItemPicOptional.m in Sources */ = {isa = PBXBuildFile; fileRef = B796DF3216D49AD800CBA3E6 /* WORecordItemPicOptional.m */; };
+		B796DF3616D49AF300CBA3E6 /* WOCellItemPicOptional.m in Sources */ = {isa = PBXBuildFile; fileRef = B796DF3516D49AF300CBA3E6 /* WOCellItemPicOptional.m */; };
+		B796DF3A16D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B796DF3916D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.m */; };
+		B796DF3D16D4D92400CBA3E6 /* LineLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B796DF3C16D4D92400CBA3E6 /* LineLayout.m */; };
 		B798BDF916D0A05300557700 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B798BDF816D0A05300557700 /* CoreLocation.framework */; };
 		B798BDFB16D0A05800557700 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B798BDFA16D0A05800557700 /* MapKit.framework */; };
 		B798BE0016D0E42200557700 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = B798BDFF16D0E42200557700 /* ZipArchive.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -307,6 +312,16 @@
 		B795FF1216D37970004B0594 /* WORecordItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordItem.m; sourceTree = "<group>"; };
 		B795FF1516D37C25004B0594 /* WOEditItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOEditItemViewController.h; sourceTree = "<group>"; };
 		B795FF1616D37C25004B0594 /* WOEditItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOEditItemViewController.m; sourceTree = "<group>"; };
+		B796DF2E16D49A0D00CBA3E6 /* WOItemPicOptionalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOItemPicOptionalViewController.h; sourceTree = "<group>"; };
+		B796DF2F16D49A0D00CBA3E6 /* WOItemPicOptionalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOItemPicOptionalViewController.m; sourceTree = "<group>"; };
+		B796DF3116D49AD800CBA3E6 /* WORecordItemPicOptional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordItemPicOptional.h; sourceTree = "<group>"; };
+		B796DF3216D49AD800CBA3E6 /* WORecordItemPicOptional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordItemPicOptional.m; sourceTree = "<group>"; };
+		B796DF3416D49AF300CBA3E6 /* WOCellItemPicOptional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOCellItemPicOptional.h; sourceTree = "<group>"; };
+		B796DF3516D49AF300CBA3E6 /* WOCellItemPicOptional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOCellItemPicOptional.m; sourceTree = "<group>"; };
+		B796DF3816D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOEditItemPicOptioinalViewController.h; sourceTree = "<group>"; };
+		B796DF3916D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOEditItemPicOptioinalViewController.m; sourceTree = "<group>"; };
+		B796DF3B16D4D92300CBA3E6 /* LineLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineLayout.h; sourceTree = "<group>"; };
+		B796DF3C16D4D92400CBA3E6 /* LineLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineLayout.m; sourceTree = "<group>"; };
 		B798BDF816D0A05300557700 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B798BDFA16D0A05800557700 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B798BDFE16D0E42200557700 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
@@ -760,6 +775,30 @@
 			name = WOEditItem;
 			sourceTree = "<group>";
 		};
+		B796DF2D16D4997400CBA3E6 /* WOItemPicOptional */ = {
+			isa = PBXGroup;
+			children = (
+				B796DF3B16D4D92300CBA3E6 /* LineLayout.h */,
+				B796DF3C16D4D92400CBA3E6 /* LineLayout.m */,
+				B796DF2E16D49A0D00CBA3E6 /* WOItemPicOptionalViewController.h */,
+				B796DF2F16D49A0D00CBA3E6 /* WOItemPicOptionalViewController.m */,
+				B796DF3116D49AD800CBA3E6 /* WORecordItemPicOptional.h */,
+				B796DF3216D49AD800CBA3E6 /* WORecordItemPicOptional.m */,
+				B796DF3416D49AF300CBA3E6 /* WOCellItemPicOptional.h */,
+				B796DF3516D49AF300CBA3E6 /* WOCellItemPicOptional.m */,
+			);
+			name = WOItemPicOptional;
+			sourceTree = "<group>";
+		};
+		B796DF3716D4A59500CBA3E6 /* WOEditItemPicOptional */ = {
+			isa = PBXGroup;
+			children = (
+				B796DF3816D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.h */,
+				B796DF3916D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.m */,
+			);
+			name = WOEditItemPicOptional;
+			sourceTree = "<group>";
+		};
 		B798BDFC16D0E40800557700 /* ZipArchive */ = {
 			isa = PBXGroup;
 			children = (
@@ -1158,6 +1197,8 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				B796DF3716D4A59500CBA3E6 /* WOEditItemPicOptional */,
+				B796DF2D16D4997400CBA3E6 /* WOItemPicOptional */,
 				B795FF1416D37BAC004B0594 /* WOEditItem */,
 				B795FF0D16D37659004B0594 /* WOItems */,
 				D0A695B916C7861C00DAC57D /* MainCategory */,
@@ -1846,6 +1887,11 @@
 				B795FF1316D37970004B0594 /* WORecordItem.m in Sources */,
 				B795FF1716D37C25004B0594 /* WOEditItemViewController.m in Sources */,
 				B701538416D3CD3000849939 /* WOCellItem.m in Sources */,
+				B796DF3016D49A0D00CBA3E6 /* WOItemPicOptionalViewController.m in Sources */,
+				B796DF3316D49AD800CBA3E6 /* WORecordItemPicOptional.m in Sources */,
+				B796DF3616D49AF300CBA3E6 /* WOCellItemPicOptional.m in Sources */,
+				B796DF3A16D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.m in Sources */,
+				B796DF3D16D4D92400CBA3E6 /* LineLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
