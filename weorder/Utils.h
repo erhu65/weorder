@@ -5,7 +5,7 @@
 //  Created by Huang Peter on 2/3/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-#import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 @interface Utils : NSObject
 
@@ -65,9 +65,8 @@
 
 + (double) radians:(double)degrees;
 + (double) degrees:(double)radians;
-
-//+(CLLocationDistance)fromLocation:(CLLocationCoordinate2D)locationA toLocation:(CLLocationCoordinate2D)locationB;
-
++(CLLocationDistance)fromLocation:(CLLocationCoordinate2D)locationA toLocation:(CLLocationCoordinate2D)locationB;
 + (NSUInteger)amountOfFreeMemory;
 + (BOOL)chkDataPathLocalExist:(NSString*)localPath;
+
 @end

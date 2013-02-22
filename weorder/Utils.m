@@ -606,31 +606,40 @@ static NSFileManager * _fileManager = nil;
     return radians * 180.0 / M_PI;
 }
 
-//+(CLLocationDistance)fromLocation:(CLLocationCoordinate2D)locationA toLocation:(CLLocationCoordinate2D)locationB
-//{
-//    CLLocationDegrees a_lat_ = [Utils degrees:locationA.latitude];
-//    CLLocationDegrees a_lng_ = [Utils degrees:locationA.longitude];
-//    
-//    CLLocationDegrees b_lat_ = [Utils degrees:locationB.latitude];
-//    CLLocationDegrees b_lng_ = [Utils degrees:locationB.longitude];
-//    
-//    CLLocation *locA_ = [[CLLocation alloc] initWithLatitude:a_lat_ longitude:a_lng_];
-//    
-//    CLLocation *locB_ = [[CLLocation alloc] initWithLatitude:b_lat_ longitude:b_lng_];
-//    
-//    CLLocationDistance distance = [locA_ distanceFromLocation:locB_];
-//    
-//    //Distance in Meters
-//    //1 meter == 100 centimeter
-//    
-//    //1 meter == 3.280 feet
-//    
-//    //1 meter == 10.76 square feet
-//    [locA_ release];
-//    [locB_ release];
-//    
-//    return distance;
-//}
+
+//how to sort by distance
+/*
+ 
+ [filterArray sortUsingComparator:(NSComparator)^(id obj1, id obj2){
+ double distance1_ = [[obj1 objectForKey:@"distance"] doubleValue];
+ double distance2_ = [[obj2 objectForKey:@"distance"] doubleValue];
+ double valueDiff = distance1_ - distance2_;
+ return (valueDiff == 0) ? NSOrderedSame : (valueDiff < 0) ? NSOrderedAscending : NSOrderedDescending;
+ }];
+
+ */
++(CLLocationDistance)fromLocation:(CLLocationCoordinate2D)locationA toLocation:(CLLocationCoordinate2D)locationB
+{
+    CLLocationDegrees a_lat_ = [Utils degrees:locationA.latitude];
+    CLLocationDegrees a_lng_ = [Utils degrees:locationA.longitude];
+    
+    CLLocationDegrees b_lat_ = [Utils degrees:locationB.latitude];
+    CLLocationDegrees b_lng_ = [Utils degrees:locationB.longitude];
+    
+    CLLocation *locA_ = [[CLLocation alloc] initWithLatitude:a_lat_ longitude:a_lng_];
+    
+    CLLocation *locB_ = [[CLLocation alloc] initWithLatitude:b_lat_ longitude:b_lng_];
+    
+    CLLocationDistance distance = [locA_ distanceFromLocation:locB_];
+    
+    //Distance in Meters
+    //1 meter == 100 centimeter
+    
+    //1 meter == 3.280 feet
+    
+    //1 meter == 10.76 square feet
+    return distance;
+}
 
 
 + (NSUInteger)amountOfFreeMemory

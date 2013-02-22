@@ -10,6 +10,7 @@
 #import "WOEditPicViewController.h"
 #import "WOItemsViewController.h"
 #import "BRMainCategoryViewController.h"
+#import "WOMapPinToDragViewController.h"
 
 #import "WOCellStorePic.h"
 #import "WORecordStore.h"
@@ -34,7 +35,7 @@ UITextViewDelegate>
 {
     UIToolbar *_tbForKeyBoard;
 }
-
+@property (strong, nonatomic) WORecordStore* store;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnItems;
 
 
@@ -54,6 +55,10 @@ UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *btnAddStroePic;
 
+@property (weak, nonatomic) IBOutlet UILabel *lbLocation;
+@property (weak, nonatomic) IBOutlet UILabel *lbLocationAddress;
+@property (weak, nonatomic) IBOutlet UIButton *btnPopMapPinToGetLocation;
+@property(nonatomic, strong) CLLocation* location;
 
 
 @property(nonatomic, strong)WORecordStore* currentRecord;
@@ -109,7 +114,10 @@ UITextViewDelegate>
     
     self.lbStorePics.text = kSharedModel.lang[@"storePics"]; 
     [BRStyleSheet styleLabel:self.lbStorePics withType:BRLabelTypeName];
-    
+    self.lbLocation.text = kSharedModel.lang[@"storeLocatioin"]; 
+    [BRStyleSheet styleLabel:self.lbLocation withType:BRLabelTypeName];
+    self.lbLocationAddress.text = @"";
+    [BRStyleSheet styleLabel:self.lbLocationAddress withType:BRLabelTypeDaysUntilBirthdaySubText];
     
     CGAffineTransform rotateTable = CGAffineTransformMakeRotation(-M_PI_2);
 	self.tb.transform = rotateTable;
@@ -231,13 +239,17 @@ UITextViewDelegate>
         [self showMsg:kSharedModel.lang[@"pleaseSelectTypeFirst"] type:msgLevelWarn];
         return;
     }
+    if(nil == self.location){
+        
+        [self showMsg:kSharedModel.lang[@"yourStoreWouldNotBeSearchByLocation"] type:msgLevelWarn];
+    }
     
     __block __weak WOStoreBackenViewController* weakSelf = (WOStoreBackenViewController*)self;
     double lat = 0.0f;
     double lng = 0.0f;
-    if(nil != kAppDelegate.location){
-        lat = kAppDelegate.location.coordinate.latitude;
-        lng = kAppDelegate.location.coordinate.longitude;
+    if(nil != self.location){
+        lat = self.location.coordinate.latitude;
+        lng = self.location.coordinate.longitude;
     }
     [kSharedModel postStoreInfo:name 
                   description:description 
@@ -259,6 +271,7 @@ UITextViewDelegate>
             [weakSelf showMsg:msg type:msgLevelInfo];
             
             WORecordStore* record =( WORecordStore* ) res[@"record"];
+            weakSelf.store = record;
             [weakSelf _populateStoreInfoWithRecord:record];
 
             return;
@@ -287,10 +300,17 @@ UITextViewDelegate>
                               
                               NSString* msgLocal = kSharedModel.lang[msg];
                               [weakSelf showMsg:msgLocal type:msgLevelInfo];
-                           
                           }
                           
                           WORecordStore* record =( WORecordStore* ) res[@"record"];
+                          weakSelf.store = record;
+                          CLLocation* location = [[CLLocation alloc] initWithLatitude:record.lat longitude: record.lng];
+                          
+                          if(record.lat != 0.0f && record.lng != 0.0f){
+                              self.location = location;
+                              [self _geocoderToAddress:location];
+                          }
+                          
                           if(nil != record){
                               [weakSelf _fetchStorePics];
                               [weakSelf _populateStoreInfoWithRecord:record];
@@ -300,6 +320,49 @@ UITextViewDelegate>
                           
                       }];
 }
+
+
+-(void)_geocoderToAddress:(CLLocation*)location
+{
+    CLGeocoder* myGeocoder  = [[CLGeocoder alloc] init];
+    // Reverse Geocode a CLLocation to a CLPlacemark
+    [myGeocoder reverseGeocodeLocation:location
+                     completionHandler:^(NSArray *placemarks, NSError *error){
+                         
+                         // Make sure the geocoder did not produce an error
+                         // before continuing
+                         if(!error){
+                             CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                             NSString* addrress = [NSString stringWithFormat:@"%@ %@,%@ %@", 
+                                             [topResult subThoroughfare],[topResult thoroughfare],
+                                             [topResult locality], [topResult administrativeArea]];
+                             PRPLog(@"reverse location to address successfully: %@ \n\
+                                    [%@, %@]",
+                                    addrress,
+                                    NSStringFromClass([self class]),
+                                    NSStringFromSelector(_cmd));
+                             self.lbLocationAddress.text = addrress;
+                             // Iterate through all of the placemarks returned
+                             // and output them to the console
+//                             for(CLPlacemark *placemark in placemarks){
+//                                 NSLog(@"%@",[placemark description]);
+//                             }
+                         }
+                         else{
+                             // Our geocoder had an error, output a message
+                             // to the console
+                             PRPLog(@"There was a reverse geocoding error\n%@ \n\
+                                    [%@, %@]",
+                                    error,
+                                    NSStringFromClass([self class]),
+                                    NSStringFromSelector(_cmd));
+                         }
+                     }
+     ];
+    
+}
+
+
 -(void)_populateStoreInfoWithRecord:(WORecordStore*)record {
     
     self.currentRecord = record;
@@ -411,24 +474,22 @@ CGRect CGRectShrinkHeight(CGRect rect, CGFloat amount)
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    //	if ([identifier isEqualToString:@"DoneEdit"])
-    //	{
-    //		if ([self.textField.text length] > 0)
-    //		{
-    //			int value = [self.textField.text intValue];
-    //			if (value >= 0 && value <= 100)
-    //				return YES;
-    //		}
-    //        
-    //		[[[UIAlertView alloc]
-    //          initWithTitle:nil
-    //          message:@"Value must be between 0 and 100."
-    //          delegate:nil
-    //          cancelButtonTitle:@"OK"
-    //          otherButtonTitles:nil]
-    //         show];
-    //		return NO;
-    //	}
+    if([identifier isEqualToString:@"segueItems"]){
+        if(nil == self.store){
+        
+            [self showMsg:kSharedModel.lang[@"pleaseAddAndSaveYourStoreFirst"] type:msgLevelWarn];
+            return NO;
+        }
+        
+    } else if  ([identifier isEqualToString:@"segueAddPIc"]) {
+        if(nil == self.store){
+            
+            [self showMsg:kSharedModel.lang[@"pleaseAddAndSaveYourStoreFirst"] type:msgLevelWarn];
+            return NO;
+        }
+    }
+    
+    
 	return YES;
 }
 
@@ -498,6 +559,35 @@ CGRect CGRectShrinkHeight(CGRect rect, CGFloat amount)
                    NSStringFromSelector(_cmd));
             
         };
+    }else if([identifier isEqualToString:@"seguePopGetLOcation"]){
+    
+        WOMapPinToDragViewController *destinationVC = (WOMapPinToDragViewController *) segue.destinationViewController;
+        if(nil != self.location){
+            destinationVC.location = self.location;
+        }
+        
+        destinationVC.complectionBlock = ^(NSDictionary* res) {
+            
+            CLLocation* location = (CLLocation* )res[@"location"];
+            NSString* address = (NSString* )res[@"address"];
+            
+            if(nil != location){
+                weakSelf.location = location;
+                if(nil != address){
+                    weakSelf.lbLocationAddress.text = address;
+                } else {
+                    weakSelf.lbLocationAddress.text = @"";
+                }
+            }
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            PRPLog(@"after choose location res: %@-[%@ , %@]",
+                   res,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            
+        };
+
+        
     }
 
 

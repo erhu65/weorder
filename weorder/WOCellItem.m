@@ -66,7 +66,7 @@
 {
     _lbPrice = lbPrice;
     if (_lbPrice) {
-        [BRStyleSheet styleLabel:_lbPrice withType:BRLabelTypeName];
+        [BRStyleSheet styleLabel:_lbPrice withType:BRLabelTypeDaysUntilBirthdaySubText];
     }
 }
 

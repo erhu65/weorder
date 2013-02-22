@@ -26,6 +26,16 @@
         self.mainCategoryNme = [_creator objectForKey:@"name"];
         
         self.created_at = (NSDate*)[dic objectForKey:@"created_at"];
+        NSDictionary* loc = [dic objectForKey:@"loc"];
+        NSNumber* lat = (NSNumber*)[loc objectForKey:@"lat"];
+        NSNumber* lng = (NSNumber*)[loc objectForKey:@"lng"];
+        double latDouble = [lat doubleValue];
+        double lngDouble = [lng doubleValue];
+        if(latDouble != 0.0f && lngDouble != 0.0f){
+            self.lat = latDouble;
+            self.lng = lngDouble;
+        }
+       
         
         self.strImgUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?", self.fbId];
         

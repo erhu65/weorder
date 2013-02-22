@@ -5,6 +5,8 @@
 //  Created by Nick Kuh on 26/07/2012.
 //  Copyright (c) 2012 Nick Kuh. All rights reserved.
 //
+#import<MapKit/MapKit.h>
+
 #define BRNotificationFacebookMeDidUpdate        @"BRNotificationFacebookMeDidUpdate"
 
 #define BRNotificationFacebookFriendsDidUpdate        @"BRNotificationFacebookFriendsDidUpdate"
@@ -221,6 +223,12 @@ typedef enum subCategoriesSortType {
         lng:(double)lng
         mainCategoryId:(NSString*)mainCategoryId
         withBlock:(void (^)(NSDictionary* res))block;
+
+- (void)fetchStoresByLocatioin:(CLLocation*)location
+                          rangeInMeters:(double)rangeInMeters  
+                          fbId:(NSString*)fbId
+                  withBlock:(void (^)(NSDictionary* userInfo))block;
+
 - (void)fetchStoreInfoByFbId:(NSString*)fbId
                 withBlock:(void (^)(NSDictionary* userInfo))block;
 
@@ -235,6 +243,7 @@ typedef enum subCategoriesSortType {
           description:(NSString*)description
                  fbId:(NSString*)fbId
             withBlock:(void (^)(NSDictionary* res))block;
+
 - (void)fetchStorePicByFbId:(NSString*)fbId
                 withBlock:(void (^)(NSDictionary* userInfo))block;
 - (void)updStorePic:(NSString*)_id

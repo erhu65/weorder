@@ -57,7 +57,7 @@
 {
     _lbPicDesc = lbPicDesc;
     if (_lbPicDesc) {
-        [BRStyleSheet styleLabel:_lbPicDesc withType:BRLabelTypeName];
+        [BRStyleSheet styleLabel:_lbPicDesc withType:BRLabelTypeDaysUntilBirthdaySubText];
     }
 }
 

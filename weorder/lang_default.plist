@@ -66,6 +66,8 @@
 	<string>Dimiss</string>
 	<key>actionSearch</key>
 	<string>Search</string>
+	<key>New item</key>
+	<string></string>
 	<key>infoRestorePurchasedProductsComplete</key>
 	<string>purchased products have been restored complete.</string>
 	<key>noSort</key>
@@ -169,7 +171,7 @@
 	<key>storeName</key>
 	<string>Store Name:</string>
 	<key>soreDescription</key>
-	<string>Store Description:</string>
+	<string>Store Desc:</string>
 	<key>storePics</key>
 	<string>Store Pictures:</string>
 	<key>pleaseFillName</key>
@@ -224,5 +226,27 @@
 	<string>Item Pic(Need):</string>
 	<key>ItemPicOptional</key>
 	<string>Item Pic(Optional):</string>
+	<key>pleaseAddAndSaveYourStoreFirst</key>
+	<string>Please add and save your store first</string>
+	<key>storeLocatioin</key>
+	<string>Location:</string>
+	<key>yourStoreWouldNotBeSearchByLocation</key>
+	<string>Your store will not be search by location</string>
+	<key>dragTheRedPinOrTypeYourAdddressToMovePin</key>
+	<string>Drag the red pin or type and search to mvoe pin</string>
+	<key>notFoundAddressLocation</key>
+	<string>Not found address location</string>
+	<key>current</key>
+	<string>Current</string>
+	<key>plseaseFillSearchField</key>
+	<string>Please fill search filed</string>
+	<key>storeByMap</key>
+	<string>Store By Map</string>
+	<key>gpsIsNotActivated</key>
+	<string>GPS isn&apos;t activated</string>
+	<key>searchByRadians</key>
+	<string>Search Range by your current location</string>
+	<key>noLImit</key>
+	<string>No limit</string>
 </dict>
 </plist>

@@ -31,6 +31,7 @@
 
 #define NotificationFromModel           @"NotificationFromModel"
 
+#define KAPIStore @"Store"
 #define KAPIItemPicOptional @"ItemPicOptional"
 
 

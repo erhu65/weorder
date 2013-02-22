@@ -52,5 +52,11 @@
 	<string>placeholderGeneral.jpeg</string>
 	<key>bgWood</key>
 	<string>tool-bar-background.png</string>
+	<key>nearby_list_pin</key>
+	<string>nearby_list_pin.png</string>
+	<key>pinMore</key>
+	<string>more.png</string>
+	<key>pinSingle</key>
+	<string>pinBlue.png</string>
 </dict>
 </plist>

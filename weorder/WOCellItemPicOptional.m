@@ -10,7 +10,7 @@
 #import "WORecordItemPicOptional.h"
 
 #import "UIImageView+RemoteFile.h"
-#import "QuartzCore/QuartzCore.h"
+
 
 @implementation WOCellItemPicOptional
 
@@ -58,7 +58,7 @@
 {
     _lbDesc = lbDesc;
     if (_lbDesc) {
-        [BRStyleSheet styleLabel:_lbDesc withType:BRLabelTypeName];
+        [BRStyleSheet styleLabel:_lbDesc withType:BRLabelTypeDaysUntilBirthdaySubText];
     }
 }
 

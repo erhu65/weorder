@@ -8,8 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		B701538416D3CD3000849939 /* WOCellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B701538316D3CD3000849939 /* WOCellItem.m */; };
+		B71F219916D5D603004BC344 /* nearby_list_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F219716D5D603004BC344 /* nearby_list_pin.png */; };
+		B71F219A16D5D603004BC344 /* nearby_list_pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F219816D5D603004BC344 /* nearby_list_pin@2x.png */; };
+		B71F219E16D5F0B2004BC344 /* WOMapPinToDragViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B71F219D16D5F0B2004BC344 /* WOMapPinToDragViewController.m */; };
+		B71F21A216D62435004BC344 /* WOLIstByMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B71F21A116D62435004BC344 /* WOLIstByMapViewController.m */; };
+		B71F21A516D6262E004BC344 /* Hotspot.m in Sources */ = {isa = PBXBuildFile; fileRef = B71F21A416D6262E004BC344 /* Hotspot.m */; };
 		B788E57116CE058D0030DA71 /* WOStoreBackenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */; };
 		B78DDBB616D1C9D600D3525C /* WORecordStorePic.m in Sources */ = {isa = PBXBuildFile; fileRef = B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */; };
+		B78E6D8A16D7129C00E089C8 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E6D8716D7129C00E089C8 /* MyAnnotation.m */; };
+		B78E6D8B16D7129C00E089C8 /* MyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E6D8916D7129C00E089C8 /* MyAnnotationView.m */; };
+		B78E6D8E16D7139B00E089C8 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = B78E6D8C16D7139B00E089C8 /* more.png */; };
+		B78E6D8F16D7139B00E089C8 /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78E6D8D16D7139B00E089C8 /* more@2x.png */; };
+		B78E6D9216D7182300E089C8 /* pinBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78E6D9016D7182300E089C8 /* pinBlue@2x.png */; };
+		B78E6D9316D7182300E089C8 /* pinBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = B78E6D9116D7182300E089C8 /* pinBlue.png */; };
 		B795FF0A16D33786004B0594 /* dropDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B795FF0816D33786004B0594 /* dropDown.png */; };
 		B795FF0B16D33786004B0594 /* dropDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B795FF0916D33786004B0594 /* dropDown@2x.png */; };
 		B795FF1016D3770D004B0594 /* WOItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF0F16D3770D004B0594 /* WOItemsViewController.m */; };
@@ -300,10 +311,26 @@
 /* Begin PBXFileReference section */
 		B701538216D3CD3000849939 /* WOCellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOCellItem.h; sourceTree = "<group>"; };
 		B701538316D3CD3000849939 /* WOCellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOCellItem.m; sourceTree = "<group>"; };
+		B71F219716D5D603004BC344 /* nearby_list_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearby_list_pin.png; sourceTree = "<group>"; };
+		B71F219816D5D603004BC344 /* nearby_list_pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nearby_list_pin@2x.png"; sourceTree = "<group>"; };
+		B71F219C16D5F0B2004BC344 /* WOMapPinToDragViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOMapPinToDragViewController.h; sourceTree = "<group>"; };
+		B71F219D16D5F0B2004BC344 /* WOMapPinToDragViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOMapPinToDragViewController.m; sourceTree = "<group>"; };
+		B71F21A016D62435004BC344 /* WOLIstByMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOLIstByMapViewController.h; sourceTree = "<group>"; };
+		B71F21A116D62435004BC344 /* WOLIstByMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOLIstByMapViewController.m; sourceTree = "<group>"; };
+		B71F21A316D6262E004BC344 /* Hotspot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hotspot.h; sourceTree = "<group>"; };
+		B71F21A416D6262E004BC344 /* Hotspot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hotspot.m; sourceTree = "<group>"; };
 		B788E56F16CE058D0030DA71 /* WOStoreBackenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStoreBackenViewController.h; sourceTree = "<group>"; };
 		B788E57016CE058D0030DA71 /* WOStoreBackenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WOStoreBackenViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B78DDBB416D1C9D600D3525C /* WORecordStorePic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WORecordStorePic.h; sourceTree = "<group>"; };
 		B78DDBB516D1C9D600D3525C /* WORecordStorePic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WORecordStorePic.m; sourceTree = "<group>"; };
+		B78E6D8616D7129C00E089C8 /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		B78E6D8716D7129C00E089C8 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
+		B78E6D8816D7129C00E089C8 /* MyAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotationView.h; sourceTree = "<group>"; };
+		B78E6D8916D7129C00E089C8 /* MyAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotationView.m; sourceTree = "<group>"; };
+		B78E6D8C16D7139B00E089C8 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		B78E6D8D16D7139B00E089C8 /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
+		B78E6D9016D7182300E089C8 /* pinBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinBlue@2x.png"; sourceTree = "<group>"; };
+		B78E6D9116D7182300E089C8 /* pinBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinBlue.png; sourceTree = "<group>"; };
 		B795FF0816D33786004B0594 /* dropDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropDown.png; sourceTree = "<group>"; };
 		B795FF0916D33786004B0594 /* dropDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropDown@2x.png"; sourceTree = "<group>"; };
 		B795FF0E16D3770D004B0594 /* WOItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOItemsViewController.h; sourceTree = "<group>"; };
@@ -738,6 +765,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B71F219B16D5F085004BC344 /* WOMapPinToDrag */ = {
+			isa = PBXGroup;
+			children = (
+				B71F219C16D5F0B2004BC344 /* WOMapPinToDragViewController.h */,
+				B71F219D16D5F0B2004BC344 /* WOMapPinToDragViewController.m */,
+			);
+			name = WOMapPinToDrag;
+			sourceTree = "<group>";
+		};
+		B71F219F16D62401004BC344 /* WOLIstByMap */ = {
+			isa = PBXGroup;
+			children = (
+				B78E6D8616D7129C00E089C8 /* MyAnnotation.h */,
+				B78E6D8716D7129C00E089C8 /* MyAnnotation.m */,
+				B78E6D8816D7129C00E089C8 /* MyAnnotationView.h */,
+				B78E6D8916D7129C00E089C8 /* MyAnnotationView.m */,
+				B71F21A316D6262E004BC344 /* Hotspot.h */,
+				B71F21A416D6262E004BC344 /* Hotspot.m */,
+				B71F21A016D62435004BC344 /* WOLIstByMapViewController.h */,
+				B71F21A116D62435004BC344 /* WOLIstByMapViewController.m */,
+			);
+			name = WOLIstByMap;
+			sourceTree = "<group>";
+		};
 		B788E56E16CE045E0030DA71 /* WOStoreBacken */ = {
 			isa = PBXGroup;
 			children = (
@@ -1197,6 +1248,8 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				B71F219F16D62401004BC344 /* WOLIstByMap */,
+				B71F219B16D5F085004BC344 /* WOMapPinToDrag */,
 				B796DF3716D4A59500CBA3E6 /* WOEditItemPicOptional */,
 				B796DF2D16D4997400CBA3E6 /* WOItemPicOptional */,
 				B795FF1416D37BAC004B0594 /* WOEditItem */,
@@ -1277,6 +1330,12 @@
 		D0A694A016C7802300DAC57D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B78E6D9016D7182300E089C8 /* pinBlue@2x.png */,
+				B78E6D9116D7182300E089C8 /* pinBlue.png */,
+				B78E6D8C16D7139B00E089C8 /* more.png */,
+				B78E6D8D16D7139B00E089C8 /* more@2x.png */,
+				B71F219716D5D603004BC344 /* nearby_list_pin.png */,
+				B71F219816D5D603004BC344 /* nearby_list_pin@2x.png */,
 				B795FF0816D33786004B0594 /* dropDown.png */,
 				B795FF0916D33786004B0594 /* dropDown@2x.png */,
 				B7E5E3A616D20FF400CAAFBE /* placeholderPerson.jpeg */,
@@ -1766,6 +1825,12 @@
 				B7E5E3AD16D20FF400CAAFBE /* placeholderGeneral@2x.jpeg in Resources */,
 				B795FF0A16D33786004B0594 /* dropDown.png in Resources */,
 				B795FF0B16D33786004B0594 /* dropDown@2x.png in Resources */,
+				B71F219916D5D603004BC344 /* nearby_list_pin.png in Resources */,
+				B71F219A16D5D603004BC344 /* nearby_list_pin@2x.png in Resources */,
+				B78E6D8E16D7139B00E089C8 /* more.png in Resources */,
+				B78E6D8F16D7139B00E089C8 /* more@2x.png in Resources */,
+				B78E6D9216D7182300E089C8 /* pinBlue@2x.png in Resources */,
+				B78E6D9316D7182300E089C8 /* pinBlue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1892,6 +1957,11 @@
 				B796DF3616D49AF300CBA3E6 /* WOCellItemPicOptional.m in Sources */,
 				B796DF3A16D4A5F300CBA3E6 /* WOEditItemPicOptioinalViewController.m in Sources */,
 				B796DF3D16D4D92400CBA3E6 /* LineLayout.m in Sources */,
+				B71F219E16D5F0B2004BC344 /* WOMapPinToDragViewController.m in Sources */,
+				B71F21A216D62435004BC344 /* WOLIstByMapViewController.m in Sources */,
+				B71F21A516D6262E004BC344 /* Hotspot.m in Sources */,
+				B78E6D8A16D7129C00E089C8 /* MyAnnotation.m in Sources */,
+				B78E6D8B16D7129C00E089C8 /* MyAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
