@@ -41,31 +41,23 @@ CLLocationManagerDelegate>
     self.barBtnSearch.title = kSharedModel.lang[@"actionSearch"];
     self.search.backgroundImage = [UIImage imageNamed:kSharedModel.theme[@"bgWood"]];
     self.search.inputAccessoryView = [self accessoryView];
+    self.search.placeholder = kSharedModel.lang[@"searcyByLocation"];
     
     self.barBtnDone.title = kSharedModel.lang[@"actionDone"];
     self.barBtnCurrent.title = kSharedModel.lang[@"current"];
-    
-    self.mapView.delegate = self;
-    
-
-    CLLocationCoordinate2D noLocation;
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 500, 500);
-    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];          
-    [self.mapView setRegion:adjustedRegion animated:YES];
-    self.mapView.showsUserLocation = YES;
-    
+        
 //    self.annotation = [[MKPointAnnotation alloc] init];
 //    self.annotation.coordinate = CLLocationCoordinate2DMake(39.9, -76.6);//defaul location is Apple headquartor
 //    [self.mapView addAnnotation:self.annotation];
 //    [self.mapView setCenterCoordinate:self.location.coordinate  animated:YES];
 //    [self _resetVisibleZoom:self.location];
-    
+        
     //get user's location
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
+
     if(nil != self.location){
         [self _resetPin:nil]; 
         [self _resetVisibleZoom:self.location];
@@ -88,6 +80,16 @@ CLLocationManagerDelegate>
     [self.noticeChildViewController
      toggleSlide:nil msg:kSharedModel.lang[@"dragTheRedPinOrTypeYourAdddressToMovePin"]
      stayTime:5.0f];
+    
+    
+    self.mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
+    CLLocationCoordinate2D noLocation;
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 500, 500);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];          
+    [self.mapView setRegion:adjustedRegion animated:YES];
+    [self _moveToMyCurrentLocation];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

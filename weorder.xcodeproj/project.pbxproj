@@ -21,6 +21,7 @@
 		B78E6D8F16D7139B00E089C8 /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78E6D8D16D7139B00E089C8 /* more@2x.png */; };
 		B78E6D9216D7182300E089C8 /* pinBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B78E6D9016D7182300E089C8 /* pinBlue@2x.png */; };
 		B78E6D9316D7182300E089C8 /* pinBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = B78E6D9116D7182300E089C8 /* pinBlue.png */; };
+		B79086ED16DCC73E00E1E342 /* WOStoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B79086EC16DCC73E00E1E342 /* WOStoresViewController.m */; };
 		B795FF0A16D33786004B0594 /* dropDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B795FF0816D33786004B0594 /* dropDown.png */; };
 		B795FF0B16D33786004B0594 /* dropDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B795FF0916D33786004B0594 /* dropDown@2x.png */; };
 		B795FF1016D3770D004B0594 /* WOItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B795FF0F16D3770D004B0594 /* WOItemsViewController.m */; };
@@ -331,6 +332,8 @@
 		B78E6D8D16D7139B00E089C8 /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
 		B78E6D9016D7182300E089C8 /* pinBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinBlue@2x.png"; sourceTree = "<group>"; };
 		B78E6D9116D7182300E089C8 /* pinBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinBlue.png; sourceTree = "<group>"; };
+		B79086EB16DCC73E00E1E342 /* WOStoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOStoresViewController.h; sourceTree = "<group>"; };
+		B79086EC16DCC73E00E1E342 /* WOStoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WOStoresViewController.m; sourceTree = "<group>"; };
 		B795FF0816D33786004B0594 /* dropDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropDown.png; sourceTree = "<group>"; };
 		B795FF0916D33786004B0594 /* dropDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropDown@2x.png"; sourceTree = "<group>"; };
 		B795FF0E16D3770D004B0594 /* WOItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WOItemsViewController.h; sourceTree = "<group>"; };
@@ -804,6 +807,15 @@
 			name = WOStoreBacken;
 			sourceTree = "<group>";
 		};
+		B79086EA16DCC5EF00E1E342 /* WOListByPage */ = {
+			isa = PBXGroup;
+			children = (
+				B79086EB16DCC73E00E1E342 /* WOStoresViewController.h */,
+				B79086EC16DCC73E00E1E342 /* WOStoresViewController.m */,
+			);
+			name = WOListByPage;
+			sourceTree = "<group>";
+		};
 		B795FF0D16D37659004B0594 /* WOItems */ = {
 			isa = PBXGroup;
 			children = (
@@ -1248,6 +1260,7 @@
 		D0A6945C16C77F2D00DAC57D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				B79086EA16DCC5EF00E1E342 /* WOListByPage */,
 				B71F219F16D62401004BC344 /* WOLIstByMap */,
 				B71F219B16D5F085004BC344 /* WOMapPinToDrag */,
 				B796DF3716D4A59500CBA3E6 /* WOEditItemPicOptional */,
@@ -1962,6 +1975,7 @@
 				B71F21A516D6262E004BC344 /* Hotspot.m in Sources */,
 				B78E6D8A16D7129C00E089C8 /* MyAnnotation.m in Sources */,
 				B78E6D8B16D7129C00E089C8 /* MyAnnotationView.m in Sources */,
+				B79086ED16DCC73E00E1E342 /* WOStoresViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

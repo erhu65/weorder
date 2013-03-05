@@ -248,5 +248,23 @@
 	<string>Search Range by your current location</string>
 	<key>noLImit</key>
 	<string>No limit</string>
+	<key>searcyByLocation</key>
+	<string>Search by location</string>
+	<key>radian</key>
+	<string>Radian</string>
+	<key>type</key>
+	<string>Type</string>
+	<key>searchStoreByTypeOrRadins</key>
+	<string>Search by type or by radin</string>
+	<key>searchByType</key>
+	<string>Search By Type</string>
+	<key>all</key>
+	<string>All</string>
+	<key>findStores</key>
+	<string>findStores</string>
+	<key>map</key>
+	<string>Map</string>
+	<key>list</key>
+	<string>List</string>
 </dict>
 </plist>

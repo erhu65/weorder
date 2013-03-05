@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 peter. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
 

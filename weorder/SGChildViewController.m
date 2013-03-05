@@ -137,7 +137,7 @@
     if(nil != msg_) self.msg = msg_;
     if(0.0f != stayTime_) self.stayTime = stayTime_;
     _lbNotice.text = self.msg;
-    NSDictionary *views = @{ @"self" : self.view };
+    NSDictionary *views = @{@"self" : self.view };
     UIView *superView = self.superviewController.view;
     
     self.lbNotice.translatesAutoresizingMaskIntoConstraints = NO;
@@ -150,7 +150,9 @@
     {
         self.superviewController.noticeHConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[self]|" options:0 metrics:nil views:views];
         self.superviewController.noticeVConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(-100)-[self(==100)]|" options:0 metrics:nil views:views];
+        
     } else {
+        
         NSString *pewPewPath = [[NSBundle mainBundle] 
                                 pathForResource:@"notice" ofType:@"caf"];
         NSURL *pewPewURL = [NSURL fileURLWithPath:pewPewPath];
@@ -159,7 +161,6 @@
         self.superviewController.noticeHConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[self]|" options:0 metrics:nil views:views];
         self.superviewController.noticeVConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[self(==100)]|" options:0 metrics:nil views:views];
     }
-    
     [superView addConstraints:self.superviewController.noticeHConstraint];
     [superView addConstraints:self.superviewController.noticeVConstraint];
     
@@ -187,16 +188,14 @@
                                                                  stayTime:self.stayTime];
                                                     
                                                 }
-
                                             });
                          }
-
     }];
+    
 //    [UIView animateWithDuration:0.3 
 //                     animations:^{
 //        [self.view layoutIfNeeded];
 //    }];
-
 }
 #pragma mark -
 #pragma mark Dynamic Accessor Methods
@@ -264,7 +263,6 @@
         
     }
     return _lbNotice;
-
 }
 
 @end
