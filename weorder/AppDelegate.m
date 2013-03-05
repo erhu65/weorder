@@ -354,7 +354,9 @@ void exceptionHandler(NSException *exception)
 -(void)_handelBRNotificationInAppDidUpdate:(NSNotification*)notification
 {
     NSDictionary *data = [notification userInfo];
+    
     NSString* type = data[@"type"];
+    
     
     if([type isEqualToString:@"server"]){
         

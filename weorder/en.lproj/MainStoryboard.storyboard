@@ -13,15 +13,18 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbs-K6-daB">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="hcO-RP-m4r"/>
+                                </constraints>
                                 <items>
-                                    <barButtonItem title="back" id="rYy-4G-zTc">
+                                    <barButtonItem title="current" id="2bK-AG-ROy">
                                         <connections>
-                                            <action selector="_back:" destination="6e6-W8-u5P" id="KbR-Ff-bkU"/>
+                                            <action selector="_moveToMyCurrentLocation" destination="6e6-W8-u5P" id="UMu-Ir-kdP"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" id="2pM-Gb-hlf">
                                         <view key="customView" contentMode="scaleToFill" id="EY6-bo-UFJ">
-                                            <rect key="frame" x="64" y="6" width="180" height="33"/>
+                                            <rect key="frame" x="78" y="6" width="165" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="nLY-AM-cGR">
@@ -30,9 +33,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="nLY-AM-cGR" firstAttribute="trailing" secondItem="EY6-bo-UFJ" secondAttribute="trailing" type="default" id="EsG-SD-JdT"/>
                                                 <constraint firstItem="nLY-AM-cGR" firstAttribute="top" secondItem="EY6-bo-UFJ" secondAttribute="top" constant="-5" id="WeF-tk-U3k"/>
                                                 <constraint firstItem="nLY-AM-cGR" firstAttribute="leading" secondItem="EY6-bo-UFJ" secondAttribute="leading" type="default" id="kcE-Br-fww"/>
+                                                <constraint firstItem="nLY-AM-cGR" firstAttribute="trailing" secondItem="EY6-bo-UFJ" secondAttribute="trailing" type="default" id="z7z-MY-U5c"/>
                                             </constraints>
                                         </view>
                                     </barButtonItem>
@@ -43,22 +46,21 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kih-9z-a9X">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="461" type="user" id="1HD-pp-lAR"/>
-                                </constraints>
-                            </mapView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kih-9z-a9X"/>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoO-ZV-6WW">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="g0A-cS-6ZQ"/>
+                                </constraints>
                                 <items>
-                                    <barButtonItem title="Deon" id="9aY-wo-37X">
+                                    <barButtonItem title="back" id="rYy-4G-zTc">
                                         <connections>
-                                            <action selector="_done:" destination="6e6-W8-u5P" id="bZE-zV-Fd0"/>
+                                            <action selector="_back:" destination="6e6-W8-u5P" id="KbR-Ff-bkU"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="DSl-2g-Vif"/>
-                                    <barButtonItem title="current" id="2bK-AG-ROy">
+                                    <barButtonItem title="Deon" id="9aY-wo-37X">
                                         <connections>
-                                            <action selector="_moveToMyCurrentLocation" destination="6e6-W8-u5P" id="UMu-Ir-kdP"/>
+                                            <action selector="_done:" destination="6e6-W8-u5P" id="bZE-zV-Fd0"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -66,18 +68,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aoO-ZV-6WW" firstAttribute="top" secondItem="gbs-K6-daB" secondAttribute="bottom" constant="-1" type="user" id="04U-O5-Phw"/>
-                            <constraint firstItem="Kih-9z-a9X" firstAttribute="top" secondItem="aoO-ZV-6WW" secondAttribute="bottom" type="user" id="61T-Pp-xye"/>
+                            <constraint firstItem="aoO-ZV-6WW" firstAttribute="top" secondItem="YfW-Se-Onb" secondAttribute="top" type="default" id="0zX-ZE-sGh"/>
+                            <constraint firstItem="gbs-K6-daB" firstAttribute="trailing" secondItem="YfW-Se-Onb" secondAttribute="trailing" type="user" id="693-lF-9aN"/>
                             <constraint firstItem="Kih-9z-a9X" firstAttribute="trailing" secondItem="YfW-Se-Onb" secondAttribute="trailing" type="default" id="I4Y-VK-qAz"/>
+                            <constraint firstItem="Kih-9z-a9X" firstAttribute="top" secondItem="gbs-K6-daB" secondAttribute="bottom" type="user" id="IA7-ci-Ws2"/>
+                            <constraint firstItem="gbs-K6-daB" firstAttribute="leading" secondItem="YfW-Se-Onb" secondAttribute="leading" type="user" id="KyD-Jr-IU9"/>
+                            <constraint firstItem="gbs-K6-daB" firstAttribute="top" secondItem="aoO-ZV-6WW" secondAttribute="bottom" type="user" id="Nfw-Rk-fS1"/>
                             <constraint firstItem="aoO-ZV-6WW" firstAttribute="trailing" secondItem="YfW-Se-Onb" secondAttribute="trailing" type="default" id="U56-1X-brX"/>
-                            <constraint firstItem="gbs-K6-daB" firstAttribute="trailing" secondItem="YfW-Se-Onb" secondAttribute="trailing" type="default" id="VaW-OQ-uOq"/>
+                            <constraint firstItem="gbs-K6-daB" firstAttribute="trailing" secondItem="YfW-Se-Onb" secondAttribute="trailing" type="user" id="XQw-4U-bko"/>
                             <constraint firstItem="Kih-9z-a9X" firstAttribute="leading" secondItem="YfW-Se-Onb" secondAttribute="leading" type="default" id="bGN-Y8-NYc"/>
-                            <constraint firstItem="Kih-9z-a9X" firstAttribute="bottom" secondItem="YfW-Se-Onb" secondAttribute="bottom" type="user" id="e4D-Qs-6i3"/>
                             <constraint firstItem="aoO-ZV-6WW" firstAttribute="leading" secondItem="YfW-Se-Onb" secondAttribute="leading" type="default" id="eRh-t0-UNM"/>
-                            <constraint firstItem="gbs-K6-daB" firstAttribute="leading" secondItem="YfW-Se-Onb" secondAttribute="leading" type="default" id="grB-fi-kYP"/>
-                            <constraint firstItem="gbs-K6-daB" firstAttribute="top" secondItem="YfW-Se-Onb" secondAttribute="top" type="user" id="h5n-T4-5JT"/>
-                            <constraint firstItem="Kih-9z-a9X" firstAttribute="top" secondItem="aoO-ZV-6WW" secondAttribute="bottom" type="user" id="itf-bd-EH7"/>
-                            <constraint firstItem="Kih-9z-a9X" firstAttribute="bottom" secondItem="YfW-Se-Onb" secondAttribute="bottom" type="user" id="tAC-M5-lM0"/>
+                            <constraint firstItem="gbs-K6-daB" firstAttribute="leading" secondItem="YfW-Se-Onb" secondAttribute="leading" type="user" id="fMF-S4-BNH"/>
+                            <constraint firstItem="Kih-9z-a9X" firstAttribute="bottom" secondItem="YfW-Se-Onb" secondAttribute="bottom" type="default" id="hgR-F2-HpW"/>
+                            <constraint firstItem="gbs-K6-daB" firstAttribute="top" secondItem="aoO-ZV-6WW" secondAttribute="bottom" type="user" id="s8s-Rw-6bz"/>
+                            <constraint firstItem="Kih-9z-a9X" firstAttribute="top" secondItem="gbs-K6-daB" secondAttribute="bottom" type="user" id="zOF-xi-ACl"/>
                         </constraints>
                     </view>
                     <connections>
@@ -840,31 +844,59 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="i2x-wd-1W5"/>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gt-B7-ptE">
                                 <items>
+                                    <barButtonItem title="current" id="2nR-Wu-ucz">
+                                        <connections>
+                                            <action selector="_moveToMyCurrentLocation" destination="xgZ-t3-8yI" id="bQv-8O-I2M"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" id="lYC-wK-W92">
                                         <view key="customView" contentMode="scaleToFill" id="0Qx-lL-SPT">
-                                            <rect key="frame" x="12" y="7" width="221" height="30"/>
+                                            <rect key="frame" x="78" y="7" width="167" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="do3-NJ-2cA">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="170" id="CxL-Y4-Jqt"/>
+                                                    </constraints>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </searchBar>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="do3-NJ-2cA" firstAttribute="top" secondItem="0Qx-lL-SPT" secondAttribute="top" constant="-8" id="3mE-dB-4UE"/>
-                                                <constraint firstItem="do3-NJ-2cA" firstAttribute="trailing" secondItem="0Qx-lL-SPT" secondAttribute="trailing" type="default" id="YNG-HF-Ivn"/>
-                                                <constraint firstItem="do3-NJ-2cA" firstAttribute="leading" secondItem="0Qx-lL-SPT" secondAttribute="leading" type="default" id="cse-nZ-f3p"/>
+                                                <constraint firstItem="do3-NJ-2cA" firstAttribute="leading" secondItem="0Qx-lL-SPT" secondAttribute="leading" type="default" id="CDP-5Q-geu"/>
                                             </constraints>
                                         </view>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="TB0-tr-fWW"/>
-                                    <barButtonItem title="search" id="QiY-Ep-YAz">
+                                    <barButtonItem title="search" width="61" id="QiY-Ep-YAz">
                                         <connections>
                                             <action selector="_search" destination="xgZ-t3-8yI" id="F5B-Dr-agx"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AVc-fA-X1a">
+                                <color key="backgroundColor" red="0.26654245339999999" green="1" blue="0.23251084129999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LDV-eG-fpZ">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2cf-Ff-brD">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.76216457199999998" green="0.57175357019999995" blue="0.44210529640000001" alpha="0.57999999999999996" colorSpace="calibratedRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -872,10 +904,16 @@
                             <constraint firstItem="5Gt-B7-ptE" firstAttribute="leading" secondItem="NcL-4V-wfV" secondAttribute="leading" type="user" id="6vv-fg-gpr"/>
                             <constraint firstItem="5Gt-B7-ptE" firstAttribute="leading" secondItem="NcL-4V-wfV" secondAttribute="leading" type="user" id="CWG-92-TLy"/>
                             <constraint firstItem="5Gt-B7-ptE" firstAttribute="trailing" secondItem="NcL-4V-wfV" secondAttribute="trailing" type="default" id="D7A-xV-O6Z"/>
+                            <constraint firstItem="AVc-fA-X1a" firstAttribute="trailing" secondItem="NcL-4V-wfV" secondAttribute="trailing" type="default" id="EMK-O8-fGK"/>
+                            <constraint firstItem="AVc-fA-X1a" firstAttribute="top" secondItem="5Gt-B7-ptE" secondAttribute="bottom" type="user" id="Ed3-dg-xa5"/>
                             <constraint firstItem="i2x-wd-1W5" firstAttribute="trailing" secondItem="NcL-4V-wfV" secondAttribute="trailing" type="default" id="MJo-KP-Ups"/>
+                            <constraint firstItem="AVc-fA-X1a" firstAttribute="leading" secondItem="NcL-4V-wfV" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="MYp-bC-L7Q"/>
+                            <constraint firstItem="AVc-fA-X1a" firstAttribute="top" secondItem="5Gt-B7-ptE" secondAttribute="bottom" type="user" id="Mba-0l-ik3"/>
                             <constraint firstItem="5Gt-B7-ptE" firstAttribute="top" secondItem="NcL-4V-wfV" secondAttribute="top" constant="2" type="user" id="Qfh-2W-wgZ"/>
+                            <constraint firstItem="AVc-fA-X1a" firstAttribute="bottom" secondItem="NcL-4V-wfV" secondAttribute="bottom" type="user" id="duo-MP-Sbm"/>
                             <constraint firstItem="i2x-wd-1W5" firstAttribute="top" secondItem="5Gt-B7-ptE" secondAttribute="bottom" type="user" id="kZS-cZ-lPx"/>
                             <constraint firstItem="i2x-wd-1W5" firstAttribute="bottom" secondItem="NcL-4V-wfV" secondAttribute="bottom" type="user" id="r4x-Je-LFL"/>
+                            <constraint firstItem="AVc-fA-X1a" firstAttribute="bottom" secondItem="NcL-4V-wfV" secondAttribute="bottom" type="user" id="uaC-4y-Zjb"/>
                             <constraint firstItem="i2x-wd-1W5" firstAttribute="leading" secondItem="NcL-4V-wfV" secondAttribute="leading" type="default" id="ydn-Ko-A6h"/>
                         </constraints>
                     </view>
@@ -886,22 +924,25 @@
                                 <action selector="_showRadinsActionSheet:" destination="xgZ-t3-8yI" id="ozb-Ia-0LW"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="current" id="2nR-Wu-ucz">
+                        <barButtonItem key="rightBarButtonItem" title="type" id="JlT-TX-b2M">
                             <connections>
-                                <action selector="_moveToMyCurrentLocation" destination="xgZ-t3-8yI" id="bQv-8O-I2M"/>
+                                <action selector="_showTypeActionSheet:" destination="xgZ-t3-8yI" id="6Ia-Xf-l8D"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="barBtnCurrent" destination="2nR-Wu-ucz" id="Zhq-Z8-zae"/>
+                        <outlet property="barBtnRadian" destination="bgS-6g-heQ" id="5WK-WH-hHZ"/>
                         <outlet property="barBtnSearch" destination="QiY-Ep-YAz" id="hqp-yy-Nzy"/>
+                        <outlet property="barBtnType" destination="JlT-TX-b2M" id="vsX-hZ-W0c"/>
+                        <outlet property="cv" destination="AVc-fA-X1a" id="7YV-oc-hyU"/>
                         <outlet property="mapView" destination="i2x-wd-1W5" id="zQq-ht-pA7"/>
                         <outlet property="search" destination="do3-NJ-2cA" id="Uft-CS-oM3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P8X-2T-Bb0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1215" y="-129"/>
+            <point key="canvasLocation" x="1186" y="-129"/>
         </scene>
         <!--Friend List View Controller - Item-->
         <scene sceneID="uuu-bO-IPk">
@@ -1601,208 +1642,6 @@
         <image name="nearby_list_pin.png" width="11" height="15"/>
         <image name="placeholderGeneral.jpeg" width="130" height="97"/>
     </resources>
-    <classes>
-        <class className="BRCellFriend" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BRCellFriend.h"/>
-            <relationships>
-                <relationship kind="outlet" name="iconView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbCount" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="BRCellMainCategory" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BRCellMainCategory.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnFavorite" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="descLb" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLb" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="BRCoreViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BRCoreViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelAndDismiss:"/>
-                <relationship kind="action" name="navigationBack:"/>
-                <relationship kind="action" name="saveAndDismiss:"/>
-            </relationships>
-        </class>
-        <class className="BRFBFriendListViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BRFBFriendListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="importButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="BRMainCategoryViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BRMainCategoryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="filterBar" candidateClass="UIView"/>
-                <relationship kind="outlet" name="filterNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="sortBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="sortLb" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="spaceBetweenFilterBarAndMainTable" candidateClass="NSLayoutConstraint"/>
-                <relationship kind="outlet" name="tb" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="WOCellItem" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOCellItem.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imvPIc" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbNmae" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbPrice" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WOCellItemPicOptional" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOCellItemPicOptional.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imvPIc" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbDesc" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WOCellNotice" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOCellNotice.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnRead" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imvFb" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbDatetime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbFbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbMsg" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WOCellStorePic" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOCellStorePic.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imvPic" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbPicDesc" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WOEditItemPicOptioinalViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOEditItemPicOptioinalViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="barBtnBack" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btnDel" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnItemPic" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSave" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imvItemPIc" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbDesc" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbItemPIc" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="tvDesc" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="WOEditItemViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOEditItemViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="barBtnBack" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btnDel" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnItemPic" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSave" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="containerItemPicOptional" candidateClass="UIView"/>
-                <relationship kind="outlet" name="imvItemPIc" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbDesc" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbItemPIc" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbPrice" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="tfName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfPrice" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tvDesc" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="WOEditPicViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOEditPicViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnAddPic" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnDel" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSave" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imvPIc" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbDescription" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tfDescription" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="WOItemPicOptionalViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOItemPicOptionalViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cv" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="lbItemPicOptional" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WOItemsViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOItemsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cv" candidateClass="UICollectionView"/>
-            </relationships>
-        </class>
-        <class className="WOLIstByMapViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOLIstByMapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="_back:"/>
-                <relationship kind="outlet" name="barBtnCurrent" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="barBtnSearch" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="search" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="WOMapPinToDragViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOMapPinToDragViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="_back:"/>
-                <relationship kind="outlet" name="barBtnBack" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="barBtnCurrent" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="barBtnDone" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="barBtnSearch" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="search" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="WONoticeViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WONoticeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="barBtnEdit" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="lbUnRead" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="swUnread" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="tb" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="WOStoreBackenViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOStoreBackenViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="barBtnItems" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btnAddStroePic" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnPopMapPinToGetLocation" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnSaveStoreInfo" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnStoreType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imvFb" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lbDescription" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbFbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbLocation" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbLocationAddress" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbStorePics" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbStoreType" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lbTypeName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="selectedMainCatetgoryId" candidateClass="NSString"/>
-                <relationship kind="outlet" name="tb" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tfName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tvDescription" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="WOStroesViewController" superclassName="BRCoreViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WOStroesViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

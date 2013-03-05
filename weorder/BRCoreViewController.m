@@ -102,7 +102,7 @@ typedef enum videosFilterMode {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handleFacebookMeDidUpdate:) name:BRNotificationFacebookMeDidUpdate object:[BRDModel sharedInstance]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handelBRNotificationInAppDidUpdate:) name:BRNotificationInAppDidUpdate object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handelBRNotificationInAppDidUpdate:) name:BRNotificationInAppDidUpdate object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_handelBRNotificationInAppDidUpdate:) name:BRNotificationInAppDidUpdate object:nil];
     
@@ -116,7 +116,7 @@ typedef enum videosFilterMode {
 
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BRNotificationFacebookMeDidUpdate object:[BRDModel sharedInstance]];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:BRNotificationInAppDidUpdate object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:BRNotificationInAppDidUpdate object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationFromModel object:nil];
 

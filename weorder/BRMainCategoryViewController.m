@@ -71,6 +71,7 @@ UIAlertViewDelegate>
     }
     return _docs;
 }
+
 -(NSNumber*)page{
     if(_page == nil){
         _page = [[NSNumber alloc] initWithInt:0];
@@ -183,6 +184,7 @@ UIAlertViewDelegate>
     if(self.mode == mainCategoryFilterModeAll
        || self.mode == mainCategoryFilterModeJustForSelection
        ){
+        
         [[BRDModel sharedInstance] fetchMainCategoriesWithPage:self.page WithBlock:^(NSDictionary* res){
             [weakSelf hideHud:YES];
             NSString* errMsg = res[@"error"];

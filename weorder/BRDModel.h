@@ -91,7 +91,6 @@ typedef enum subCategoriesSortType {
 @property mainCategoriesSortType mainCategoriesSortType;
 
 
-
 - (void)fetchMainCategoriesWithPage:(NSNumber*)page 
                           WithBlock:(void (^)(NSDictionary* userInfo))block;
 
@@ -225,6 +224,7 @@ typedef enum subCategoriesSortType {
         withBlock:(void (^)(NSDictionary* res))block;
 
 - (void)fetchStoresByLocatioin:(CLLocation*)location
+                        mainCategoryId:(NSString*)mainCategoryId
                           rangeInMeters:(double)rangeInMeters  
                           fbId:(NSString*)fbId
                   withBlock:(void (^)(NSDictionary* userInfo))block;

@@ -29,8 +29,6 @@
         if(nil != userLocation){
             self.distanceFromUser = [Utils fromLocation:userLocation.coordinate toLocation:self.coordinate];
         }
-
-        
     }
     return self;
 }

@@ -97,7 +97,7 @@ UITextViewDelegate>
     self.barBtnItems.title = kSharedModel.lang[@"items"];
     
 	self.tfName.inputAccessoryView = [self accessoryView];
-    self.tfName.clearButtonMode = UITextFieldViewModeAlways;
+    self.tfName.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.lbName.text = kSharedModel.lang[@"storeName"];
     [BRStyleSheet styleLabel:self.lbName withType:BRLabelTypeName];
     
@@ -283,11 +283,12 @@ UITextViewDelegate>
 -(void)_fetchStoreInfo{
     
     if(nil == kSharedModel.fbId) return;
-    
+    [self showHud:YES];
     __block __weak WOStoreBackenViewController* weakSelf = (WOStoreBackenViewController*)self;
     [kSharedModel fetchStoreInfoByFbId:kSharedModel.fbId 
                       withBlock:^(NSDictionary* res) {
                           
+                          [weakSelf hideHud:YES];
                           NSString* error = res[@"error"];
                           if(nil != error){
                                

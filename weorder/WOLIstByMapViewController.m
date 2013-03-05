@@ -6,17 +6,27 @@
 //  Copyright (c) 2013 peter. All rights reserved.
 //
 
+//center of Taichung city , for simulator..
 #define centerLat 24.1369
 #define centerLong 120.6786
+
 #define spanDeltaLat 4.9
 #define spanDeltaLong 5.8
 #define scaleLat 9.0
 #define scaleLong 11.0
 
-#define KWOLIstByMapViewControllerPickerViewRadins 101
+#define KWOLIstByMapViewControllerPickerViewRadins 123401
+#define KWOLIstByMapViewControllerActionSheetRadins 123402
 
+#define KWOLIstByMapViewControllerPickerViewType 123403
+#define KWOLIstByMapViewControllerActionSheetType 123404
+
+
+#define KWOLIstByMapViewControllerSegmentTypeMap 0
+#define KWOLIstByMapViewControllerSegmentTypeList 1
 
 #import "WOLIstByMapViewController.h"
+#import "BRRecordMainCategory.h"
 #import "Hotspot.h"
 #import "WORecordStore.h"
 #import "MyAnnotationView.h"
@@ -34,20 +44,34 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *cv;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnSearch;
 @property (weak, nonatomic) IBOutlet UISearchBar *search;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnCurrent;
 @property (strong, nonatomic) NSMutableArray* annotations;
-//@property (strong, nonatomic) NSArray* annotationsTmp;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnRadian;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barBtnType;
+@property (strong, nonatomic) NSString * mainCategoryId;
 
 @property (nonatomic, assign) NSInteger searchRadins;
-@end
 
+@property (nonatomic, assign) NSInteger searchMainCategoryIndex;
+@property (nonatomic, strong) NSMutableArray* docsMainCategory;
+
+@property (strong, nonatomic) UISegmentedControl *segment;
+
+@end
 
 @implementation WOLIstByMapViewController
 
-
+-(NSMutableArray*)docsMainCategory{
+    if(nil == _docsMainCategory){
+        _docsMainCategory = [[NSMutableArray alloc] init];
+    }
+    return _docsMainCategory;
+}
 
 -(float)randomFloatFrom:(float)a to:(float)b
 {
@@ -78,23 +102,29 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
     self.searchRadins = 0;
     self.title = kSharedModel.lang[@"storeByMap"];
     
+    self.segment = [[UISegmentedControl alloc] initWithFrame: CGRectZero];
+    self.segment.segmentedControlStyle = UISegmentedControlStyleBezeled;
+    [self.segment insertSegmentWithTitle: @"map" atIndex: 0 animated: NO];
+    [self.segment insertSegmentWithTitle: @"list" atIndex: 1 animated: NO];
+    [self.segment sizeToFit];
+    [self.segment setSelectedSegmentIndex:KWOLIstByMapViewControllerSegmentTypeMap];
+    self.navigationItem.titleView = self.segment;
+    
+    [self.segment setTitle:kSharedModel.lang[@"map"] forSegmentAtIndex:KWOLIstByMapViewControllerSegmentTypeMap];
+    [self.segment setTitle:kSharedModel.lang[@"list"] forSegmentAtIndex:KWOLIstByMapViewControllerSegmentTypeList];
+    
     self.barBtnSearch.title = kSharedModel.lang[@"actionSearch"];
     self.search.backgroundImage = [UIImage imageNamed:kSharedModel.theme[@"bgWood"]];
     self.search.inputAccessoryView = [self accessoryView];
+    self.search.placeholder = kSharedModel.lang[@"searcyByLocation"];
     
     self.barBtnCurrent.title = kSharedModel.lang[@"current"];
     
+    self.barBtnRadian.title =  kSharedModel.lang[@"radian"];
+    self.barBtnType.title =  kSharedModel.lang[@"type"];
+    
     //self.annotations = [[NSMutableArray alloc] initWithCapacity:1000];
     //[self generateAnnotations];
-    //self.annotationsTmp = [[NSArray alloc] initWithArray:self.annotations];
-    
-    self.mapView.delegate = self;
-
-    CLLocationCoordinate2D noLocation;
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 500, 500);
-    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];          
-    [self.mapView setRegion:adjustedRegion animated:YES];
-    self.mapView.showsUserLocation = YES;
 
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -102,16 +132,39 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     if(nil != self.location){
+        
         [self _resetVisibleZoom:self.location];
         [self _fetchStoresByLocatioin:self.location 
+                        mainCategoryId:self.mainCategoryId
                         rangeInMeters:self.searchRadins 
                                  fbId:kSharedModel.fbId];
-
     } else {
         [locationManager startUpdatingLocation];
     }
     
-
+    __weak __block WOLIstByMapViewController *weakSelf =(WOLIstByMapViewController *) self;
+    [[BRDModel sharedInstance] fetchMainCategoriesWithPage:@(-1) WithBlock:^(NSDictionary* res){
+        [weakSelf hideHud:YES];
+        NSString* errMsg = res[@"error"];
+        
+        NSMutableArray* mTempArr =(NSMutableArray*)res[@"docs"];
+        NSRange range = NSMakeRange(0, mTempArr.count); 
+        NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:range];
+        [weakSelf.docsMainCategory insertObjects:res[@"docs"] atIndexes:indexes];
+        
+        weakSelf.searchMainCategoryIndex = weakSelf.docsMainCategory.count;
+        
+        if(nil != errMsg){
+            [self handleErrMsg:errMsg];
+        } else {
+            
+            PRPLog(@"self.docsMainCategory.count: %d-[%@ , %@]",
+                   weakSelf.docsMainCategory.count,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+                  
+        }
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -120,33 +173,49 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
     [super viewDidAppear:animated];
     self.noticeChildViewController.view.hidden = NO;
     
     [self.noticeChildViewController
-     toggleSlide:nil msg:kSharedModel.lang[@"dragTheRedPinOrTypeYourAdddressToMovePin"]
+     toggleSlide:nil msg:kSharedModel.lang[@"searchStoreByTypeOrRadins"]
      stayTime:5.0f];
+
+    self.mapView.delegate = self;
+    CLLocationCoordinate2D noLocation;
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 500, 500);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];          
+    [self.mapView setRegion:adjustedRegion animated:YES];
+    self.mapView.showsUserLocation = YES;
+
+    if(self.annotations.count > 0){
+        [self _moveToMyCurrentLocation];
+    }
+  
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    
     [super viewWillDisappear:animated];
     self.noticeChildViewController.view.hidden = YES;
 }
 
-
 -(void)_fetchStoresByLocatioin:(CLLocation*)location
+        mainCategoryId:(NSString*)mainCategoryId
                  rangeInMeters:(double)rangeInMeters  
                           fbId:(NSString*)fbId
 {
     [self showHud:YES];
+    
     __block __weak WOLIstByMapViewController* weakSelf = (WOLIstByMapViewController*)self;
     [self.annotations removeAllObjects];
     
     [kSharedModel fetchStoresByLocatioin:(CLLocation*)location
+                           mainCategoryId:mainCategoryId 
                            rangeInMeters:(double)rangeInMeters  
                                     fbId:(NSString*)fbId
                             withBlock:^(NSDictionary* res) {
-                                
+                                                            
                                 NSString* error  = res[@"error"];
                                 if(nil != error){
                                     [weakSelf showMsg:error type:msgLevelError];
@@ -164,6 +233,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
                                     
                                     Hotspot* hotsppot = (Hotspot*)obj;
                                     hotsppot.distanceFromUser = [Utils fromLocation:self.location.coordinate toLocation:hotsppot.coordinate];
+                                    
                                     PRPLog(@"hotsppot.distanceFromUser: %f \n\
                                            - [%@ , %@]",
                                            hotsppot.distanceFromUser,
@@ -175,10 +245,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
                                 [weakSelf.mapView addAnnotations:weakSelf.annotations];
                                 [weakSelf _resetVisibleZoom:self.location];
                             }];
-    
 }
-
-
 
 #pragma mark MKMapViewDelegate
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
@@ -224,6 +291,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
         _zoomLevel = mapView.region.span.longitudeDelta;
         
         NSSet *visibleAnnotations = [mapView annotationsInMapRect:mapView.visibleMapRect];
+        if(!visibleAnnotations) return;
         for (Hotspot *place in visibleAnnotations)
         {
             if ([place placesCount] > 1){
@@ -247,6 +315,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
         
     }
 }
+
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     MyAnnotationView* myAnnotaioinView =(MyAnnotationView*) view;
@@ -263,15 +332,19 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 //only for ios 6
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
-    self.location = [locations objectAtIndex:0];
-    [locationManager stopUpdatingLocation];
- 
-    
-    //for testing...
+#if TARGET_IPHONE_SIMULATOR
+    //for testing in simulator...
     CLLocation* locationFound = [[CLLocation alloc] initWithLatitude:centerLat longitude: centerLong];
     self.location = locationFound;
+#else
     
-    [self _fetchStoresByLocatioin:self.location 
+    self.location = [locations objectAtIndex:0];
+#endif
+    [locationManager stopUpdatingLocation];
+
+    
+    [self _fetchStoresByLocatioin:self.location
+                   mainCategoryId:self.mainCategoryId
                     rangeInMeters:self.searchRadins 
                              fbId:kSharedModel.fbId];
     PRPLog(@"self.location.coordinate.latitude: %f \n\
@@ -290,6 +363,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 
 -(IBAction)_moveToMyCurrentLocation
 {
+    self.search.text = @"";
     PRPLog(@"self.mapView.userLocation.location.coordinate.latitude: %f \n\
            self.mapView.userLocation.location.coordinate..longitude: %f \n\
            - [%@ , %@]",
@@ -311,11 +385,47 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
     self.complectionBlock(nil);
 }
 
+
+- (IBAction)_switchDisplayMode:(id)sender {
+    
+}
+
 -(void)_resetVisibleZoom:(CLLocation*) location{
     
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.5f, 0.5f);
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.002f, 0.002f);
     MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, span);
     [self.mapView setRegion:region animated:YES];
+}
+
+
+- (IBAction)_showTypeActionSheet:(id)sender
+{    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] 
+                                  initWithTitle:kSharedModel.lang[@"searchByType"]  delegate:self 
+                                  cancelButtonTitle:kSharedModel.lang[@"actionCancel"]  destructiveButtonTitle:nil 
+                                  otherButtonTitles:kSharedModel.lang[@"actionDone"] , nil];
+   	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    actionSheet.tag = KWOLIstByMapViewControllerActionSheetType;
+    [actionSheet showInView:self.tabBarController.view];
+    
+	//Build the picker
+	UIPickerView *pickerView = [[UIPickerView alloc] init];
+	pickerView.tag = KWOLIstByMapViewControllerPickerViewType;
+	pickerView.delegate = self;
+	pickerView.dataSource = self;
+	pickerView.showsSelectionIndicator = YES;
+    
+    NSInteger selectedRow = self.searchMainCategoryIndex;
+    
+    [pickerView selectRow:selectedRow inComponent:0 animated:YES];
+    
+    pickerView.frame = CGRectMake(0.0f, 150.0f, 320.0f, 20.0f);
+    CGPoint center = actionSheet.center;
+    actionSheet.frame = CGRectMake(0.0f, 0.0f, 320.0f, 400.0f);
+    actionSheet.center = center;
+    
+	// Embed the picker
+	[actionSheet insertSubview:pickerView atIndex:0];  
 }
 
 - (IBAction)_showRadinsActionSheet:(id)sender
@@ -326,6 +436,7 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
                                   cancelButtonTitle:kSharedModel.lang[@"actionCancel"]  destructiveButtonTitle:nil 
                                   otherButtonTitles:kSharedModel.lang[@"actionDone"] , nil];
    	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    actionSheet.tag = KWOLIstByMapViewControllerActionSheetRadins;
     [actionSheet showInView:self.tabBarController.view];
     
 	// Build the picker
@@ -355,47 +466,58 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 
 #pragma mark UIActionSheetDelegate
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString* btnTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     
-	if ([btnTitle isEqualToString:kSharedModel.lang[@"actionDone"]]) {
-        UIPickerView *pickerView =(UIPickerView *)[actionSheet viewWithTag:KWOLIstByMapViewControllerPickerViewRadins];
-        NSInteger selectedRow = [pickerView selectedRowInComponent:0];
-        self.searchRadins = ++selectedRow;
-        if(self.searchRadins == 20){
-            self.searchRadins = 0;
-        } 
-        PRPLog(@"search by %i KM \n\
-               [%@, %@]",
-               self.searchRadins,
-               NSStringFromClass([self class]),
-               NSStringFromSelector(_cmd));
+    NSString* btnTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    NSUInteger tagIdentifier = actionSheet.tag;
+    
+    if([btnTitle isEqualToString:kSharedModel.lang[@"actionDone"]]){
+    
+        if (tagIdentifier == KWOLIstByMapViewControllerActionSheetRadins) {
+            
+            UIPickerView *pickerView =(UIPickerView *)[actionSheet viewWithTag:KWOLIstByMapViewControllerPickerViewRadins];
+            
+            NSInteger selectedRow = [pickerView selectedRowInComponent:0];
+            
+            self.searchRadins = ++selectedRow;
+            
+            if(self.searchRadins == 20){
+                self.searchRadins = 0;
+            }
+            
+            PRPLog(@"search by %i KM \n\
+                   [%@, %@]",
+                   self.searchRadins,
+                   NSStringFromClass([self class]),
+                   NSStringFromSelector(_cmd));
+            //[self _resetVisibleZoom:self.location];
+            
+        }  else if (tagIdentifier == KWOLIstByMapViewControllerActionSheetType
+                    && [btnTitle isEqualToString:kSharedModel.lang[@"actionDone"]]) {
+            
+            UIPickerView *pickerView =(UIPickerView *)[actionSheet viewWithTag:KWOLIstByMapViewControllerPickerViewType];
+            
+            NSInteger selectedRow = [pickerView selectedRowInComponent:0];
+            self.searchMainCategoryIndex = selectedRow;
+        }
         
+        NSInteger rowSelectedAllIndex = self.docsMainCategory.count;
+        self.mainCategoryId = @"";
         
-//        if(self.mapView.userLocation.coordinate.latitude == 0.0f 
-//           || self.searchRadins == 0.0f){
-//            self.annotations = [self.annotationsTmp mutableCopy];
-//        } else {
-//            
-//            __block NSMutableArray* arrFilter = [[NSMutableArray alloc] init];
-//            [self.annotationsTmp enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop){
-//                Hotspot* hotsppot = (Hotspot*)obj;
-//                PRPLog(@"hotsppot.distanceFromUser: %f \n\
-//                       - [%@ , %@]",
-//                       hotsppot.distanceFromUser,
-//                       NSStringFromClass([self class]),
-//                       NSStringFromSelector(_cmd));
-//                
-//                NSInteger searchRadinsMeters = self.searchRadins* 1000;
-//                if(hotsppot.distanceFromUser != 0.0f 
-//                   && hotsppot.distanceFromUser <= searchRadinsMeters){
-//                    [arrFilter addObject:hotsppot];
-//                } 
-//                    
-//            }];
-//            self.annotations = arrFilter;
-//        }
-        [self _resetVisibleZoom:self.location];
-	} 
+        if(self.searchMainCategoryIndex < rowSelectedAllIndex){
+            
+            BRRecordMainCategory* record = [self.docsMainCategory objectAtIndex:self.searchMainCategoryIndex];
+            self.mainCategoryId = record.uid;
+            
+        } else {
+            self.mainCategoryId = @"";
+        }
+        
+        [self _fetchStoresByLocatioin:self.location 
+                       mainCategoryId:self.mainCategoryId
+                        rangeInMeters:self.searchRadins 
+                                 fbId:kSharedModel.fbId];    
+    }
+    
 
 }
 
@@ -407,18 +529,40 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-	return 20; // twenty items per column
+    NSUInteger tagIdentifier = pickerView.tag;
+    
+    if(tagIdentifier == KWOLIstByMapViewControllerPickerViewType){
+        return (self.docsMainCategory.count+1);
+    } else  {
+        return 20;
+    }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-     ++row;
-    if(row == 20){
-        return kSharedModel.lang[@"noLImit"];
-    } else {
-        return [NSString stringWithFormat:@"%i KM", row];
+    NSUInteger tagIdentifier = pickerView.tag;
+    
+    if(tagIdentifier == KWOLIstByMapViewControllerPickerViewType){
+        
+        NSInteger rowSelectedAllIndex = self.docsMainCategory.count;
+        
+        if(row == rowSelectedAllIndex){
+            
+            return kSharedModel.lang[@"all"];
+        } else {
+            BRRecordMainCategory* record = [self.docsMainCategory objectAtIndex:row];
+            return  record.name;
+        }
+        
+    } else  {
+        ++row;
+        if(row == 20){
+            return kSharedModel.lang[@"noLImit"];
+        } else {
+            return [NSString stringWithFormat:@"%i KM", row];
+        }
     }
-	
+
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -433,8 +577,6 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
         [self showMsg:kSharedModel.lang[@"gpsIsNotActivated"] type:msgLevelWarn];
         return;
     }
-    
-    
     [self _resetVisibleZoom:self.location];
 }
 
@@ -511,13 +653,14 @@ UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 
 -(void)group:(NSArray *)annotations
 {
+    if(!self.annotations) return;
     float latDelta = self.mapView.region.span.latitudeDelta / scaleLat;
     float longDelta = self.mapView.region.span.longitudeDelta / scaleLong;
     
     [self.annotations makeObjectsPerformSelector:@selector(cleanPlaces)];
     NSMutableArray *visibleAnnotations = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (Hotspot *current in annotations)
+    for (Hotspot *current in self.annotations)
     {
         [self.mapView deselectAnnotation:current animated:YES];
         CLLocationDegrees lat = current.coordinate.latitude;

@@ -60,7 +60,8 @@ typedef enum : int
 static BRDModel *_sharedInstance = nil;
 + (BRDModel*)sharedInstance
 {
-    if( !_sharedInstance ) {
+    if( !_sharedInstance) {
+        
 		_sharedInstance = [[BRDModel alloc] init];
         _sharedInstance.lang = [LangManager sharedManager].dic;
         _sharedInstance.theme = [ThemeManager sharedManager].dic;
@@ -76,26 +77,7 @@ static BRDModel *_sharedInstance = nil;
         
         
         if(nil != fbId && nil != fbName) {
-            
-            //_sharedInstance.fbId = fbId;
-            //_sharedInstance.fbName = fbName;
-            //restore points left previous    
-//            [_sharedInstance postPointsConsumtion:@"com.erhu65.wework.amount.animation" points:@"0" fbId:fbId withBlock:^(NSDictionary* res) {
-//                NSString* error = res[@"error"];
-//                if(nil !=  error){
-//                    return;
-//                }
-//                NSDictionary* docPoints = res[@"doc"];
-//                PRPLog(@"docPoints: %@-[%@ , %@]",
-//                       docPoints,
-//                       NSStringFromClass([self class]),
-//                       NSStringFromSelector(_cmd));
-//                _sharedInstance.points = (NSNumber*)docPoints[@"points"];
-//            }];
-            
-            
-            //[_sharedInstance _doRegisterApns];
-            
+                        
             
         } else {
             _sharedInstance.points = @0;
@@ -115,8 +97,8 @@ static BRDModel *_sharedInstance = nil;
                    NSStringFromClass([self class]),
                    NSStringFromSelector(_cmd));
         }
-
-
+        
+        
         
 	}
     
@@ -4684,6 +4666,7 @@ static BRDModel *_sharedInstance = nil;
 }
 
 - (void)fetchStoresByLocatioin:(CLLocation*)location
+                mainCategoryId:(NSString*)mainCategoryId
                  rangeInMeters:(double)rangeInMeters  
                           fbId:(NSString*)fbId
                      withBlock:(void (^)(NSDictionary* userInfo))block{
@@ -4704,10 +4687,15 @@ static BRDModel *_sharedInstance = nil;
     if(rangeInMeters == 0.0f){
         rangeInMeters = 9999999999.0f;
     }
+    rangeInMeters /= 3959;
+    
+    if(nil == mainCategoryId){
+        mainCategoryId = @"";
+    }
 
     dispatch_async(concurrentQueue, ^{
                 
-        NSString* urlStr = [NSString stringWithFormat:@"%@/coffeecup/%@?lat=%f&lng=%f&fbId=%@&rangeInMeters=%f", BASE_URL, KAPIStore, lat, lng, fbId, rangeInMeters];
+        NSString* urlStr = [NSString stringWithFormat:@"%@/coffeecup/%@?lat=%f&lng=%f&fbId=%@&rangeInMeters=%f&mainCategoryId=%@", BASE_URL, KAPIStore, lat, lng, fbId, rangeInMeters, mainCategoryId];
         
         PRPLog(@"http request fetchStoresByLocatioin: %@\n  -[%@ , %@]",
                urlStr,
